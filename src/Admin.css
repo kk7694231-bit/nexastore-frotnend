@@ -1,0 +1,32 @@
+.admin-sidebar{
+  background:
+  linear-gradient(
+    180deg,
+    #6366f1,
+    #4338ca
+  );
+
+  color:white;
+}
+
+.dashboard-card{
+  background:white;
+
+  border-radius:20px;
+
+  padding:25px;
+
+  box-shadow:
+  0 10px 25px rgba(
+    0,
+    0,
+    0,
+    .08
+  );
+}
+
+.dashboard-card p{
+  color:#6366f1;
+  font-size:2rem;
+  font-weight:bold;
+}
