@@ -18,7 +18,7 @@ function AdminProducts() {
   const fetchProducts = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/products"
+        "https://nexastore-backendnew.vercel.app/api/products"
       );
 
       setProducts(res.data);
@@ -32,7 +32,7 @@ function AdminProducts() {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        "http://localhost:5000/api/products",
+        "https://nexastore-backendnew.vercel.app/api/products",
         {
           name,
           description,
@@ -69,7 +69,7 @@ function AdminProducts() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:5000/api/products/${id}`,
+        `https://nexastore-backendnew.vercel.app/api/products/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -12,7 +12,7 @@ function AdminOrders() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/orders"
+        "https://nexastore-backendnew.vercel.app/api/orders"
       );
 
       setOrders(res.data);
@@ -24,7 +24,7 @@ function AdminOrders() {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/orders/${id}`,
+        `https://nexastore-backendnew.vercel.app/api/orders/${id}`,
         {
           orderStatus: status,
         }

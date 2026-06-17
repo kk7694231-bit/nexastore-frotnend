@@ -16,7 +16,7 @@ function Orders() {
         localStorage.getItem("userId");
 
       const res = await axios.get(
-        `http://localhost:5000/api/orders/user/${userId}`
+        `https://nexastore-backendnew.vercel.app/api/orders/user/${userId}`
       );
 
       setOrders(res.data);

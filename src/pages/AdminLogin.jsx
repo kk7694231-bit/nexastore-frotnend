@@ -13,7 +13,7 @@ function AdminLogin() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://nexastore-backendnew.vercel.app/api/auth/login",
         {
           email,
           password

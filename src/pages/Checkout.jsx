@@ -30,7 +30,7 @@ if (!token) {
       console.log("CART =", JSON.stringify(cart, null, 2));
 console.log("PRODUCTS =", JSON.stringify(products, null, 2));
     await axios.post(
-  "http://localhost:5000/api/orders",
+  "https://nexastore-backendnew.vercel.app/api/orders",
   {
     userId,
     products,

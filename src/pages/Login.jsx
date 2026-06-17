@@ -11,7 +11,7 @@ function Login() {
   const handleLogin = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://nexastore-backendnew.vercel.app/api/auth/login",
         {
           email,
           password,

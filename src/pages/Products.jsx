@@ -28,7 +28,7 @@ function Products({
 
     axios
       .get(
-        `http://localhost:5000/api/products?keyword=${keyword}&category=${category}`
+        `https://nexastore-backendnew.vercel.app/api/products?keyword=${keyword}&category=${category}`
       )
       .then((res) =>
         setProducts(res.data)
