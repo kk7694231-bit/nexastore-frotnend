@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 function AdminLogin() {
   const navigate = useNavigate();
 
+  const [isSignup, setIsSignup] = useState(false);
+
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,36 +28,69 @@ function AdminLogin() {
         return;
       }
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
-
-      localStorage.setItem(
-        "role",
-        res.data.role
-      );
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.role);
 
       alert("Admin Login Successful");
-
       navigate("/admin");
 
     } catch (error) {
-      alert(
-        error.response?.data?.message ||
-        "Login Failed"
+      alert(error.response?.data?.message || "Login Failed");
+    }
+  };
+
+  const handleAdminSignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(
+        "https://nexastore-backend-l4s3.vercel.app/api/auth/admin/register",
+        {
+          name,
+          email,
+          password
+        }
       );
+
+      alert(res.data.message);
+
+      setIsSignup(false);
+
+    } catch (error) {
+      alert(error.response?.data?.message || "Signup Failed");
     }
   };
 
   return (
     <div>
-      <h1>Admin Login</h1>
+      <h1>
+        {isSignup ? "Admin Signup" : "Admin Login"}
+      </h1>
 
-      <form onSubmit={handleAdminLogin}>
+      <form
+        onSubmit={
+          isSignup
+            ? handleAdminSignup
+            : handleAdminLogin
+        }
+      >
+        {isSignup && (
+          <>
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) =>
+                setName(e.target.value)
+              }
+            />
+            <br /><br />
+          </>
+        )}
+
         <input
           type="email"
-          placeholder="Admin Email"
+          placeholder="Email"
           value={email}
           onChange={(e) =>
             setEmail(e.target.value)
@@ -75,9 +111,23 @@ function AdminLogin() {
         <br /><br />
 
         <button type="submit">
-          Admin Login
+          {isSignup
+            ? "Signup"
+            : "Login"}
         </button>
       </form>
+
+      <br />
+
+      <button
+        onClick={() =>
+          setIsSignup(!isSignup)
+        }
+      >
+        {isSignup
+          ? "Already have an account? Login"
+          : "Create Admin Account"}
+      </button>
     </div>
   );
 }
