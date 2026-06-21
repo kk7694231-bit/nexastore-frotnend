@@ -14,7 +14,7 @@ function OrderHistory() {
         localStorage.getItem("userId");
 
       const res = await axios.get(
-        `https://nexastore-backendnew.vercel.app/api/orders/user/${userId}`
+        `https://nexastore-backend-l4s3.vercel.app/api/orders/user/${userId}`
       );
 
       setOrders(res.data);

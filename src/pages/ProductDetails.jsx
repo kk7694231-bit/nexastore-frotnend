@@ -14,7 +14,7 @@ function ProductDetails({ cart, setCart }) {
   const fetchProduct = async () => {
     try {
       const res = await axios.get(
-        `https://nexastore-backendnew.vercel.app/api/products/${id}`
+        `https://nexastore-backend-l4s3.vercel.app//api/products/${id}`
       );
 
       setProduct(res.data);
