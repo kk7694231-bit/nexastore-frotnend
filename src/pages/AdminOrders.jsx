@@ -24,7 +24,7 @@ function AdminOrders() {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `https://nexastore-backend-l4s3.vercel.app/api/orders/${id}`,
+        `https://nexastore-backend-rzao.vercel.app/api/orders/${id}`,
         {
           orderStatus: status,
         }

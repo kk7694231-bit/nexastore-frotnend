@@ -33,7 +33,7 @@ function AdminAnalytics() {
         localStorage.getItem("token");
 
       const res = await axios.get(
-        "https://nexastore-backend-l4s3.vercel.app/api/admin/analytics",
+        "https://nexastore-backend-rzao.vercel.app/api/admin/analytics",
         {
           headers: {
             Authorization: `Bearer ${token}`,

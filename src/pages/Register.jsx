@@ -14,7 +14,7 @@ function Register() {
 
     try {
       const res = await axios.post(
-        "https://nexastore-backend-l4s3.vercel.app/api/auth/register",
+        "https://nexastore-backend-rzao.vercel.app/api/auth/register",
         {
           name,
           email,

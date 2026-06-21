@@ -14,7 +14,7 @@ function AdminUsers() {
       const token = localStorage.getItem("token");
 
 const res = await axios.get(
-  "https://nexastore-backend-l4s3.vercel.app/api/admin/users",
+  "https://nexastore-backend-rzao.vercel.app/api/admin/users",
   {
     headers: {
       Authorization: `Bearer ${token}`,

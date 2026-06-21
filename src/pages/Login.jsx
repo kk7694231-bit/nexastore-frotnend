@@ -12,7 +12,7 @@ function Login() {
   const handleLogin = async () => {
     try {
       const { data } = await axios.post(
-        "https://nexastore-backend-l4s3.vercel.app/api/auth/login",
+        "https://nexastore-backend-rzao.vercel.app/api/auth/login",
         {
           email,
           password,

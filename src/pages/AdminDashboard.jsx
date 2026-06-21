@@ -19,7 +19,7 @@ function AdminDashboard() {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "https://nexastore-backend-l4s3.vercel.app/api/admin/dashboard",
+        "https://nexastore-backend-rzao.vercel.app/api/admin/dashboard",
         {
           headers: {
             Authorization: `Bearer ${token}`,

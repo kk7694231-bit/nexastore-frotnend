@@ -44,7 +44,7 @@ function AdminLogin() {
 
     try {
       const res = await axios.post(
-        "https://nexastore-backend-l4s3.vercel.app/api/auth/admin/register",
+        "https://nexastore-backend-rzao.vercel.app/api/auth/admin/register",
         {
           name,
           email,

@@ -69,7 +69,7 @@ function AdminProducts() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `https://nexastore-backend-l4s3.vercel.app/api/products/${id}`,
+        `https://nexastore-backend-rzao.vercel.app/api/products/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
