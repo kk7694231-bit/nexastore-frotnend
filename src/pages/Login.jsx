@@ -31,7 +31,7 @@ function Login() {
         "userId",
         data.userId
       );
-      alert(data.message);
+     alert(data.message || "Login Successful");
 
       if (data.role === "admin") {
         navigate("/admin");
