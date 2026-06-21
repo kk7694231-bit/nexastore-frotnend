@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 function Login() {
   const navigate = useNavigate();
 
@@ -74,6 +75,8 @@ function Login() {
     <button onClick={handleLogin}>
       Login
     </button>
+
+    <a href="/admin-login">admin login</a>
 
     <p className="register-link">
       New User?
