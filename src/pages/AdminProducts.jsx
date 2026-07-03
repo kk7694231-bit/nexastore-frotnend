@@ -11,19 +11,19 @@ function AdminProducts() {
   const [image, setImage] = useState("");
   const [stock, setStock] = useState("");
 
+  const API_URL = "https://nexastore-backend-rzao.vercel.app";
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get(
-        "https://nexastore-backendnew.vercel.app/api/products"
-      );
-
+      const res = await axios.get(`${API_URL}/api/products`);
       setProducts(res.data);
     } catch (error) {
       console.log(error);
+      alert("Failed to fetch products");
     }
   };
 
@@ -32,14 +32,14 @@ function AdminProducts() {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        "https://nexastore-backendnew.vercel.app/api/products",
+        `${API_URL}/api/products`,
         {
           name,
           description,
-          price,
+          price: Number(price),
           category,
           image,
-          stock,
+          stock: Number(stock),
         },
         {
           headers: {
@@ -60,7 +60,7 @@ function AdminProducts() {
       fetchProducts();
     } catch (error) {
       console.log(error);
-      alert("Failed To Add Product");
+      alert(error.response?.data?.message || "Failed To Add Product");
     }
   };
 
@@ -68,154 +68,105 @@ function AdminProducts() {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.delete(
-        `https://nexastore-backend-rzao.vercel.app/api/products/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.delete(`${API_URL}/api/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      alert("Product Deleted");
-
+      alert("Product Deleted Successfully");
       fetchProducts();
+
     } catch (error) {
       console.log(error);
-      alert("Delete Failed");
+      alert(error.response?.data?.message || "Delete Failed");
     }
   };
 
-    return (
-  <div className="admin-main">
+  return (
+    <div className="admin-main">
+      <h1>Manage Products</h1>
 
-    <h1>Manage Products</h1>
+      <div className="product-form">
+        <input
+          type="text"
+          placeholder="Product Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-<div className="product-form">
+        <input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
-  <input
-    type="text"
-    placeholder="Product Name"
-    value={name}
-    onChange={(e) =>
-      setName(e.target.value)
-    }
-  />
+        <input
+          type="number"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
 
-  <input
-    type="text"
-    placeholder="Description"
-    value={description}
-    onChange={(e) =>
-      setDescription(
-        e.target.value
-      )
-    }
-  />
-
-  <input
-    type="number"
-    placeholder="Price"
-    value={price}
-    onChange={(e) =>
-      setPrice(e.target.value)
-    }
-  />
-
- <select
-  value={category}
-  onChange={(e) =>
-    setCategory(e.target.value)
-  }
->
-  <option value="">
-    Select Category
-  </option>
-
-  <option value="Mobiles">
-    Mobiles
-  </option>
-
-  <option value="Electronics">
-    Electronics
-  </option>
-
-  <option value="Fashion">
-    Fashion
-  </option>
-
-  <option value="Gaming">
-    Gaming
-  </option>
-</select>
-
-  <input
-    type="text"
-    placeholder="Image URL"
-    value={image}
-    onChange={(e) =>
-      setImage(e.target.value)
-    }
-  />
-
-  <input
-    type="number"
-    placeholder="Stock"
-    value={stock}
-    onChange={(e) =>
-      setStock(e.target.value)
-    }
-  />
-
-  <button
-    onClick={handleAddProduct}
-  >
-    Add Product
-  </button>
-
-</div>
-
-    <div className="admin-products-grid">
-
-      {products.map((product) => (
-
-        <div
-          key={product._id}
-          className="admin-product-card"
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
         >
+          <option value="">Select Category</option>
+          <option value="Mobiles">Mobiles</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Gaming">Gaming</option>
+        </select>
 
-          <img
-            src={product.image}
-            alt={product.name}
-          />
+        <input
+          type="text"
+          placeholder="Image URL"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+        />
 
-          <h3>{product.name}</h3>
+        <input
+          type="number"
+          placeholder="Stock"
+          value={stock}
+          onChange={(e) => setStock(e.target.value)}
+        />
 
-          <p>
-            ₹{product.price}
-          </p>
+        <button onClick={handleAddProduct}>
+          Add Product
+        </button>
+      </div>
 
-          <span>
-            {product.category}
-          </span>
+      <div className="admin-products-grid">
+        {products.map((product) => (
+          <div
+            key={product._id}
+            className="admin-product-card"
+          >
+            <img
+              src={product.image}
+              alt={product.name}
+            />
 
-          <button
-  className="delete-btn"
-  onClick={() =>
-    handleDelete(product._id)
-  }
->
-  Delete
-</button>
+            <h3>{product.name}</h3>
 
-        </div>
+            <p>₹{product.price}</p>
 
-      ))}
+            <span>{product.category}</span>
 
+            <button
+              className="delete-btn"
+              onClick={() => handleDelete(product._id)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
-
-  </div>
-);
+  );
 }
 
 export default AdminProducts;
