@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom";
 function AdminLogin() {
   const navigate = useNavigate();
 
-  const [isSignup, setIsSignup] = useState(false);
-
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,21 +12,22 @@ function AdminLogin() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
+      const { data } = await axios.post(
         "https://nexastore-backend-rzao.vercel.app/api/auth/login",
         {
           email,
-          password
+          password,
         }
       );
 
-      if (res.data.role !== "admin") {
+      if (data.role !== "admin") {
         alert("You are not an admin");
         return;
       }
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", res.data.role);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("userId", data.userId);
 
       alert("Admin Login Successful");
       navigate("/admin");
@@ -39,95 +37,35 @@ function AdminLogin() {
     }
   };
 
-  const handleAdminSignup = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await axios.post(
-        "https://nexastore-backend-rzao.vercel.app/api/auth/admin/register",
-        {
-          name,
-          email,
-          password
-        }
-      );
-
-      alert(res.data.message);
-
-      setIsSignup(false);
-
-    } catch (error) {
-      alert(error.response?.data?.message || "Signup Failed");
-    }
-  };
-
   return (
     <div>
-      <h1>
-        {isSignup ? "Admin Signup" : "Admin Login"}
-      </h1>
+      <h1>Admin Login</h1>
 
-      <form
-        onSubmit={
-          isSignup
-            ? handleAdminSignup
-            : handleAdminLogin
-        }
-      >
-        {isSignup && (
-          <>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) =>
-                setName(e.target.value)
-              }
-            />
-            <br /><br />
-          </>
-        )}
-
+      <form onSubmit={handleAdminLogin}>
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Admin Email"
           value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
+          onChange={(e) => setEmail(e.target.value)}
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Admin Password"
           value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <button type="submit">
-          {isSignup
-            ? "Signup"
-            : "Login"}
+          Login
         </button>
       </form>
-
-      <br />
-
-      <button
-        onClick={() =>
-          setIsSignup(!isSignup)
-        }
-      >
-        {isSignup
-          ? "Already have an account? Login"
-          : "Create Admin Account"}
-      </button>
     </div>
   );
 }
