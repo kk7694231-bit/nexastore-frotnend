@@ -5,34 +5,55 @@ import AdminSidebar from "../components/AdminSidebar";
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
 
+  const API_URL = "https://nexastore-backend-rzao.vercel.app";
+
   useEffect(() => {
     fetchOrders();
   }, []);
 
   const fetchOrders = async () => {
     try {
+      const token = localStorage.getItem("token");
+
       const res = await axios.get(
-        "https://nexastore-backendnew.vercel.app/api/orders"
+        `${API_URL}/api/orders`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
-      setOrders(res.data);
+      setOrders(res.data.orders || res.data);
+
     } catch (error) {
       console.log(error);
+      alert(error.response?.data?.message || "Failed to fetch orders");
     }
   };
 
   const updateStatus = async (id, status) => {
     try {
+      const token = localStorage.getItem("token");
+
       await axios.put(
-        `https://nexastore-backend-rzao.vercel.app/api/orders/${id}`,
+        `${API_URL}/api/orders/${id}`,
         {
           orderStatus: status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
+      alert("Order status updated");
       fetchOrders();
+
     } catch (error) {
       console.log(error);
+      alert(error.response?.data?.message || "Update failed");
     }
   };
 
@@ -42,64 +63,57 @@ function AdminOrders() {
 
       <main className="admin-main">
         <h1 className="orders-title" style={{ color: "white" }}>
-  Manage Orders
-</h1>
+          Manage Orders
+        </h1>
 
-<div className="orders-table-wrapper">
-
-  <table className="orders-table">
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Total</th>
-              <th>Status</th>
-              <th>Payment</th>
-              <th>Update</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>
-                  {order.userId?.name}
-                </td>
-
-                <td>
-                  ₹{order.totalAmount}
-                </td>
-
-                <td>{order.paymentMethod}</td>
-
-                <td>
-  <span
-    className={`status-badge ${order.orderStatus}`}
-  >
-    {order.orderStatus}
-  </span>
-</td>
-
-                <td>
-                  <select
-                    onChange={(e) =>
-                      updateStatus(
-                        order._id,
-                        e.target.value
-                      )
-                    }
-                    value={order.orderStatus}
-                  >
-                    <option>Pending</option>
-                    <option>Processing</option>
-                    <option>Shipped</option>
-                    <option>Delivered</option>
-                  </select>
-                </td>
+        <div className="orders-table-wrapper">
+          <table className="orders-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Update</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order.userId?.name || "Unknown User"}</td>
+
+                  <td>₹{order.totalAmount}</td>
+
+                  <td>{order.paymentMethod}</td>
+
+                  <td>
+                    <span
+                      className={`status-badge ${order.orderStatus}`}
+                    >
+                      {order.orderStatus}
+                    </span>
+                  </td>
+
+                  <td>
+                    <select
+                      value={order.orderStatus}
+                      onChange={(e) =>
+                        updateStatus(order._id, e.target.value)
+                      }
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="Processing">Processing</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+
+          </table>
+        </div>
       </main>
     </div>
   );
