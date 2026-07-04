@@ -2192,3 +2192,73 @@ table td{
   background:#4caf50;
   color:white;
 }
+
+/* ================= ADMIN LOGIN ================= */
+
+.admin-login-container{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle at top,#1c1435,#09060f 70%);
+}
+
+.admin-login-box{
+    width:420px;
+    background:#17141d;
+    padding:45px;
+    border-radius:30px;
+    box-shadow:0 0 35px rgba(0,0,0,.5);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.admin-login-box h1{
+    color:#fff;
+    text-align:center;
+    font-size:42px;
+    margin-bottom:35px;
+}
+
+.admin-input-box{
+    margin-bottom:20px;
+}
+
+.admin-input-box input{
+    width:100%;
+    height:58px;
+    border:none;
+    outline:none;
+    border-radius:15px;
+    background:#222;
+    color:#fff;
+    padding:0 20px;
+    font-size:16px;
+}
+
+.admin-input-box input::placeholder{
+    color:#8d8d8d;
+}
+
+.admin-input-box input:focus{
+    border:1px solid #2d00ff;
+    box-shadow:0 0 10px rgba(45,0,255,.4);
+}
+
+.admin-login-btn{
+    width:100%;
+    height:58px;
+    border:none;
+    border-radius:18px;
+    background:linear-gradient(90deg,#1d00ff,#3a00ff);
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.admin-login-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 18px #2d00ff;
+}
