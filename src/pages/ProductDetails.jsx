@@ -6,20 +6,32 @@ function ProductDetails({ cart, setCart }) {
   const { id } = useParams();
 
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const API_URL = "https://nexastore-backend-rzao.vercel.app";
 
   useEffect(() => {
-    fetchProduct();
+    if (id) {
+      fetchProduct();
+    }
   }, [id]);
 
   const fetchProduct = async () => {
     try {
+      console.log("Product ID:", id);
+
       const res = await axios.get(
-        `https://nexastore-backend-rzao.vercel.app/api/products/${id}`
+        `${API_URL}/api/products/${id}`
       );
+
+      console.log("Product Response:", res.data);
 
       setProduct(res.data);
     } catch (error) {
-      console.log(error);
+      console.error("API Error:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Product Not Found");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,8 +64,12 @@ function ProductDetails({ cart, setCart }) {
     alert("Product Added To Cart");
   };
 
+  if (loading) {
+    return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+  }
+
   if (!product) {
-    return <h2>Loading...</h2>;
+    return <h2 style={{ textAlign: "center" }}>Product Not Found</h2>;
   }
 
   return (
@@ -63,29 +79,29 @@ function ProductDetails({ cart, setCart }) {
         alt={product.name}
       />
 
-      <h1>{product.name}</h1>
+      <div className="product-info">
+        <h1>{product.name}</h1>
 
-      <h2>
-        ₹{product.price.toLocaleString()}
-      </h2>
+        <h2>₹{product.price}</h2>
 
-      <p className="stock">
-        Stock: {product.stock}
-      </p>
+        <p className="stock">
+          Stock: {product.stock}
+        </p>
 
-      <p>{product.description}</p>
+        <p>{product.description}</p>
 
-      <div className="product-buttons">
-        <button
-          className="cart-btn"
-          onClick={addToCart}
-        >
-          Add To Cart
-        </button>
+        <div className="product-buttons">
+          <button
+            className="cart-btn"
+            onClick={addToCart}
+          >
+            Add To Cart
+          </button>
 
-        <button className="buy-btn">
-          Buy Now
-        </button>
+          <button className="buy-btn">
+            Buy Now
+          </button>
+        </div>
       </div>
     </div>
   );
