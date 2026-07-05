@@ -1,17 +1,48 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 function ProductDetails({ cart, setCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const API_URL = "https://nexastore-backend-rzao.vercel.app";
+  const API_URL =
+    "https://nexastore-backend-rzao.vercel.app";
 
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+
+  const dummyProducts = [
+    {
+      _id: "1",
+      name: "iPhone 15 Pro",
+      price: 89999,
+      rating: 4.8,
+      category: "Mobiles",
+      image:
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500",
+    },
+    {
+      _id: "2",
+      name: "Samsung Galaxy S24",
+      price: 74999,
+      rating: 4.7,
+      category: "Mobiles",
+      image:
+        "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500",
+    },
+    {
+      _id: "3",
+      name: "HP Victus Gaming Laptop",
+      price: 54999,
+      rating: 4.9,
+      category: "Electronics",
+      image:
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500",
+    },
+  ];
 
   useEffect(() => {
     fetchProduct();
@@ -25,7 +56,10 @@ function ProductDetails({ cart, setCart }) {
 
       setProduct(data);
 
-      fetchRelatedProducts(data.category, data._id);
+      fetchRelatedProducts(
+        data.category,
+        data._id
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -43,12 +77,19 @@ function ProductDetails({ cart, setCart }) {
       );
 
       const filtered = data
-        .filter((item) => item._id !== currentId)
+        .filter(
+          (item) => item._id !== currentId
+        )
         .slice(0, 3);
 
-      setRelatedProducts(filtered);
+      if (filtered.length > 0) {
+        setRelatedProducts(filtered);
+      } else {
+        setRelatedProducts(dummyProducts);
+      }
     } catch (error) {
       console.log(error);
+      setRelatedProducts(dummyProducts);
     }
   };
 
@@ -79,7 +120,7 @@ function ProductDetails({ cart, setCart }) {
       ]);
     }
 
-    alert("Product Added Successfully");
+    alert("Product Added To Cart");
   };
 
   const buyNow = () => {
@@ -112,7 +153,7 @@ function ProductDetails({ cart, setCart }) {
         Product Not Found
       </h2>
     );
-  } 
+  }  
     return (
     <>
       <div
@@ -122,7 +163,7 @@ function ProductDetails({ cart, setCart }) {
           padding: "30px",
           background: "#fff",
           borderRadius: "15px",
-          boxShadow: "0 8px 25px rgba(0,0,0,.15)",
+          boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
           display: "flex",
           flexWrap: "wrap",
           gap: "40px",
@@ -130,7 +171,7 @@ function ProductDetails({ cart, setCart }) {
       >
         <div
           style={{
-            flex: 1,
+            flex: "1",
             minWidth: "350px",
             textAlign: "center",
           }}
@@ -143,14 +184,14 @@ function ProductDetails({ cart, setCart }) {
               maxWidth: "450px",
               height: "450px",
               objectFit: "contain",
-              borderRadius: "12px",
+              borderRadius: "15px",
             }}
           />
         </div>
 
         <div
           style={{
-            flex: 1,
+            flex: "1",
             minWidth: "350px",
           }}
         >
@@ -158,7 +199,7 @@ function ProductDetails({ cart, setCart }) {
             style={{
               background: "#28a745",
               color: "#fff",
-              padding: "6px 15px",
+              padding: "6px 14px",
               borderRadius: "20px",
             }}
           >
@@ -167,22 +208,23 @@ function ProductDetails({ cart, setCart }) {
 
           <h1
             style={{
-              fontSize: "38px",
               marginTop: "20px",
+              fontSize: "38px",
+              color: "#222",
             }}
           >
             {product.name}
           </h1>
 
-          <div
+          <p
             style={{
               color: "#ff9800",
               fontSize: "20px",
-              margin: "15px 0",
+              margin: "10px 0",
             }}
           >
-            ⭐⭐⭐⭐☆ ({product.rating})
-          </div>
+            ⭐⭐⭐⭐☆ ({product.rating || 4.5})
+          </p>
 
           <h2
             style={{
@@ -193,12 +235,21 @@ function ProductDetails({ cart, setCart }) {
             ₹{product.price.toLocaleString()}
           </h2>
 
-          <p style={{ marginTop: "20px" }}>
+          <p
+            style={{
+              marginTop: "20px",
+              fontSize: "18px",
+            }}
+          >
             <strong>Category:</strong> {product.category}
           </p>
 
-          <p>
-            <strong>Available Stock:</strong> {product.stock}
+          <p
+            style={{
+              fontSize: "18px",
+            }}
+          >
+            <strong>Stock:</strong> {product.stock}
           </p>
 
           <p
@@ -216,7 +267,7 @@ function ProductDetails({ cart, setCart }) {
               display: "flex",
               alignItems: "center",
               gap: "15px",
-              marginTop: "25px",
+              marginTop: "30px",
             }}
           >
             <strong>Quantity</strong>
@@ -226,19 +277,14 @@ function ProductDetails({ cart, setCart }) {
                 quantity > 1 &&
                 setQuantity(quantity - 1)
               }
-              style={{
-                width: "35px",
-                height: "35px",
-                cursor: "pointer",
-              }}
             >
               -
             </button>
 
             <span
               style={{
-                fontSize: "20px",
                 fontWeight: "bold",
+                fontSize: "20px",
               }}
             >
               {quantity}
@@ -248,11 +294,6 @@ function ProductDetails({ cart, setCart }) {
               onClick={() =>
                 setQuantity(quantity + 1)
               }
-              style={{
-                width: "35px",
-                height: "35px",
-                cursor: "pointer",
-              }}
             >
               +
             </button>
@@ -302,14 +343,13 @@ function ProductDetails({ cart, setCart }) {
 
           <div
             style={{
-              marginTop: "35px",
-              background: "#f5f5f5",
+              marginTop: "30px",
               padding: "20px",
+              background: "#f5f5f5",
               borderRadius: "10px",
-              lineHeight: "2",
             }}
           >
-            <p>🚚 Free Delivery</p>
+            <p>🚚 Free Delivery in 2-4 Days</p>
             <p>🔄 7 Days Replacement</p>
             <p>🛡 1 Year Warranty</p>
             <p>💳 Secure Payments</p>
@@ -336,7 +376,7 @@ function ProductDetails({ cart, setCart }) {
             display: "grid",
             gridTemplateColumns:
               "repeat(auto-fit,minmax(250px,1fr))",
-            gap: "25px",
+            gap: "20px",
           }}
         >
           {relatedProducts.map((item) => (
@@ -344,10 +384,10 @@ function ProductDetails({ cart, setCart }) {
               key={item._id}
               style={{
                 background: "#fff",
-                padding: "20px",
                 borderRadius: "12px",
+                padding: "20px",
                 boxShadow:
-                  "0 5px 15px rgba(0,0,0,.15)",
+                  "0 5px 15px rgba(0,0,0,.12)",
                 textAlign: "center",
               }}
             >
@@ -368,7 +408,7 @@ function ProductDetails({ cart, setCart }) {
                   color: "#ff9800",
                 }}
               >
-                ⭐⭐⭐⭐☆
+                ⭐ {item.rating || 4.5}
               </p>
 
               <h2
@@ -379,28 +419,45 @@ function ProductDetails({ cart, setCart }) {
                 ₹{item.price.toLocaleString()}
               </h2>
 
-              <Link
-                to={`/products/${item._id}`}
-                style={{
-                  textDecoration: "none",
-                }}
-              >
+              {item._id === "1" ||
+              item._id === "2" ||
+              item._id === "3" ? (
                 <button
                   style={{
-                    marginTop: "15px",
                     width: "100%",
+                    marginTop: "10px",
+                    padding: "12px",
                     background: "#2874f0",
                     color: "#fff",
                     border: "none",
-                    padding: "12px",
                     borderRadius: "8px",
-                    cursor: "pointer",
-                    fontWeight: "bold",
                   }}
                 >
-                  View Product
+                  Demo Product
                 </button>
-              </Link>
+              ) : (
+                <Link
+                  to={`/products/${item._id}`}
+                  style={{
+                    textDecoration: "none",
+                  }}
+                >
+                  <button
+                    style={{
+                      width: "100%",
+                      marginTop: "10px",
+                      padding: "12px",
+                      background: "#2874f0",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    View Product
+                  </button>
+                </Link>
+              )}
             </div>
           ))}
         </div>
