@@ -333,14 +333,14 @@ const navigate = useNavigate();
   </div>
 
   <div className="product-card">
-    <Link to="/products/6a2d1829bb4abd3155c654f4">
+    <Link to="/products">
       <img
         src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg"
         alt="Headphones"
       />
     </Link>
 
-    <Link to="/products/6a2d1829bb4abd3155c654f4">
+    <Link to="/products">
       <h3>Sony Headphones</h3>
     </Link>
 
