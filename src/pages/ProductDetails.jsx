@@ -18,36 +18,32 @@ function ProductDetails({ cart, setCart }) {
 
   const fetchProduct = async () => {
     try {
-      console.log("Product ID:", id);
-
-      const res = await axios.get(
+      const { data } = await axios.get(
         `${API_URL}/api/products/${id}`
       );
 
-      console.log("Product Response:", res.data);
-
-      setProduct(res.data);
+      setProduct(data);
     } catch (error) {
-      console.error("API Error:", error.response?.data || error.message);
-      alert(error.response?.data?.message || "Product Not Found");
+      console.error(error);
+
+      if (error.response?.status === 404) {
+        alert("Product not found");
+      } else {
+        alert("Unable to load product");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const addToCart = () => {
-    const existingItem = cart.find(
-      (item) => item._id === product._id
-    );
+    const exist = cart.find((item) => item._id === product._id);
 
-    if (existingItem) {
+    if (exist) {
       setCart(
         cart.map((item) =>
           item._id === product._id
-            ? {
-                ...item,
-                quantity: item.quantity + 1,
-              }
+            ? { ...item, quantity: item.quantity + 1 }
             : item
         )
       );
@@ -74,27 +70,21 @@ function ProductDetails({ cart, setCart }) {
 
   return (
     <div className="product-details">
-      <img
-        src={product.image}
-        alt={product.name}
-      />
+      <img src={product.image} alt={product.name} />
 
       <div className="product-info">
         <h1>{product.name}</h1>
 
-        <h2>₹{product.price}</h2>
+        <h2>₹{product.price.toLocaleString()}</h2>
 
-        <p className="stock">
-          Stock: {product.stock}
+        <p>
+          <strong>Stock:</strong> {product.stock}
         </p>
 
         <p>{product.description}</p>
 
         <div className="product-buttons">
-          <button
-            className="cart-btn"
-            onClick={addToCart}
-          >
+          <button className="cart-btn" onClick={addToCart}>
             Add To Cart
           </button>
 
