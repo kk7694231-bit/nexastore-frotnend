@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Home({ cart, setCart }) {
   const [products, setProducts] = useState([]);
-
+  const productsRef = useRef(null);
   const API_URL =
     "https://nexastore-backend-rzao.vercel.app";
 
@@ -69,6 +69,11 @@ function Home({ cart, setCart }) {
 
     alert("Product Added Successfully");
   };
+    const scrollToProducts = () => {
+  productsRef.current?.scrollIntoView({
+    behavior: "smooth",
+  });
+  };
 
   return (
     <>
@@ -105,6 +110,7 @@ function Home({ cart, setCart }) {
         >
           <h1
             style={{
+              color: "#0a0a0a",
               fontSize: "58px",
               marginBottom: "20px",
             }}
@@ -114,6 +120,7 @@ function Home({ cart, setCart }) {
 
           <p
             style={{
+              color: "#0a0a0a",
               width: "500px",
               fontSize: "22px",
             }}
@@ -124,6 +131,7 @@ function Home({ cart, setCart }) {
           </p>
 
           <button
+            onClick={scrollToProducts}
             style={{
               marginTop: "30px",
               background: "#ff9800",
@@ -285,8 +293,9 @@ function Home({ cart, setCart }) {
       {/* Featured Products */}
 
       <div
+        ref={productsRef}
         style={{
-          maxWidth: "1300px",
+        maxWidth: "1300px",
           margin: "40px auto",
           padding: "0 20px",
         }}
