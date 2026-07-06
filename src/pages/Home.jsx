@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 function Home({ cart, setCart }) {
   const [products, setProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const productsRef = useRef(null);
   const API_URL =
     "https://nexastore-backend-rzao.vercel.app";
@@ -40,6 +41,13 @@ function Home({ cart, setCart }) {
       console.log(error);
     }
   };
+
+  const filteredProducts =
+  selectedCategory === "All"
+    ? products
+    : products.filter(
+        (product) => product.category === selectedCategory
+      );
 
   const addToCart = (product) => {
     const exist = cart.find(
@@ -168,18 +176,22 @@ function Home({ cart, setCart }) {
           { icon: "📺", name: "Electronics" },
           { icon: "⌚", name: "Accessories" },
         ].map((item) => (
-          <div
-            key={item.name}
-            style={{
-              width: "160px",
-              background: "#fff",
-              borderRadius: "15px",
-              padding: "25px",
-              textAlign: "center",
-              boxShadow:
-                "0 5px 15px rgba(0,0,0,.12)",
-            }}
-          >
+         <div
+  key={item.name}
+  onClick={() => {
+    setSelectedCategory(item.name);
+    scrollToProducts();
+  }}
+  style={{
+    width: "160px",
+    background: "#fff",
+    borderRadius: "15px",
+    padding: "25px",
+    textAlign: "center",
+    boxShadow: "0 5px 15px rgba(0,0,0,.12)",
+    cursor: "pointer",
+  }}
+>
             <div
               style={{
                 fontSize: "55px",
@@ -317,7 +329,7 @@ function Home({ cart, setCart }) {
             gap: "30px",
           }}
         >
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div
               key={product._id}
               style={{
