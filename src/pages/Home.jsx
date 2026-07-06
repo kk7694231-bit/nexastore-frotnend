@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 function Home({ cart, setCart }) {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedBrand, setSelectedBrand] = useState("All");
   const productsRef = useRef(null);
   const API_URL =
     "https://nexastore-backend-rzao.vercel.app";
@@ -42,12 +43,17 @@ function Home({ cart, setCart }) {
     }
   };
 
-  const filteredProducts =
-  selectedCategory === "All"
-    ? products
-    : products.filter(
-        (product) => product.category === selectedCategory
-      );
+ const filteredProducts = products.filter((product) => {
+  const categoryMatch =
+    selectedCategory === "All" ||
+    product.category === selectedCategory;
+
+  const brandMatch =
+    selectedBrand === "All" ||
+    product.brand === selectedBrand;
+
+  return categoryMatch && brandMatch;
+});
 
   const addToCart = (product) => {
     const exist = cart.find(
