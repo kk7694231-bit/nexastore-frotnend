@@ -115,9 +115,11 @@ function AdminProducts() {
         >
           <option value="">Select Category</option>
           <option value="Mobiles">Mobiles</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Fashion">Fashion</option>
+          <option value="Laptops">Laptops</option>
           <option value="Gaming">Gaming</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Accessories">Accessories</option>
         </select>
 
         <input
