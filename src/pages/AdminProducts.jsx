@@ -8,6 +8,7 @@ function AdminProducts() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
   const [image, setImage] = useState("");
   const [stock, setStock] = useState("");
 
@@ -38,6 +39,7 @@ function AdminProducts() {
           description,
           price: Number(price),
           category,
+          brand,
           image,
           stock: Number(stock),
         },
@@ -54,6 +56,7 @@ function AdminProducts() {
       setDescription("");
       setPrice("");
       setCategory("");
+      setBrand("");
       setImage("");
       setStock("");
 
@@ -120,6 +123,18 @@ function AdminProducts() {
           <option value="Fashion">Fashion</option>
           <option value="Electronics">Electronics</option>
           <option value="Accessories">Accessories</option>
+        </select>
+        <select
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
+        >
+          <option value="">Select Brand</option>
+          <option value="Apple">Apple</option>
+          <option value="Samsung">Samsung</option>
+          <option value="HP">HP</option>
+          <option value="Dell">Dell</option>
+          <option value="Sony">Sony</option>
+          <option value="Nike">Nike</option>
         </select>
 
         <input
