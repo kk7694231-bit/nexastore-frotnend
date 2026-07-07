@@ -121,7 +121,7 @@ function Home({ cart, setCart }) {
         >
           <h1
             style={{
-              color: "#f2f609",
+              color: "#292a1e",
               fontSize: "58px",
               marginBottom: "20px",
             }}
@@ -131,7 +131,7 @@ function Home({ cart, setCart }) {
 
           <p
             style={{
-              color: "#81fff2",
+              color: "#000000",
               width: "500px",
               fontSize: "22px",
             }}
