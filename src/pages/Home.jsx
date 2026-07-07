@@ -121,9 +121,9 @@ function Home({ cart, setCart }) {
         >
           <h1
             style={{
-              color: "#292a1e",
+              color: "#1e2a2a",
               fontSize: "58px",
-              marginBottom: "20px",
+              marginBottom: "10px",
             }}
           >
             Welcome To NexaStore
