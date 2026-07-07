@@ -197,9 +197,12 @@ function Home({ cart, setCart }) {
          <div
   key={item.name}
   onClick={() => {
-    setSelectedCategory(item.name);
-    scrollToProducts();
-  }}
+  alert(item.name);
+  console.log(item.name);
+
+  setSelectedCategory(item.name);
+  scrollToProducts();
+}}
   style={{
     width: "160px",
     background: "#fff",
