@@ -122,7 +122,8 @@ function Home({ cart, setCart }) {
           <h1
             style={{
               color: "#f9fd93",
-              fontSize: "58px",
+              fontSize: "52px",
+              left: "40px",
               marginBottom: "20px",
             }}
           >
