@@ -285,9 +285,13 @@ function Home({ cart, setCart }) {
             "Dell",
             "Nike",
           ].map((brand) => (
-            <div
-              key={brand}
-              style={{
+           <div
+            key={brand}
+            onClick={() => {
+            setSelectedBrand(brand);
+            scrollToProducts();
+          }}
+          style={{
                 background: "#fff",
                 borderRadius: "15px",
                 padding: "30px",
