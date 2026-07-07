@@ -11,9 +11,6 @@ function Home({ cart, setCart }) {
     "https://nexastore-backend-rzao.vercel.app";
 
   const banners = [
-    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600",
-    "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1600",
-    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600",
     "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600",
   ];
 
