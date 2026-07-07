@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Home({ cart, setCart }) {
   const [products, setProducts] = useState([]);
@@ -90,15 +91,21 @@ function Home({ cart, setCart }) {
     <>
       {/* Hero Slider */}
 
-      <div
-        style={{
-          width: "100%",
-          height: "450px",
-          overflow: "hidden",
-          position: "relative",
-          marginBottom: "40px",
-        }}
-      >
+      <motion.div
+  initial={{ opacity: 0, x: -100 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{
+    duration: 0.8,
+    ease: "easeOut",
+  }}
+  style={{
+    width: "100%",
+    height: "450px",
+    overflow: "hidden",
+    position: "relative",
+    marginBottom: "40px",
+  }}
+>
         <img
           src={banners[currentSlide]}
           alt="Banner"
@@ -158,20 +165,27 @@ function Home({ cart, setCart }) {
             Shop Now
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Categories */}
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          flexWrap: "wrap",
-          marginBottom: "50px",
-          gap: "20px",
-          padding: "0 20px",
-        }}
-      >
+     <motion.div
+  initial={{ opacity: 0, y: 80 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    delay: 0.3,
+    duration: 0.7,
+    ease: "easeOut",
+  }}
+  style={{
+    display: "flex",
+    justifyContent: "space-evenly",
+    flexWrap: "wrap",
+    marginBottom: "50px",
+    gap: "20px",
+    padding: "0 20px",
+  }}
+>
         {[
           { icon: "📱", name: "Mobiles" },
           { icon: "💻", name: "Laptops" },
@@ -207,21 +221,28 @@ function Home({ cart, setCart }) {
             <h3>{item.name}</h3>
           </div>
         ))}
-      </div>
+      </motion.div>
+
             {/* Mega Sale Banner */}
 
-      <div
-        style={{
-          margin: "40px 20px",
-          background:
-            "linear-gradient(135deg,#ff416c,#ff4b2b)",
-          borderRadius: "20px",
-          padding: "50px",
-          color: "#fff",
-          textAlign: "center",
-          boxShadow: "0 10px 25px rgba(0,0,0,.15)",
-        }}
-      >
+      <motion.div
+  initial={{ opacity: 0, scale: 0.8 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{
+    delay: 0.5,
+    duration: 0.7,
+    ease: "easeOut",
+  }}
+  style={{
+    margin: "40px 20px",
+    background: "linear-gradient(135deg,#ff416c,#ff4b2b)",
+    borderRadius: "20px",
+    padding: "50px",
+    color: "#fff",
+    textAlign: "center",
+    boxShadow: "0 10px 25px rgba(0,0,0,.15)",
+  }}
+>
         <h1
           style={{
             fontSize: "50px",
@@ -247,16 +268,23 @@ function Home({ cart, setCart }) {
         >
           Mobiles • Laptops • Fashion • Gaming
         </p>
-      </div>
+      </motion.div>
 
       {/* Featured Brands */}
 
-      <div
-        style={{
-          padding: "20px",
-          marginBottom: "50px",
-        }}
-      >
+      <motion.div
+  initial={{ opacity: 0, y: 80 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    delay: 0.7,
+    duration: 0.7,
+    ease: "easeOut",
+  }}
+  style={{
+    padding: "20px",
+    marginBottom: "50px",
+  }}
+>
         <h2
           style={{
             textAlign: "center",
@@ -276,49 +304,61 @@ function Home({ cart, setCart }) {
           }}
         >
           {[
-            "Apple",
-            "Samsung",
-            "HP",
-            "Sony",
-            "Dell",
-            "Nike",
-          ].map((brand) => (
-           <div
-            key={brand}
-            onClick={() => {
-            setSelectedBrand(brand);
-            scrollToProducts();
-          }}
-          style={{
-                background: "#fff",
-                borderRadius: "15px",
-                padding: "30px",
-                textAlign: "center",
-                boxShadow:
-                  "0 5px 15px rgba(0,0,0,.12)",
-              }}
-            >
-              <h2
-                style={{
-                  color: "#2874f0",
-                }}
-              >
-                {brand}
-              </h2>
-            </div>
-          ))}
+  "Apple",
+  "Samsung",
+  "HP",
+  "Sony",
+  "Dell",
+  "Nike",
+].map((brand, index) => (
+  <motion.div
+    key={brand}
+    onClick={() => {
+      setSelectedBrand(brand);
+      scrollToProducts();
+    }}
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{
+      delay: index * 0.15,
+      duration: 0.5,
+    }}
+    style={{
+      background: "#fff",
+      borderRadius: "15px",
+      padding: "30px",
+      textAlign: "center",
+      boxShadow: "0 5px 15px rgba(0,0,0,.12)",
+      cursor: "pointer",
+    }}
+  >
+    <h2
+      style={{
+        color: "#2874f0",
+      }}
+    >
+      {brand}
+    </h2>
+  </motion.div>
+))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Featured Products */}
 
-      <div
-        ref={productsRef}
-        style={{
-        maxWidth: "1300px",
-          margin: "40px auto",
-          padding: "0 20px",
-        }}
+      <motion.div
+  initial={{ opacity: 0, y: 80 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    delay: 0.9,
+    duration: 0.7,
+    ease: "easeOut",
+  }}
+  style={{
+    maxWidth: "1300px",
+    margin: "40px auto",
+    padding: "0 20px",
+  }}
       >
         <h2
           style={{
@@ -337,9 +377,15 @@ function Home({ cart, setCart }) {
             gap: "30px",
           }}
         >
-          {filteredProducts.map((product) => (
-            <div
-              key={product._id}
+          {filteredProducts.map((product, index) => (
+  <motion.div
+    key={product._id}
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{
+      delay: index * 0.1,
+      duration: 0.5,
+    }}
               style={{
                 background: "#fff",
                 borderRadius: "15px",
@@ -445,13 +491,21 @@ function Home({ cart, setCart }) {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
+
             {/* Why Choose Us */}
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 80 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 1.1,
+          duration: 0.7,
+          ease: "easeOut",
+        }}
         style={{
           maxWidth: "1300px",
           margin: "70px auto",
@@ -480,26 +534,34 @@ function Home({ cart, setCart }) {
             {
               icon: "🚚",
               title: "Fast Delivery",
-              desc: "Free delivery across India.",
+              desc: "Quick and reliable shipping across India.",
             },
             {
               icon: "💳",
-              title: "Secure Payment",
-              desc: "100% Secure Payment Gateway.",
+              title: "Secure Payments",
+              desc: "Multiple safe payment methods available.",
             },
             {
-              icon: "🔄",
-              title: "Easy Returns",
-              desc: "7 Days Easy Replacement.",
+              icon: "🛍️",
+              title: "Wide Selection",
+              desc: "A broad range of products from top brands.",
             },
             {
-              icon: "📞",
-              title: "24/7 Support",
-              desc: "Customer support anytime.",
+              icon: "👍",
+              title: "Quality Assurance",
+              desc: "Only genuine products with trusted seller support.",
             },
-          ].map((item) => (
+          ].map((item, index) => (
+  <motion.div
+    key={item.title}
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{
+      delay: index * 0.15,
+      duration: 0.5,
+    }}
+  >
             <div
-              key={item.title}
               style={{
                 background: "#fff",
                 padding: "30px",
@@ -517,135 +579,163 @@ function Home({ cart, setCart }) {
 
               <p>{item.desc}</p>
             </div>
+          </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
-      {/* Customer Reviews */}
 
-      <div
+    {/* Customer Reviews */}
+
+<motion.div
+  initial={{ opacity: 0, y: 80 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    delay: 1.3,
+    duration: 0.7,
+    ease: "easeOut",
+  }}
+  style={{
+    background: "#f8f9fa",
+    padding: "60px 20px",
+  }}
+>
+  <h2
+    style={{
+      textAlign: "center",
+      marginBottom: "40px",
+      fontSize: "34px",
+    }}
+  >
+    Customer Reviews
+  </h2>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns:
+        "repeat(auto-fit,minmax(320px,1fr))",
+      gap: "25px",
+      maxWidth: "1200px",
+      margin: "auto",
+    }}
+  >
+    {[
+      {
+        name: "Rahul",
+        review:
+          "Excellent products and super fast delivery.",
+      },
+      {
+        name: "Priya",
+        review:
+          "Affordable prices and amazing quality.",
+      },
+      {
+        name: "Arun",
+        review:
+          "Best online shopping experience.",
+      },
+    ].map((item, index) => (
+      <motion.div
+        key={item.name}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          delay: index * 0.2,
+          duration: 0.5,
+        }}
         style={{
-          background: "#f8f9fa",
-          padding: "60px 20px",
+          background: "#fff",
+          padding: "25px",
+          borderRadius: "15px",
+          boxShadow:
+            "0 5px 15px rgba(0,0,0,.1)",
         }}
       >
-        <h2
-          style={{
-            textAlign: "center",
-            marginBottom: "40px",
-            fontSize: "34px",
-          }}
-        >
-          Customer Reviews
-        </h2>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit,minmax(320px,1fr))",
-            gap: "25px",
-            maxWidth: "1200px",
-            margin: "auto",
-          }}
-        >
-          {[
-            {
-              name: "Rahul",
-              review:
-                "Excellent products and super fast delivery.",
-            },
-            {
-              name: "Priya",
-              review:
-                "Affordable prices and amazing quality.",
-            },
-            {
-              name: "Arun",
-              review:
-                "Best online shopping experience.",
-            },
-          ].map((item) => (
-            <div
-              key={item.name}
-              style={{
-                background: "#fff",
-                padding: "25px",
-                borderRadius: "15px",
-                boxShadow:
-                  "0 5px 15px rgba(0,0,0,.1)",
-              }}
-            >
-              <h3>{item.name}</h3>
-
-              <p
-                style={{
-                  color: "#ff9800",
-                }}
-              >
-                ⭐⭐⭐⭐⭐
-              </p>
-
-              <p>{item.review}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Newsletter */}
-
-      <div
-        style={{
-          background:
-            "linear-gradient(135deg,#2874f0,#1565c0)",
-          color: "#fff",
-          textAlign: "center",
-          padding: "60px 20px",
-        }}
-      >
-        <h2 style={{ fontSize: "36px" }}>
-          Subscribe to our Newsletter
-        </h2>
+        <h3>{item.name}</h3>
 
         <p
           style={{
-            margin: "15px 0 30px",
+            color: "#ff9800",
           }}
         >
-          Get updates about new arrivals and offers.
+          ⭐⭐⭐⭐⭐
         </p>
 
-        <input
-          type="email"
-          placeholder="Enter your email"
-          style={{
-            padding: "15px",
-            width: "320px",
-            borderRadius: "8px",
-            border: "none",
-            outline: "none",
-            marginRight: "10px",
-          }}
-        />
+        <p>{item.review}</p>
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
 
-        <button
-          style={{
-            padding: "15px 25px",
-            background: "#ff9800",
-            color: "#fff",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
-        >
-          Subscribe
-        </button>
-      </div>
+{/* Newsletter */}
+
+<motion.div
+  initial={{ opacity: 0, y: 80 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    delay: 1.5,
+    duration: 0.7,
+    ease: "easeOut",
+  }}
+  style={{
+    background:
+      "linear-gradient(135deg,#2874f0,#1565c0)",
+    color: "#fff",
+    textAlign: "center",
+    padding: "60px 20px",
+  }}
+>
+  <h2 style={{ fontSize: "36px" }}>
+    Subscribe to our Newsletter
+  </h2>
+
+  <p
+    style={{
+      margin: "15px 0 30px",
+    }}
+  >
+    Get updates about new arrivals and offers.
+  </p>
+
+  <input
+    type="email"
+    placeholder="Enter your email"
+    style={{
+      padding: "15px",
+      width: "320px",
+      borderRadius: "8px",
+      border: "none",
+      outline: "none",
+      marginRight: "10px",
+    }}
+  />
+
+  <button
+    style={{
+      padding: "15px 25px",
+      background: "#ff9800",
+      color: "#fff",
+      border: "none",
+      borderRadius: "8px",
+      cursor: "pointer",
+      fontWeight: "bold",
+    }}
+  >
+    Subscribe
+  </button>
+</motion.div>
 
       {/* Footer */}
 
-      <footer
+      <motion.footer
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{
+    delay: 1.7,
+    duration: 0.8,
+  }}
         style={{
           background: "#111",
           color: "#fff",
@@ -713,7 +803,7 @@ function Home({ cart, setCart }) {
         >
           © 2026 NexaStore. All Rights Reserved.
         </p>
-      </footer>
+      </motion.footer>
     </>
   );
 }
