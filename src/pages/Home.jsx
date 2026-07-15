@@ -390,21 +390,27 @@ viewport={{ once: false, amount: 0.2 }}
           {filteredProducts.map((product, index) => (
   <motion.div
     key={product._id}
-    initial={{ opacity: 0, y: 40 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: false, amount: 0.2 }}
-    transition={{
-      delay: index * 0.1,
-      duration: 0.5,
+    initial={{
+      opacity: 0,
+      x: index % 2 === 0 ? -120 : 120,
     }}
-              style={{
-                background: "#fff",
-                borderRadius: "15px",
-                overflow: "hidden",
-                boxShadow:
-                  "0 8px 20px rgba(0,0,0,.12)",
-              }}
-            >
+    whileInView={{
+      opacity: 1,
+      x: 0,
+    }}
+    viewport={{ once: false, amount: 0.2 }}
+    transition={{
+      duration: 0.7,
+      delay: index * 0.15,
+      ease: "easeOut",
+    }}
+    style={{
+      background: "#fff",
+      borderRadius: "15px",
+      overflow: "hidden",
+      boxShadow: "0 8px 20px rgba(0,0,0,.12)",
+    }}
+  >
               <img
                 src={product.image}
                 alt={product.name}
