@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 
@@ -109,17 +110,34 @@ function Products({ cart, setCart }) {
       >
         {Array.isArray(products) &&
         products.length > 0 ? (
-          products.map((product) => (
-                        <div
-              key={product._id}
-              style={{
-                background: "#ffffff",
-                borderRadius: "18px",
-                overflow: "hidden",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.12)",
-                border: "1px solid #eee",
-              }}
-            >
+          products.map((product, index) => (
+            <motion.div
+  key={product._id}
+  initial={{
+    opacity: 0,
+    x: index % 2 === 0 ? -150 : 150,
+  }}
+  whileInView={{
+    opacity: 1,
+    x: 0,
+  }}
+  viewport={{
+    once: false,
+    amount: 0.2,
+  }}
+  transition={{
+    duration: 0.8,
+    delay: index * 0.1,
+    ease: "easeOut",
+  }}
+  style={{
+    background: "#ffffff",
+    borderRadius: "18px",
+    overflow: "hidden",
+    boxShadow: "0 4px 15px rgba(0,0,0,0.12)",
+    border: "1px solid #eee",
+  }}
+>
               <div
                 style={{
                   position: "relative",
@@ -319,7 +337,7 @@ function Products({ cart, setCart }) {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))
         ) : (
                     <div
