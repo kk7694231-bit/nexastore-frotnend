@@ -2525,3 +2525,46 @@ table td{
     align-items: center !important;
   }
 }
+
+/* ============================= */
+/* Featured Products Responsive  */
+/* ============================= */
+
+.featured-products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.featured-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+@media (max-width:768px){
+
+  .featured-products-grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .featured-product-card{
+    width:100%;
+  }
+
+  .featured-product-card img{
+    height:180px !important;
+    padding:10px !important;
+  }
+
+  .featured-buttons{
+    flex-direction:column;
+  }
+
+  .featured-buttons a,
+  .featured-buttons button{
+    width:100%;
+  }
+
+}
