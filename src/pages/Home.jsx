@@ -378,38 +378,32 @@ viewport={{ once: false, amount: 0.2 }}
           Featured Products
         </h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit,minmax(280px,1fr))",
-            gap: "30px",
-          }}
-        >
+        <div className="featured-products-grid">
           {filteredProducts.map((product, index) => (
   <motion.div
-    key={product._id}
-    initial={{
-      opacity: 0,
-      x: index % 2 === 0 ? -120 : 120,
-    }}
-    whileInView={{
-      opacity: 1,
-      x: 0,
-    }}
-    viewport={{ once: false, amount: 0.2 }}
-    transition={{
-      duration: 0.7,
-      delay: index * 0.15,
-      ease: "easeOut",
-    }}
-    style={{
-      background: "#fff",
-      borderRadius: "15px",
-      overflow: "hidden",
-      boxShadow: "0 8px 20px rgba(0,0,0,.12)",
-    }}
-  >
+  key={product._id}
+  className="featured-product-card"
+  initial={{
+    opacity: 0,
+    x: index % 2 === 0 ? -120 : 120,
+  }}
+  whileInView={{
+    opacity: 1,
+    x: 0,
+  }}
+  viewport={{ once: false, amount: 0.2 }}
+  transition={{
+    duration: 0.7,
+    delay: index * 0.15,
+    ease: "easeOut",
+  }}
+  style={{
+    background: "#fff",
+    borderRadius: "15px",
+    overflow: "hidden",
+    boxShadow: "0 8px 20px rgba(0,0,0,.12)",
+  }}
+>
               <img
                 src={product.image}
                 alt={product.name}
@@ -460,13 +454,7 @@ viewport={{ once: false, amount: 0.2 }}
 
                 <p>Stock : {product.stock}</p>
 
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "10px",
-                    marginTop: "15px",
-                  }}
-                >
+                <div className="featured-buttons">
                   <button
                     onClick={() =>
                       addToCart(product)
