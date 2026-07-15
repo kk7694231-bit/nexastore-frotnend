@@ -1,37 +1,66 @@
-.hero{
-  height:75vh;
-
-  background:
-  linear-gradient(
+/* ==========================================
+   கணினி மற்றும் பொதுவான ஸ்டைல்கள் (Desktop & Base)
+   ========================================== */
+.hero {
+  height: 75vh;
+  background: linear-gradient(
     135deg,
     #6366f1,
     #ec4899,
     #06b6d4
   );
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* மொபைலில் ஓரத்தில் ஒட்டாமல் இருக்க */
+  box-sizing: border-box;
 }
 
-.glass-card{
-  background:rgba(255,255,255,.15);
-  -webkit-backdrop-filter:blur(15px);
-  backdrop-filter:blur(15px);
-
-  padding:50px;
-  border-radius:25px;
-  color:white;
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  padding: 50px;
+  border-radius: 25px;
+  color: white;
+  width: 100%;
+  max-width: 600px; /* கார்டு மிக நீளமாக போவதைத் தடுக்கிறது */
+  box-sizing: border-box;
 }
 
-.category-box{
-  background:white;
-  border-radius:20px;
-  padding:30px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-  transition:.3s;
+.category-box {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: .3s;
+  box-sizing: border-box;
 }
 
-.category-box:hover{
-  transform:translateY(-10px);
+/* கணினியில் மட்டும் Hover அனிமேஷன் வேலை செய்யும் */
+@media (hover: hover) {
+  .category-box:hover {
+    transform: translateY(-10px);
+  }
+}
+
+/* ==========================================
+   மொபைல் திரைகளுக்கான ஸ்டைல்கள் (Media Query)
+   ========================================== */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    min-height: 50vh; /* மொபைலில் திரையின் உயரத்தைக் குறைக்கிறது */
+    padding: 40px 15px;
+  }
+
+  .glass-card {
+    padding: 25px 20px; /* Padding பாதியாகக் குறைக்கப்பட்டுள்ளது */
+    border-radius: 18px; /* வளைவுகள் மொபைலுக்கு ஏற்பக் குறைக்கப்பட்டுள்ளது */
+    text-align: center; /* மொபைலில் எழுத்துக்கள் நடுவில் இருந்தால் அழகாக இருக்கும் */
+  }
+
+  .category-box {
+    padding: 20px; /* மொபைலில் இடத்தை மிச்சப்படுத்த padding குறைக்கப்பட்டுள்ளது */
+  }
 }
