@@ -2331,3 +2331,197 @@ table td{
   }
 
 }
+
+/* ==========================================================================
+   ADDITIONAL MOBILE RESPONSIVE FIXES (WITHOUT OVERWRITING EXISTING STYLES)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Global Adjustments */
+  body {
+    overflow-x: hidden !important;
+  }
+  
+  /* Navbar adjustments */
+  .navbar {
+    flex-direction: column !important;
+    padding: 15px 20px !important;
+    gap: 15px !important;
+  }
+  
+  .search-box {
+    margin: 10px 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .nav-links {
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 15px !important;
+  }
+
+  /* Hero / Glass Card */
+  .hero {
+    height: auto !important;
+    padding: 80px 20px !important;
+  }
+
+  .glass-card {
+    width: 100% !important;
+    padding: 30px 20px !important;
+    border-radius: 20px !important;
+  }
+
+  .glass-card h1 {
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Core Grids & Containers */
+  .products-section,
+  .categories-section,
+  .deals-section {
+    padding: 60px 20px !important;
+  }
+
+  .products-grid,
+  .categories-grid,
+  .deals-grid,
+  .dashboard-cards,
+  .users-grid,
+  .admin-products-grid,
+  .products-container {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Product Cards & Badges */
+  .product-card {
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .product-card img {
+    height: 200px !important;
+  }
+
+  /* Product Details Page */
+  .product-details {
+    grid-template-columns: 1fr !important;
+    padding: 40px 20px !important;
+    gap: 30px !important;
+    text-align: center;
+  }
+
+  .product-details img {
+    max-width: 100% !important;
+  }
+
+  .product-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .cart-btn,
+  .buy-btn {
+    width: 100% !important;
+  }
+
+  /* Cart Page & Cart Items */
+  .cart-page {
+    padding: 30px 15px !important;
+  }
+
+  .cart-item {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: center;
+    padding: 20px !important;
+    gap: 20px !important;
+  }
+
+  .cart-item img {
+    width: 130px !important;
+    height: 130px !important;
+    margin: 0 auto !important;
+  }
+
+  .quantity-controls {
+    justify-content: center !important;
+  }
+
+  /* Checkout Page */
+  .checkout-page {
+    padding: 30px 15px !important;
+  }
+
+  .checkout-page button {
+    width: 100% !important;
+  }
+
+  /* Admin Layout & Sidebar */
+  .admin-container {
+    flex-direction: column !important;
+  }
+
+  .admin-sidebar {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(212, 175, 55, .15) !important;
+    padding: 20px !important;
+  }
+
+  .admin-sidebar ul {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 0 !important;
+  }
+
+  .admin-sidebar li {
+    margin-bottom: 0 !important;
+  }
+
+  .admin-sidebar a {
+    padding: 10px 15px !important;
+  }
+
+  .admin-main {
+    padding: 30px 15px !important;
+  }
+
+  /* Admin Orders Table */
+  .orders-table-wrapper {
+    padding: 15px !important;
+  }
+
+  .orders-table th, 
+  .orders-table td {
+    padding: 12px 10px !important;
+    font-size: 14px !important;
+  }
+
+  /* Admin & Auth Forms */
+  .product-form {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .login-box,
+  .register-box,
+  .auth-card,
+  .admin-login-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 30px 20px !important;
+  }
+
+  /* Footer Layout */
+  .footer-links {
+    flex-direction: column !important;
+    gap: 15px !important;
+    align-items: center !important;
+  }
+}
