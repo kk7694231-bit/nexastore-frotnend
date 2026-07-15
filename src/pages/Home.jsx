@@ -199,10 +199,8 @@ viewport={{ once: false, amount: 0.2 }}
          <div
   key={item.name}
   onClick={() => {
-  alert(item.name);
-  console.log(item.name);
-
   setSelectedCategory(item.name);
+  setSelectedBrand("All");
   scrollToProducts();
 }}
   style={{
@@ -321,9 +319,10 @@ viewport={{ once: false, amount: 0.2 }}
   <motion.div
     key={brand}
     onClick={() => {
-      setSelectedBrand(brand);
-      scrollToProducts();
-    }}
+  setSelectedBrand(brand);
+  setSelectedCategory("All");
+  scrollToProducts();
+}}
     initial={{ opacity: 0, y: 40 }}
 whileInView={{ opacity: 1, y: 0 }}
 viewport={{ once: false, amount: 0.2 }}
