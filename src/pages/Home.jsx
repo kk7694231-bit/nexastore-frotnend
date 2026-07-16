@@ -88,14 +88,13 @@ function Home({ cart, setCart }) {
   return (
     <div style={{ boxSizing: "border-box", overflowX: "hidden", width: "100%" }}>
       {/* Hero Slider */}
-      <motion.div
-        initial={{ opacity: 0, y: isMobile ? 30 : 80 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
-        transition={{
-          duration: 0.8,
-          ease: "easeOut",
-        }}
+<motion.div
+  initial={{ opacity: 0, y: isMobile ? 30 : 80 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    duration: 0.8,
+    ease: "easeOut",
+  }}
         style={{
           width: "100%",
           height: isMobile ? "320px" : "450px",
