@@ -98,8 +98,8 @@ function Home({ cart, setCart }) {
         }}
         style={{
           width: "100%",
-          height: isMobile ? "auto" : "450px",
-          minHeight: isMobile ? "380px" : "450px",
+          height: isMobile ? "320px" : "450px",
+          minHeight: isMobile ? "320px" : "450px",
           overflow: "hidden",
           position: "relative",
           marginBottom: "40px",
@@ -110,7 +110,7 @@ function Home({ cart, setCart }) {
           alt="Banner"
           style={{
             width: "100%",
-            height: isMobile ? "380px" : "450px",
+            height: isMobile ? "320px" : "450px",
             objectFit: "cover",
             transition: "0.8s",
           }}
@@ -142,7 +142,7 @@ function Home({ cart, setCart }) {
             style={{
               color: "#000000",
               width: isMobile ? "100%" : "500px",
-              fontSize: isMobile ? "16px" : "22px",
+              fontSize: isMobile ? "15px" : "16px",
               margin: isMobile ? "0 auto" : "0",
             }}
           >
@@ -158,7 +158,7 @@ function Home({ cart, setCart }) {
               border: "none",
               padding: isMobile ? "12px 28px" : "15px 35px",
               borderRadius: "8px",
-              fontSize: isMobile ? "16px" : "18px",
+              fontSize: isMobile ? "15px" : "16px",
               fontWeight: "bold",
               width: isMobile ? "100%" : "auto",
             }}
@@ -203,7 +203,8 @@ function Home({ cart, setCart }) {
               scrollToProducts();
             }}
             style={{
-              width: isMobile ? "140px" : "160px",
+              width: isMobile ? "45%" : "160px",
+              maxWidth: "160px",
               background: "#fff",
               borderRadius: "15px",
               padding: isMobile ? "15px" : "25px",
@@ -213,7 +214,7 @@ function Home({ cart, setCart }) {
             }}
           >
             <div style={{ fontSize: isMobile ? "40px" : "55px" }}>{item.icon}</div>
-            <h3 style={{ fontSize: isMobile ? "16px" : "18px", margin: "10px 0 0" }}>{item.name}</h3>
+            <h3 style={{ fontSize: isMobile ? "15px" : "16px", margin: "10px 0 0" }}>{item.name}</h3>
           </div>
         ))}
       </motion.div>
@@ -244,7 +245,7 @@ function Home({ cart, setCart }) {
         <h2 style={{ fontSize: isMobile ? "22px" : "32px", marginBottom: "10px" }}>
           Up To 70% OFF
         </h2>
-        <p style={{ fontSize: isMobile ? "16px" : "20px" }}>
+        <p style={{ fontSize: isMobile ? "15px" : "16px" }}>
           Mobiles • Laptops • Fashion • Gaming
         </p>
       </motion.div>
@@ -269,12 +270,15 @@ function Home({ cart, setCart }) {
         </h2>
 
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(auto-fit,minmax(180px,1fr))",
-            gap: isMobile ? "15px" : "25px",
-          }}
-        >
+  style={{
+    display: "grid",
+    gridTemplateColumns: isMobile
+      ? "repeat(auto-fit, minmax(140px, 1fr))"
+      : "repeat(auto-fit, minmax(180px, 1fr))",
+    gap: isMobile ? "15px" : "25px",
+    width: "100%",
+  }}
+>
           {["Apple", "Samsung", "HP", "Sony", "Dell", "Nike"].map((brand, index) => (
             <motion.div
               key={brand}
@@ -376,7 +380,7 @@ function Home({ cart, setCart }) {
   }}
 >
                 <div>
-                  <h3 style={{ fontSize: isMobile ? "16px" : "18px", margin: "0 0 10px" }}>{product.name}</h3>
+                  <h3 style={{ fontSize: isMobile ? "15px" : "16px", margin: "0 0 10px" }}>{product.name}</h3>
                   <p style={{ color: "#666", minHeight: isMobile ? "auto" : "45px", fontSize: isMobile ? "14px" : "16px", margin: "0 0 10px" }}>
                     {product.description.substring(0, 60)}...
                   </p>
@@ -384,7 +388,7 @@ function Home({ cart, setCart }) {
                     ₹{product.price.toLocaleString()}
                   </h2>
                   <p style={{ color: "#ff9800", margin: "0 0 5px" }}>⭐ {product.rating || 4.5}</p>
-                  <p style={{ margin: "0 0 15px", fontSize: isMobile ? "14px" : "16px", color: "#333" }}>Stock : {product.stock}</p>
+                  <p style={{ margin: "0 0 15px", fontSize: isMobile ? "15px" : "16px", color: "#333" }}>Stock : {product.stock}</p>
                 </div>
 
                 <div
@@ -500,7 +504,7 @@ function Home({ cart, setCart }) {
               <div
                 style={{
                   background: "#fff",
-                  padding: "30px",
+                  padding: isMobile ? "20px" : "30px",
                   textAlign: "center",
                   borderRadius: "15px",
                   boxShadow: "0 5px 15px rgba(0,0,0,.12)",
@@ -568,7 +572,7 @@ function Home({ cart, setCart }) {
               }}
               style={{
                 background: "#fff",
-                padding: "25px",
+                padding: "25px",padding: isMobile ? "18px" : "25px",
                 borderRadius: "15px",
                 boxShadow: "0 5px 15px rgba(0,0,0,.1)",
               }}
@@ -599,7 +603,7 @@ function Home({ cart, setCart }) {
         }}
       >
         <h2 style={{ fontSize: isMobile ? "26px" : "36px", margin: 0 }}>Subscribe to our Newsletter</h2>
-        <p style={{ margin: "15px 0 30px", fontSize: isMobile ? "14px" : "16px" }}>
+        <p style={{ margin: "15px 0 30px", fontSize: isMobile ? "15px" : "16px", }}>
           Get updates about new arrivals and offers.
         </p>
 
@@ -642,7 +646,7 @@ function Home({ cart, setCart }) {
         style={{
           background: "#111",
           color: "#fff",
-          padding: "50px 20px",
+          padding: "50px 20px",padding: isMobile ? "35px 20px" : "50px 20px",
         }}
       >
         <div
@@ -650,8 +654,8 @@ function Home({ cart, setCart }) {
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(250px,1fr))",
             gap: "30px",
-            maxWidth: "1300px",
-            margin: "auto",
+           maxWidth: "450px",
+           margin:"0 auto",
           }}
         >
           <div>
