@@ -111,7 +111,7 @@ function Home({ cart, setCart }) {
   width: "100%",
   height: isMobile ? "320px" : "450px",
   objectFit: "cover",
-  objectPosition: isMobile ? "85% center" : "center",
+  objectPosition: isMobile ? "100% center" : "center",
   transition: "0.8s",
 }}
         />
