@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import banner from "../assets/banner.jpg";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -13,9 +14,7 @@ function Home({ cart, setCart }) {
   // மொபைல் திரையைக் கண்டறியும் State
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 
-  const banners = [
-    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600",
-  ];
+  const banners = [banner];
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -105,16 +104,15 @@ function Home({ cart, setCart }) {
         }}
       >
         <img
-          src={banners[currentSlide]}
-          alt="Banner"
-          style={{
-  width: "100%",
-  height: isMobile ? "320px" : "450px",
-  objectFit: "cover",
-  objectPosition: isMobile ? "100% center" : "center",
-  transition: "0.8s",
-}}
-        />
+  src={banners[currentSlide]}
+  alt="Banner"
+  style={{
+    width: "100%",
+    height: isMobile ? "260px" : "520px",
+    objectFit: "cover",
+    borderRadius: "15px",
+  }}
+/>
 
        <div
   style={{
