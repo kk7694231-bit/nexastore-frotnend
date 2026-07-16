@@ -111,7 +111,7 @@ function Home({ cart, setCart }) {
   width: "100%",
   height: isMobile ? "320px" : "450px",
   objectFit: "cover",
-  objectPosition: isMobile ? "75% center" : "center",
+  objectPosition: isMobile ? "85% center" : "center",
   transition: "0.8s",
 }}
         />
@@ -120,14 +120,12 @@ function Home({ cart, setCart }) {
   style={{
     position: "absolute",
     top: "50%",
-    left: isMobile ? "50%" : "70px",
+    left: isMobile ? "20px" : "70px",
     right: "auto",
-    transform: isMobile
-      ? "translate(-50%, -50%)"
-      : "translateY(-50%)",
+    transform: "translateY(-50%)",
     color: "#fff",
-    textAlign: isMobile ? "center" : "left",
-    width: isMobile ? "90%" : "500px",
+    textAlign: "left",
+    width: isMobile ? "280px" : "500px",
   }}
 >
           <h1
@@ -318,10 +316,9 @@ margin: isMobile ? "25px auto 0" : "30px 0 0",
 
       {/* Featured Products */}
       <motion.div
-        ref={productsRef}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
+  ref={productsRef}
+  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
         transition={{
           delay: 0.5,
           duration: 0.7,
