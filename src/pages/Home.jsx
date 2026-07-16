@@ -104,71 +104,15 @@ function Home({ cart, setCart }) {
         }}
       >
         <img
-  src={banners[currentSlide]}
-  alt="Banner"
-  style={{
-    width: "100%",
-    height: isMobile ? "260px" : "520px",
-    objectFit: "cover",
-    borderRadius: "15px",
-  }}
-/>
-
-       <div
-  style={{
-    position: "absolute",
-    top: "50%",
-    left: isMobile ? "20px" : "70px",
-    right: "auto",
-    transform: "translateY(-50%)",
-    color: "#fff",
-    textAlign: "left",
-    width: isMobile ? "280px" : "500px",
-  }}
->
-          <h1
-            style={{
-              color: "#121212",
-              fontSize: isMobile ? "28px" : "52px",
-fontWeight: "700",
-lineHeight: "1.2",
-              left: isMobile ? "0px" : "40px",
-              marginBottom: "20px",
-            }}
-          >
-            Welcome To NexaStore
-          </h1>
-
-          <p
-            style={{
-              color: "#000000",
-              width: isMobile ? "100%" : "500px",
-              fontSize: isMobile ? "15px" : "16px",
-              margin: isMobile ? "0 auto" : "0",
-            }}
-          >
-            India's Best Online Shopping Store for Mobiles, Electronics, Fashion, Gaming and Accessories.
-          </p>
-
-          <button
-            onClick={scrollToProducts}
-            style={{
-              marginTop: "30px",
-              background: "#ff9800",
-              color: "#fff",
-              border: "none",
-              padding: isMobile ? "12px 28px" : "15px 35px",
-              borderRadius: "8px",
-              fontSize: isMobile ? "15px" : "16px",
-              fontWeight: "bold",
-              width: isMobile ? "220px" : "auto",
-display: "block",
-margin: isMobile ? "25px auto 0" : "30px 0 0",
-            }}
-          >
-            Shop Now
-          </button>
-        </div>
+          src={banners[currentSlide]}
+          alt="Banner"
+          style={{
+            width: "100%",
+            height: isMobile ? "260px" : "520px",
+            objectFit: "cover",
+            borderRadius: "15px",
+          }}
+        />
       </motion.div>
 
       {/* Categories */}
