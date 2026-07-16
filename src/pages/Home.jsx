@@ -11,7 +11,7 @@ function Home({ cart, setCart }) {
   const API_URL = "https://nexastore-backend-rzao.vercel.app";
 
   // மொபைல் திரையைக் கண்டறியும் State
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 
   const banners = [
     "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600",
@@ -359,32 +359,48 @@ function Home({ cart, setCart }) {
                 alt={product.name}
                 style={{
                   width: "100%",
-                  height: "250px",
+                  height: isMobile ? "180px" : "250px",
                   objectFit: "contain",
                   background: "#f5f5f5",
-                  padding: "20px",
+                  padding: isMobile ? "10px" : "20px",
                 }}
               />
 
-              <div style={{ padding: "20px", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div
+  style={{
+    padding: isMobile ? "15px" : "20px",
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  }}
+>
                 <div>
-                  <h3 style={{ fontSize: "18px", margin: "0 0 10px" }}>{product.name}</h3>
-                  <p style={{ color: "#666", minHeight: "45px", fontSize: "14px", margin: "0 0 10px" }}>
+                  <h3 style={{ fontSize: isMobile ? "16px" : "18px", margin: "0 0 10px" }}>{product.name}</h3>
+                  <p style={{ color: "#666", minHeight: isMobile ? "auto" : "45px", fontSize: isMobile ? "14px" : "16px", margin: "0 0 10px" }}>
                     {product.description.substring(0, 60)}...
                   </p>
                   <h2 style={{ color: "#e53935", margin: "0 0 10px" }}>
                     ₹{product.price.toLocaleString()}
                   </h2>
                   <p style={{ color: "#ff9800", margin: "0 0 5px" }}>⭐ {product.rating || 4.5}</p>
-                  <p style={{ margin: "0 0 15px", fontSize: "14px", color: "#333" }}>Stock : {product.stock}</p>
+                  <p style={{ margin: "0 0 15px", fontSize: isMobile ? "14px" : "16px", color: "#333" }}>Stock : {product.stock}</p>
                 </div>
 
-                <div style={{ display: "flex", gap: "10px", marginTop: "auto" }}>
+                <div
+  style={{
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    gap: "10px",
+    marginTop: "auto",
+  }}
+>
                   <button
                     onClick={() => addToCart(product)}
                     style={{
                       flex: 1,
                       padding: "12px",
+                      width: isMobile ? "100%" : "auto",
                       border: "none",
                       background: "#ff9800",
                       color: "#fff",
