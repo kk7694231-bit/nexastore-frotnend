@@ -109,28 +109,34 @@ function Home({ cart, setCart }) {
           src={banners[currentSlide]}
           alt="Banner"
           style={{
-            width: "100%",
-            height: isMobile ? "320px" : "450px",
-            objectFit: "cover",
-            transition: "0.8s",
-          }}
+  width: "100%",
+  height: isMobile ? "320px" : "450px",
+  objectFit: "cover",
+  objectPosition: isMobile ? "75% center" : "center",
+  transition: "0.8s",
+}}
         />
 
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: isMobile ? "20px" : "70px",
-            right: isMobile ? "20px" : "auto",
-            transform: "translateY(-50%)",
-            color: "#fff",
-            textAlign: isMobile ? "center" : "left",
-          }}
-        >
+       <div
+  style={{
+    position: "absolute",
+    top: "50%",
+    left: isMobile ? "50%" : "70px",
+    right: "auto",
+    transform: isMobile
+      ? "translate(-50%, -50%)"
+      : "translateY(-50%)",
+    color: "#fff",
+    textAlign: isMobile ? "center" : "left",
+    width: isMobile ? "90%" : "500px",
+  }}
+>
           <h1
             style={{
               color: "#121212",
-              fontSize: isMobile ? "32px" : "52px",
+              fontSize: isMobile ? "28px" : "52px",
+fontWeight: "700",
+lineHeight: "1.2",
               left: isMobile ? "0px" : "40px",
               marginBottom: "20px",
             }}
@@ -160,7 +166,9 @@ function Home({ cart, setCart }) {
               borderRadius: "8px",
               fontSize: isMobile ? "15px" : "16px",
               fontWeight: "bold",
-              width: isMobile ? "100%" : "auto",
+              width: isMobile ? "220px" : "auto",
+display: "block",
+margin: isMobile ? "25px auto 0" : "30px 0 0",
             }}
           >
             Shop Now
