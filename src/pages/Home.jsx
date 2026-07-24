@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import banner from "../assets/banner.png.png";
+import banner from "../assets/Bannerr.png.png";
 import mobileBanner from "../assets/mobile-banner.png.png";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
