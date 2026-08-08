@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import banner from "../assets/Bannerr.png.png";
-import mobileBanner from "../assets/mobile-banner.png.png";
+import banner from "../assets/Banner.png";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -10,36 +9,30 @@ function Home({ cart, setCart }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedBrand, setSelectedBrand] = useState("All");
   const productsRef = useRef(null);
+
   const API_URL = "https://nexastore-backend-rzao.vercel.app";
 
-  // மொபைல் திரையைக் கண்டறியும் State
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+  // Mobile screen detection
+  const [isMobile, setIsMobile] = useState(
+    () => window.innerWidth <= 768
+  );
 
-  const banners = [isMobile ? mobileBanner : banner];
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-
+  // Fetch products + handle screen resize
   useEffect(() => {
     fetchProducts();
 
-    const slider = setInterval(() => {
-      setCurrentSlide((prev) =>
-        prev === banners.length - 1 ? 0 : prev + 1
-      );
-    }, 3000);
-
-    // திரையின் அளவு மாறும் போது கண்காணிக்கும் Function
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
+
     window.addEventListener("resize", handleResize);
 
     return () => {
-      clearInterval(slider);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  // Fetch products
   const fetchProducts = async () => {
     try {
       const { data } = await axios.get(`${API_URL}/api/products`);
@@ -49,6 +42,7 @@ function Home({ cart, setCart }) {
     }
   };
 
+  // Filter products
   const filteredProducts = products.filter((product) => {
     const categoryMatch =
       selectedCategory === "All" ||
@@ -61,6 +55,7 @@ function Home({ cart, setCart }) {
     return categoryMatch && brandMatch;
   });
 
+  // Add product to cart
   const addToCart = (product) => {
     const exist = cart.find((item) => item._id === product._id);
 
@@ -79,6 +74,7 @@ function Home({ cart, setCart }) {
     alert("Product Added Successfully");
   };
 
+  // Scroll to products
   const scrollToProducts = () => {
     productsRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -86,43 +82,278 @@ function Home({ cart, setCart }) {
   };
 
   return (
-    <div style={{ boxSizing: "border-box", overflowX: "hidden", width: "100%" }}>
-      {/* Hero Slider */}
-<motion.div
-  initial={{ opacity: 0, y: isMobile ? 30 : 80 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    duration: 0.8,
-    ease: "easeOut",
-  }}
+    <div
+      style={{
+        boxSizing: "border-box",
+        overflowX: "hidden",
+        width: "100%",
+        background: "#ffffff",
+      }}
+    >
+
+      {/* =====================================================
+          MODERN HERO SECTION
+      ===================================================== */}
+
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          ease: "easeOut",
+        }}
         style={{
           width: "100%",
-          height: isMobile ? "320px" : "450px",
-          minHeight: isMobile ? "320px" : "450px",
+          minHeight: isMobile ? "700px" : "570px",
+          background: "#ffffff",
           overflow: "hidden",
           position: "relative",
-          marginBottom: "40px",
         }}
       >
-        <img
-  src={banners[currentSlide]}
-  alt="Banner"
-  style={{
-    width: "100%",
-    height: isMobile ? "260px" : "520px",
-    objectFit: "cover",
-    objectPosition: "center",
-    borderRadius: "15px",
-    display: "block",
-  }}
-/>
-      </motion.div>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "1450px",
+            minHeight: isMobile ? "700px" : "570px",
+            margin: "0 auto",
+            padding: isMobile
+              ? "45px 20px"
+              : "45px 50px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: isMobile ? "30px" : "20px",
+            flexDirection: isMobile ? "column" : "row",
+            boxSizing: "border-box",
+          }}
+        >
 
-      {/* Categories */}
+          {/* ================= LEFT SIDE ================= */}
+
+          <div
+            style={{
+              flex: "0 0 42%",
+              maxWidth: "570px",
+              textAlign: isMobile ? "center" : "left",
+              zIndex: 3,
+              paddingTop: isMobile ? "10px" : "0",
+            }}
+          >
+
+            {/* Welcome text */}
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: isMobile
+                  ? "center"
+                  : "flex-start",
+                gap: "12px",
+                marginBottom: "22px",
+              }}
+            >
+              <span
+                style={{
+                  width: "42px",
+                  height: "3px",
+                  background: "#ff6b00",
+                  display: "inline-block",
+                }}
+              />
+
+              <span
+                style={{
+                  fontSize: isMobile ? "15px" : "18px",
+                  fontWeight: "600",
+                  color: "#172b4d",
+                  letterSpacing: "0.3px",
+                }}
+              >
+                WELCOME TO{" "}
+                <span style={{ color: "#ff6b00" }}>
+                  NEXASTORE
+                </span>
+              </span>
+            </div>
+
+            {/* Main heading */}
+
+            <h1
+              style={{
+                margin: 0,
+                fontSize: isMobile ? "48px" : "72px",
+                lineHeight: "1.03",
+                fontWeight: "800",
+                color: "#102a43",
+                letterSpacing: isMobile
+                  ? "-1.5px"
+                  : "-2.5px",
+              }}
+            >
+              SHOP MORE.
+              <br />
+
+              <span style={{ color: "#ff6b00" }}>
+                SAVE MORE.
+              </span>
+            </h1>
+
+            {/* Description */}
+
+            <p
+              style={{
+                marginTop: "28px",
+                marginBottom: "6px",
+                fontSize: isMobile ? "16px" : "19px",
+                lineHeight: "1.6",
+                color: "#52606d",
+              }}
+            >
+              Discover top quality products at best prices.
+            </p>
+
+            <p
+              style={{
+                marginTop: "0",
+                fontSize: isMobile ? "16px" : "19px",
+                lineHeight: "1.6",
+                color: "#52606d",
+              }}
+            >
+              Your one-stop destination for everything you need.
+            </p>
+
+            {/* Buttons */}
+
+            <div
+              style={{
+                display: "flex",
+                gap: "14px",
+                marginTop: "30px",
+                justifyContent: isMobile
+                  ? "center"
+                  : "flex-start",
+                flexWrap: "wrap",
+              }}
+            >
+              <button
+                onClick={scrollToProducts}
+                style={{
+                  padding: "15px 30px",
+                  background: "#102a43",
+                  color: "#ffffff",
+                  border: "none",
+                  borderRadius: "8px",
+                  fontSize: "16px",
+                  fontWeight: "700",
+                  cursor: "pointer",
+                  minWidth: "145px",
+                }}
+              >
+                SHOP NOW&nbsp; →
+              </button>
+
+              <button
+                onClick={scrollToProducts}
+                style={{
+                  padding: "13px 27px",
+                  background: "#ffffff",
+                  color: "#ff6b00",
+                  border: "2px solid #ff6b00",
+                  borderRadius: "8px",
+                  fontSize: "16px",
+                  fontWeight: "700",
+                  cursor: "pointer",
+                  minWidth: "165px",
+                }}
+              >
+                EXPLORE OFFERS
+              </button>
+            </div>
+          </div>
+
+          {/* ================= RIGHT SIDE ================= */}
+
+          <div
+            style={{
+              flex: "0 0 55%",
+              width: isMobile ? "100%" : "55%",
+              minHeight: isMobile ? "320px" : "500px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+            }}
+          >
+
+            {/* Orange decorative circle */}
+
+            <div
+              style={{
+                position: "absolute",
+                width: isMobile ? "230px" : "400px",
+                height: isMobile ? "230px" : "400px",
+                borderRadius: "50%",
+                background: "#ff6b00",
+                opacity: 0.9,
+                right: isMobile ? "5%" : "12%",
+                top: isMobile ? "10%" : "5%",
+                zIndex: 0,
+              }}
+            />
+
+            {/* Soft background circle */}
+
+            <div
+              style={{
+                position: "absolute",
+                width: isMobile ? "280px" : "570px",
+                height: isMobile ? "280px" : "570px",
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(circle, #f2f4f7 0%, #ffffff 70%)",
+                zIndex: 0,
+              }}
+            />
+
+            {/* Product image */}
+
+            <img
+              src={banner}
+              alt="NexaStore Products"
+              style={{
+                width: isMobile ? "100%" : "110%",
+                maxWidth: isMobile ? "430px" : "720px",
+                height: isMobile ? "330px" : "520px",
+                objectFit: "contain",
+                position: "relative",
+                zIndex: 2,
+                display: "block",
+              }}
+            />
+          </div>
+        </div>
+      </motion.section>
+
+
+      {/* =====================================================
+          CATEGORIES
+      ===================================================== */}
+
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
+        initial={{
+          opacity: 0,
+          y: 40,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: false,
+          amount: 0.2,
+        }}
         transition={{
           delay: 0.2,
           duration: 0.7,
@@ -132,18 +363,39 @@ function Home({ cart, setCart }) {
           display: "flex",
           justifyContent: "center",
           flexWrap: "wrap",
-          marginBottom: "50px",
+          marginBottom: "55px",
           gap: isMobile ? "15px" : "20px",
-          padding: "0 20px",
+          padding: isMobile
+            ? "0 15px"
+            : "0 30px",
         }}
       >
+
         {[
-          { icon: "📱", name: "Mobiles" },
-          { icon: "💻", name: "Laptops" },
-          { icon: "🎮", name: "Gaming" },
-          { icon: "👕", name: "Fashion" },
-          { icon: "📺", name: "Electronics" },
-          { icon: "⌚", name: "Accessories" },
+          {
+            icon: "📱",
+            name: "Mobiles",
+          },
+          {
+            icon: "💻",
+            name: "Laptops",
+          },
+          {
+            icon: "🎮",
+            name: "Gaming",
+          },
+          {
+            icon: "👕",
+            name: "Fashion",
+          },
+          {
+            icon: "📺",
+            name: "Electronics",
+          },
+          {
+            icon: "⌚",
+            name: "Accessories",
+          },
         ].map((item) => (
           <div
             key={item.name}
@@ -153,60 +405,71 @@ function Home({ cart, setCart }) {
               scrollToProducts();
             }}
             style={{
-              width: isMobile ? "45%" : "160px",
-              maxWidth: "160px",
-              background: "#fff",
-              borderRadius: "15px",
-              padding: isMobile ? "15px" : "25px",
+              width: isMobile
+                ? "42%"
+                : "160px",
+              maxWidth: "170px",
+              background: "#ffffff",
+              borderRadius: "14px",
+              padding: isMobile
+                ? "18px 10px"
+                : "22px 15px",
               textAlign: "center",
-              boxShadow: "0 5px 15px rgba(0,0,0,.12)",
+              boxShadow:
+                "0 5px 20px rgba(16,42,67,0.10)",
+              border:
+                "1px solid #f0f0f0",
               cursor: "pointer",
+              transition:
+                "transform 0.2s ease",
             }}
           >
-            <div style={{ fontSize: isMobile ? "40px" : "55px" }}>{item.icon}</div>
-            <h3 style={{ fontSize: isMobile ? "15px" : "16px", margin: "10px 0 0" }}>{item.name}</h3>
+            <div
+              style={{
+                fontSize: isMobile
+                  ? "38px"
+                  : "48px",
+                marginBottom: "8px",
+              }}
+            >
+              {item.icon}
+            </div>
+
+            <h3
+              style={{
+                fontSize: isMobile
+                  ? "14px"
+                  : "16px",
+                margin: 0,
+                color: "#102a43",
+              }}
+            >
+              {item.name}
+            </h3>
           </div>
         ))}
       </motion.div>
 
-      {/* Mega Sale Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.7,
-          ease: "easeOut",
-        }}
-        style={{
-          margin: isMobile ? "30px 15px" : "40px 20px",
-          background: "linear-gradient(135deg,#ff416c,#ff4b2b)",
-          borderRadius: "20px",
-          padding: isMobile ? "30px 15px" : "50px",
-          color: "#fff",
-          textAlign: "center",
-          boxShadow: "0 10px 25px rgba(0,0,0,.15)",
-        }}
-      >
-        <h1 style={{ fontSize: isMobile ? "32px" : "50px", marginBottom: "15px" }}>
-          🔥 Mega Sale 2026
-        </h1>
-        <h2 style={{ fontSize: isMobile ? "22px" : "32px", marginBottom: "10px" }}>
-          Up To 70% OFF
-        </h2>
-        <p style={{ fontSize: isMobile ? "15px" : "16px" }}>
-          Mobiles • Laptops • Fashion • Gaming
-        </p>
-      </motion.div>
 
-      {/* Featured Brands */}
+      {/* =====================================================
+          FEATURED BRANDS
+      ===================================================== */}
+
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
+        initial={{
+          opacity: 0,
+          y: 40,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: false,
+          amount: 0.2,
+        }}
         transition={{
-          delay: 0.4,
+          delay: 0.2,
           duration: 0.7,
           ease: "easeOut",
         }}
@@ -215,21 +478,42 @@ function Home({ cart, setCart }) {
           marginBottom: "50px",
         }}
       >
-        <h2 style={{ textAlign: "center", marginBottom: "30px", fontSize: isMobile ? "28px" : "35px" }}>
+
+        <h2
+          style={{
+            textAlign: "center",
+            marginBottom: "30px",
+            fontSize: isMobile
+              ? "28px"
+              : "35px",
+            color: "#102a43",
+          }}
+        >
           Top Brands
         </h2>
 
         <div
-  style={{
-    display: "grid",
-    gridTemplateColumns: isMobile
-      ? "repeat(auto-fit, minmax(140px, 1fr))"
-      : "repeat(auto-fit, minmax(180px, 1fr))",
-    gap: isMobile ? "15px" : "25px",
-    width: "100%",
-  }}
->
-          {["Apple", "Samsung", "HP", "Sony", "Dell", "Nike"].map((brand, index) => (
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile
+              ? "repeat(2, 1fr)"
+              : "repeat(6, 1fr)",
+            gap: isMobile
+              ? "15px"
+              : "20px",
+            width: "100%",
+            maxWidth: "1300px",
+            margin: "0 auto",
+          }}
+        >
+          {[
+            "Apple",
+            "Samsung",
+            "HP",
+            "Sony",
+            "Dell",
+            "Nike",
+          ].map((brand, index) => (
             <motion.div
               key={brand}
               onClick={() => {
@@ -237,33 +521,67 @@ function Home({ cart, setCart }) {
                 setSelectedCategory("All");
                 scrollToProducts();
               }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: false,
+                amount: 0.2,
+              }}
               transition={{
                 delay: index * 0.1,
                 duration: 0.5,
               }}
               style={{
-                background: "#fff",
-                borderRadius: "15px",
-                padding: isMobile ? "20px" : "30px",
+                background: "#ffffff",
+                borderRadius: "14px",
+                padding: isMobile
+                  ? "20px"
+                  : "25px",
                 textAlign: "center",
-                boxShadow: "0 5px 15px rgba(0,0,0,.12)",
+                boxShadow:
+                  "0 5px 18px rgba(16,42,67,0.09)",
+                border:
+                  "1px solid #f0f0f0",
                 cursor: "pointer",
               }}
             >
-              <h2 style={{ color: "#2874f0", fontSize: isMobile ? "20px" : "24px", margin: 0 }}>{brand}</h2>
+              <h2
+                style={{
+                  color: "#ff6b00",
+                  fontSize: isMobile
+                    ? "19px"
+                    : "23px",
+                  margin: 0,
+                }}
+              >
+                {brand}
+              </h2>
             </motion.div>
           ))}
         </div>
       </motion.div>
 
-      {/* Featured Products */}
+
+      {/* =====================================================
+          FEATURED PRODUCTS
+      ===================================================== */}
+
       <motion.div
-  ref={productsRef}
-  initial={{ opacity: 0, y: 40 }}
-  animate={{ opacity: 1, y: 0 }}
+        ref={productsRef}
+        initial={{
+          opacity: 0,
+          y: 40,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
         transition={{
           delay: 0.5,
           duration: 0.7,
@@ -275,127 +593,270 @@ function Home({ cart, setCart }) {
           padding: "0 20px",
         }}
       >
-        <h2 style={{ fontSize: isMobile ? "28px" : "34px", marginBottom: "30px", textAlign: isMobile ? "center" : "left" }}>
+
+        <h2
+          style={{
+            fontSize: isMobile
+              ? "28px"
+              : "34px",
+            marginBottom: "30px",
+            textAlign: isMobile
+              ? "center"
+              : "left",
+            color: "#102a43",
+          }}
+        >
           Featured Products
         </h2>
 
-        <div 
+        <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(280px, 1fr))",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : "repeat(auto-fill, minmax(280px, 1fr))",
             gap: "25px",
-            width: "100%"
+            width: "100%",
           }}
         >
-          {filteredProducts.map((product, index) => (
-            <motion.div
-              key={product._id}
-              initial={{ opacity: 0, x: isMobile ? 0 : (index % 2 === 0 ? -40 : 40), y: isMobile ? 30 : 0 }}
-              whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{
-                duration: 0.6,
-                delay: isMobile ? 0 : index * 0.05,
-                ease: "easeOut",
-              }}
-              style={{
-                background: "#fff",
-                borderRadius: "15px",
-                overflow: "hidden",
-                boxShadow: "0 8px 20px rgba(0,0,0,.12)",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                style={{
-                  width: "100%",
-                  height: isMobile ? "180px" : "250px",
-                  objectFit: "contain",
-                  background: "#f5f5f5",
-                  padding: isMobile ? "10px" : "20px",
+          {filteredProducts.map(
+            (product, index) => (
+              <motion.div
+                key={product._id}
+                initial={{
+                  opacity: 0,
+                  x: isMobile
+                    ? 0
+                    : index % 2 === 0
+                    ? -40
+                    : 40,
+                  y: isMobile
+                    ? 30
+                    : 0,
                 }}
-              />
+                whileInView={{
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                }}
+                viewport={{
+                  once: false,
+                  amount: 0.1,
+                }}
+                transition={{
+                  duration: 0.6,
+                  delay: isMobile
+                    ? 0
+                    : index * 0.05,
+                  ease: "easeOut",
+                }}
+                style={{
+                  background: "#ffffff",
+                  borderRadius: "15px",
+                  overflow: "hidden",
+                  boxShadow:
+                    "0 8px 20px rgba(16,42,67,0.10)",
+                  display: "flex",
+                  flexDirection: "column",
+                  border:
+                    "1px solid #f0f0f0",
+                }}
+              >
 
-              <div
-  style={{
-    padding: isMobile ? "15px" : "20px",
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  }}
->
-                <div>
-                  <h3 style={{ fontSize: isMobile ? "15px" : "16px", margin: "0 0 10px" }}>{product.name}</h3>
-                  <p style={{ color: "#666", minHeight: isMobile ? "auto" : "45px", fontSize: isMobile ? "14px" : "16px", margin: "0 0 10px" }}>
-                    {product.description.substring(0, 60)}...
-                  </p>
-                  <h2 style={{ color: "#e53935", margin: "0 0 10px" }}>
-                    ₹{product.price.toLocaleString()}
-                  </h2>
-                  <p style={{ color: "#ff9800", margin: "0 0 5px" }}>⭐ {product.rating || 4.5}</p>
-                  <p style={{ margin: "0 0 15px", fontSize: isMobile ? "15px" : "16px", color: "#333" }}>Stock : {product.stock}</p>
-                </div>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={{
+                    width: "100%",
+                    height: isMobile
+                      ? "180px"
+                      : "250px",
+                    objectFit: "contain",
+                    background: "#f7f8fa",
+                    padding: isMobile
+                      ? "10px"
+                      : "20px",
+                  }}
+                />
 
                 <div
-  style={{
-    display: "flex",
-    flexDirection: isMobile ? "column" : "row",
-    gap: "10px",
-    marginTop: "auto",
-  }}
->
-                  <button
-                    onClick={() => addToCart(product)}
-                    style={{
-                      flex: 1,
-                      padding: "12px",
-                      width: isMobile ? "100%" : "auto",
-                      border: "none",
-                      background: "#ff9800",
-                      color: "#fff",
-                      borderRadius: "8px",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Add To Cart
-                  </button>
+                  style={{
+                    padding: isMobile
+                      ? "15px"
+                      : "20px",
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent:
+                      "space-between",
+                  }}
+                >
 
-                  <Link
-                    to={`/products/${product._id}`}
-                    style={{ flex: 1, textDecoration: "none" }}
-                  >
-                    <button
+                  <div>
+
+                    <h3
                       style={{
-                        width: "100%",
-                        padding: "12px",
-                        border: "none",
-                        background: "#2874f0",
-                        color: "#fff",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        fontWeight: "bold",
+                        fontSize: isMobile
+                          ? "15px"
+                          : "16px",
+                        margin:
+                          "0 0 10px",
+                        color: "#102a43",
                       }}
                     >
-                      View Details
+                      {product.name}
+                    </h3>
+
+                    <p
+                      style={{
+                        color: "#666",
+                        minHeight: isMobile
+                          ? "auto"
+                          : "45px",
+                        fontSize: isMobile
+                          ? "14px"
+                          : "16px",
+                        margin:
+                          "0 0 10px",
+                      }}
+                    >
+                      {product.description
+                        ? product.description.substring(
+                            0,
+                            60
+                          ) + "..."
+                        : "Quality product available at NexaStore."}
+                    </p>
+
+                    <h2
+                      style={{
+                        color: "#ff6b00",
+                        margin:
+                          "0 0 10px",
+                      }}
+                    >
+                      ₹
+                      {product.price.toLocaleString()}
+                    </h2>
+
+                    <p
+                      style={{
+                        color: "#ff9800",
+                        margin:
+                          "0 0 5px",
+                      }}
+                    >
+                      ⭐{" "}
+                      {product.rating ||
+                        4.5}
+                    </p>
+
+                    <p
+                      style={{
+                        margin:
+                          "0 0 15px",
+                        fontSize: isMobile
+                          ? "15px"
+                          : "16px",
+                        color: "#333",
+                      }}
+                    >
+                      Stock :{" "}
+                      {product.stock}
+                    </p>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection:
+                        isMobile
+                          ? "column"
+                          : "row",
+                      gap: "10px",
+                      marginTop: "auto",
+                    }}
+                  >
+
+                    <button
+                      onClick={() =>
+                        addToCart(product)
+                      }
+                      style={{
+                        flex: 1,
+                        padding: "12px",
+                        width: isMobile
+                          ? "100%"
+                          : "auto",
+                        border: "none",
+                        background:
+                          "#ff6b00",
+                        color: "#fff",
+                        borderRadius:
+                          "8px",
+                        cursor:
+                          "pointer",
+                        fontWeight:
+                          "bold",
+                      }}
+                    >
+                      Add To Cart
                     </button>
-                  </Link>
+
+                    <Link
+                      to={`/products/${product._id}`}
+                      style={{
+                        flex: 1,
+                        textDecoration:
+                          "none",
+                      }}
+                    >
+                      <button
+                        style={{
+                          width: "100%",
+                          padding: "12px",
+                          border: "none",
+                          background:
+                            "#102a43",
+                          color: "#fff",
+                          borderRadius:
+                            "8px",
+                          cursor:
+                            "pointer",
+                          fontWeight:
+                            "bold",
+                        }}
+                      >
+                        View Details
+                      </button>
+                    </Link>
+
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          )}
         </div>
       </motion.div>
 
-      {/* Why Choose Us */}
+
+      {/* =====================================================
+          WHY CHOOSE US
+      ===================================================== */}
+
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
+        initial={{
+          opacity: 0,
+          y: 40,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: false,
+          amount: 0.2,
+        }}
         transition={{
           delay: 0.2,
           duration: 0.7,
@@ -407,14 +868,26 @@ function Home({ cart, setCart }) {
           padding: "0 20px",
         }}
       >
-        <h2 style={{ textAlign: "center", fontSize: isMobile ? "28px" : "34px", marginBottom: "35px" }}>
+
+        <h2
+          style={{
+            textAlign: "center",
+            fontSize: isMobile
+              ? "28px"
+              : "34px",
+            marginBottom: "35px",
+            color: "#102a43",
+          }}
+        >
           Why Choose NexaStore?
         </h2>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(250px,1fr))",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : "repeat(auto-fit,minmax(250px,1fr))",
             gap: "25px",
           }}
         >
@@ -442,9 +915,18 @@ function Home({ cart, setCart }) {
           ].map((item, index) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              initial={{
+                opacity: 0,
+                y: 30,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: false,
+                amount: 0.2,
+              }}
               transition={{
                 delay: index * 0.1,
                 duration: 0.5,
@@ -453,14 +935,33 @@ function Home({ cart, setCart }) {
               <div
                 style={{
                   background: "#fff",
-                  padding: isMobile ? "20px" : "30px",
+                  padding: isMobile
+                    ? "20px"
+                    : "30px",
                   textAlign: "center",
                   borderRadius: "15px",
-                  boxShadow: "0 5px 15px rgba(0,0,0,.12)",
+                  boxShadow:
+                    "0 5px 15px rgba(16,42,67,0.10)",
+                  border:
+                    "1px solid #f0f0f0",
                 }}
               >
-                <div style={{ fontSize: "50px" }}>{item.icon}</div>
-                <h3>{item.title}</h3>
+                <div
+                  style={{
+                    fontSize: "50px",
+                  }}
+                >
+                  {item.icon}
+                </div>
+
+                <h3
+                  style={{
+                    color: "#102a43",
+                  }}
+                >
+                  {item.title}
+                </h3>
+
                 <p>{item.desc}</p>
               </div>
             </motion.div>
@@ -468,11 +969,24 @@ function Home({ cart, setCart }) {
         </div>
       </motion.div>
 
-      {/* Customer Reviews */}
+
+      {/* =====================================================
+          CUSTOMER REVIEWS
+      ===================================================== */}
+
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
+        initial={{
+          opacity: 0,
+          y: 40,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: false,
+          amount: 0.2,
+        }}
         transition={{
           delay: 0.2,
           duration: 0.7,
@@ -483,14 +997,26 @@ function Home({ cart, setCart }) {
           padding: "60px 20px",
         }}
       >
-        <h2 style={{ textAlign: "center", marginBottom: "40px", fontSize: isMobile ? "28px" : "34px" }}>
+
+        <h2
+          style={{
+            textAlign: "center",
+            marginBottom: "40px",
+            fontSize: isMobile
+              ? "28px"
+              : "34px",
+            color: "#102a43",
+          }}
+        >
           Customer Reviews
         </h2>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(300px,1fr))",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : "repeat(auto-fit,minmax(300px,1fr))",
             gap: "25px",
             maxWidth: "1200px",
             margin: "auto",
@@ -499,60 +1025,118 @@ function Home({ cart, setCart }) {
           {[
             {
               name: "Rahul",
-              review: "Excellent products and super fast delivery.",
+              review:
+                "Excellent products and super fast delivery.",
             },
             {
               name: "Priya",
-              review: "Affordable prices and amazing quality.",
+              review:
+                "Affordable prices and amazing quality.",
             },
             {
               name: "Arun",
-              review: "Best online shopping experience.",
+              review:
+                "Best online shopping experience.",
             },
           ].map((item, index) => (
             <motion.div
               key={item.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              initial={{
+                opacity: 0,
+                y: 30,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: false,
+                amount: 0.2,
+              }}
               transition={{
                 delay: index * 0.1,
                 duration: 0.5,
               }}
               style={{
                 background: "#fff",
-                padding: "25px",padding: isMobile ? "18px" : "25px",
+                padding: isMobile
+                  ? "18px"
+                  : "25px",
                 borderRadius: "15px",
-                boxShadow: "0 5px 15px rgba(0,0,0,.1)",
+                boxShadow:
+                  "0 5px 15px rgba(16,42,67,0.10)",
               }}
             >
               <h3>{item.name}</h3>
-              <p style={{ color: "#ff9800" }}>⭐⭐⭐⭐⭐</p>
+
+              <p
+                style={{
+                  color: "#ff9800",
+                }}
+              >
+                ⭐⭐⭐⭐⭐
+              </p>
+
               <p>{item.review}</p>
             </motion.div>
           ))}
         </div>
       </motion.div>
 
-      {/* Newsletter */}
+
+      {/* =====================================================
+          NEWSLETTER
+      ===================================================== */}
+
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
+        initial={{
+          opacity: 0,
+          y: 40,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: false,
+          amount: 0.2,
+        }}
         transition={{
           delay: 0.2,
           duration: 0.7,
           ease: "easeOut",
         }}
         style={{
-          background: "linear-gradient(135deg,#2874f0,#1565c0)",
+          background:
+            "linear-gradient(135deg,#102a43,#173f5f)",
           color: "#fff",
           textAlign: "center",
-          padding: isMobile ? "40px 20px" : "60px 20px",
+          padding: isMobile
+            ? "40px 20px"
+            : "60px 20px",
         }}
       >
-        <h2 style={{ fontSize: isMobile ? "26px" : "36px", margin: 0 }}>Subscribe to our Newsletter</h2>
-        <p style={{ margin: "15px 0 30px", fontSize: isMobile ? "15px" : "16px", }}>
+
+        <h2
+          style={{
+            fontSize: isMobile
+              ? "26px"
+              : "36px",
+            margin: 0,
+          }}
+        >
+          Subscribe to our Newsletter
+        </h2>
+
+        <p
+          style={{
+            margin:
+              "15px 0 30px",
+            fontSize: isMobile
+              ? "15px"
+              : "16px",
+          }}
+        >
           Get updates about new arrivals and offers.
         </p>
 
@@ -561,87 +1145,240 @@ function Home({ cart, setCart }) {
           placeholder="Enter your email"
           style={{
             padding: "15px",
-            width: isMobile ? "100%" : "320px",
+            width: isMobile
+              ? "100%"
+              : "320px",
+            boxSizing: "border-box",
             borderRadius: "8px",
             border: "none",
             outline: "none",
-            marginRight: isMobile ? "0px" : "10px",
-            marginBottom: isMobile ? "15px" : "0px",
+            marginRight: isMobile
+              ? "0"
+              : "10px",
+            marginBottom: isMobile
+              ? "15px"
+              : "0",
           }}
         />
 
         <button
           style={{
             padding: "15px 25px",
-            background: "#ff9800",
+            background: "#ff6b00",
             color: "#fff",
             border: "none",
             borderRadius: "8px",
             cursor: "pointer",
             fontWeight: "bold",
-            width: isMobile ? "100%" : "auto",
+            width: isMobile
+              ? "100%"
+              : "auto",
           }}
         >
           Subscribe
         </button>
       </motion.div>
 
-      {/* Footer */}
+
+      {/* =====================================================
+          FOOTER
+      ===================================================== */}
+
       <motion.footer
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
-        transition={{ duration: 0.8 }}
+        initial={{
+          opacity: 0,
+          y: 40,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: false,
+          amount: 0.2,
+        }}
+        transition={{
+          duration: 0.8,
+        }}
         style={{
           background: "#111",
           color: "#fff",
-          padding: "50px 20px",padding: isMobile ? "35px 20px" : "50px 20px",
+          padding: isMobile
+            ? "35px 20px"
+            : "50px 20px",
         }}
       >
+
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(250px,1fr))",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : "repeat(auto-fit,minmax(250px,1fr))",
             gap: "30px",
-           maxWidth: "450px",
-           margin:"0 auto",
+            maxWidth: "1200px",
+            margin: "0 auto",
           }}
         >
+
           <div>
             <h2>NexaStore</h2>
-            <p style={{ color: "#bbb", fontSize: "14px", lineHeight: "1.6" }}>
-              India's trusted online shopping destination for Electronics, Fashion, Mobiles and Gaming.
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                lineHeight: "1.6",
+              }}
+            >
+              India's trusted online shopping
+              destination for Electronics,
+              Fashion, Mobiles and Gaming.
             </p>
           </div>
 
+
           <div>
             <h3>Quick Links</h3>
-            <p style={{ color: "#bbb", fontSize: "14px", cursor: "pointer" }}>Home</p>
-            <p style={{ color: "#bbb", fontSize: "14px", cursor: "pointer" }}>Products</p>
-            <p style={{ color: "#bbb", fontSize: "14px", cursor: "pointer" }}>Cart</p>
-            <p style={{ color: "#bbb", fontSize: "14px", cursor: "pointer" }}>Orders</p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
+            >
+              Home
+            </p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
+            >
+              Products
+            </p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
+            >
+              Cart
+            </p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
+            >
+              Orders
+            </p>
           </div>
+
 
           <div>
             <h3>Contact</h3>
-            <p style={{ color: "#bbb", fontSize: "14px" }}>📍 Coimbatore, Tamil Nadu</p>
-            <p style={{ color: "#bbb", fontSize: "14px" }}>📞 +91 9876543210</p>
-            <p style={{ color: "#bbb", fontSize: "14px" }}>✉ support@nexastore.com</p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+              }}
+            >
+              📍 Coimbatore, Tamil Nadu
+            </p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+              }}
+            >
+              📞 +91 9876543210
+            </p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+              }}
+            >
+              ✉ support@nexastore.com
+            </p>
           </div>
+
 
           <div>
             <h3>Follow Us</h3>
-            <p style={{ color: "#bbb", fontSize: "14px", cursor: "pointer" }}>📘 Facebook</p>
-            <p style={{ color: "#bbb", fontSize: "14px", cursor: "pointer" }}>📸 Instagram</p>
-            <p style={{ color: "#bbb", fontSize: "14px", cursor: "pointer" }}>🐦 Twitter</p>
-            <p style={{ color: "#bbb", fontSize: "14px", cursor: "pointer" }}>▶ YouTube</p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
+            >
+              📘 Facebook
+            </p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
+            >
+              📸 Instagram
+            </p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
+            >
+              🐦 Twitter
+            </p>
+
+            <p
+              style={{
+                color: "#bbb",
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
+            >
+              ▶ YouTube
+            </p>
           </div>
+
         </div>
 
-        <hr style={{ margin: "30px 0", borderColor: "#333" }} />
-        <p style={{ textAlign: "center", fontSize: "14px", color: "#bbb", margin: 0 }}>
+        <hr
+          style={{
+            margin: "30px 0",
+            borderColor: "#333",
+          }}
+        />
+
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "14px",
+            color: "#bbb",
+            margin: 0,
+          }}
+        >
           © 2026 NexaStore. All Rights Reserved.
         </p>
+
       </motion.footer>
     </div>
   );
