@@ -36,101 +36,418 @@ p{
   border-radius:20px;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* =========================================================
+   NEXASTORE MODERN NAVBAR
+   ========================================================= */
 
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  padding:18px 40px;
-
-  position:sticky;
-  top:0;
-
-  z-index:1000;
-
-  background:rgb(0, 0, 0);
-
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-
-  border-bottom:1px solid rgba(212,175,55,.2);
+.navbar-wrapper {
+  width: 100%;
+  background: #ffffff;
+  color: #102a43;
+  border-bottom: 1px solid #e8edf2;
+  position: relative;
+  z-index: 1000;
 }
 
-.logo{
-  color: #f6f4f4;
-  font-size:2rem;
-  font-weight:800;
 
-  color:var(--gold);
+/* ================= TOP NAVBAR ================= */
 
-  text-transform:uppercase;
+.navbar-main {
+  width: 100%;
+  max-width: 1500px;
+  min-height: 105px;
+  margin: 0 auto;
+  padding: 0 45px;
 
-  letter-spacing:2px;
+  display: flex;
+  align-items: center;
+  gap: 45px;
 
-  text-shadow:
-  0 0 10px rgba(212,175,55,.4);
+  box-sizing: border-box;
 }
 
-.search-box{
-  display:flex;
-  flex:1;
-  max-width:600px;
-  margin:0 40px;
+
+/* ================= LOGO ================= */
+
+.navbar-logo {
+  text-decoration: none;
+  white-space: nowrap;
+
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+
+  min-width: 260px;
 }
 
-.search-box input{
-  flex:1;
-
-  padding:14px;
-
-  border:none;
-  outline:none;
-
-  color:rgb(16, 15, 15);
-
-  background:#e4dfdf;
-
-  border-radius:12px 0 0 12px;
+.logo-nexa {
+  color: #102a43;
 }
 
-.search-box button{
-  width:65px;
-
-  border:none;
-
-  color:white;
-
-  background:white;
-
-  border-radius:0 12px 12px 0;
+.logo-store {
+  color: #ff6b00;
 }
 
-.nav-links{
-  display:flex;
-  gap:25px;
+
+/* ================= SEARCH ================= */
+
+.navbar-search {
+  flex: 1;
+  max-width: 720px;
+  height: 60px;
+
+  display: flex;
+  align-items: stretch;
+
+  border: 1px solid #dfe5eb;
+  border-radius: 10px;
+
+  overflow: hidden;
+  background: #ffffff;
+
+  box-shadow: 0 2px 8px rgba(16, 42, 67, 0.04);
 }
 
-.nav-links a{
-  color:white;
-  font-weight:600;
-  transition:.3s;
+
+/* Category */
+
+.category-select {
+  min-width: 185px;
+
+  padding: 0 20px;
+
+  border: none;
+  border-right: 1px solid #dfe5eb;
+
+  background: #ffffff;
+
+  color: #102a43;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
 }
 
-.nav-links a:hover{
-  color:var(--gold);
+
+/* Search input */
+
+.navbar-search input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+  outline: none;
+
+  padding: 0 20px;
+
+  font-size: 15px;
+  color: #102a43;
+
+  background: #ffffff;
 }
 
-.cart-count{
-  background:var(--gold);
-  color:rgb(12, 12, 12);
+.navbar-search input::placeholder {
+  color: #7b8794;
+}
 
-  padding:2px 8px;
 
-  border-radius:50%;
+/* Search button */
+
+.search-button {
+  width: 65px;
+
+  border: none;
+
+  background: #ff6b00;
+  color: #ffffff;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.search-button:hover {
+  background: #e85d00;
+}
+
+
+/* ================= RIGHT ACTIONS ================= */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  white-space: nowrap;
+}
+
+
+.nav-action {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #102a43;
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.nav-action:hover {
+  color: #ff6b00;
+}
+
+
+.nav-action-icon {
+  font-size: 27px;
+  line-height: 1;
+}
+
+
+.cart-icon {
+  font-size: 25px;
+}
+
+
+.logout-action {
+  font-family: inherit;
+}
+
+
+.cart-action {
+  position: relative;
+  padding-right: 8px;
+}
+
+
+/* Cart number */
+
+.cart-count {
+  position: absolute;
+
+  top: -13px;
+  right: -10px;
+
+  min-width: 22px;
+  height: 22px;
+
+  padding: 0 5px;
+
+  border-radius: 50%;
+
+  background: #ff6b00;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+
+/* ================= SECOND MENU ================= */
+
+.navbar-menu {
+  width: 100%;
+
+  min-height: 72px;
+
+  border-top: 1px solid #edf0f3;
+
+  display: flex;
+  align-items: center;
+
+  gap: 48px;
+
+  padding: 0 50px;
+
+  box-sizing: border-box;
+}
+
+
+.navbar-menu-link {
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+
+  position: relative;
+
+  color: #102a43;
+
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  transition: color 0.2s ease;
+}
+
+
+.navbar-menu-link:hover {
+  color: #ff6b00;
+}
+
+
+.navbar-menu-link.active {
+  color: #ff6b00;
+}
+
+
+/* Orange underline */
+
+.navbar-menu-link.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 3px;
+
+  background: #ff6b00;
+}
+
+
+/* =========================================================
+   MOBILE NAVBAR
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .navbar-main {
+    gap: 20px;
+    padding: 0 25px;
+  }
+
+  .navbar-logo {
+    min-width: auto;
+    font-size: 30px;
+  }
+
+  .navbar-actions {
+    gap: 15px;
+  }
+
+  .navbar-actions .nav-action span:not(.nav-action-icon):not(.cart-count) {
+    display: none;
+  }
+
+  .navbar-menu {
+    gap: 25px;
+    padding: 0 25px;
+
+    overflow-x: auto;
+  }
+
+  .navbar-menu-link {
+    white-space: nowrap;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .navbar-main {
+    min-height: auto;
+
+    padding: 18px 15px;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+  }
+
+
+  .navbar-logo {
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 30px;
+  }
+
+
+  .navbar-search {
+    order: 3;
+
+    width: 100%;
+    max-width: none;
+
+    height: 52px;
+  }
+
+
+  .category-select {
+    display: none;
+  }
+
+
+  .search-button {
+    width: 55px;
+  }
+
+
+  .navbar-actions {
+    width: 100%;
+
+    justify-content: center;
+
+    gap: 25px;
+  }
+
+
+  .navbar-menu {
+    min-height: 55px;
+
+    padding: 0 15px;
+
+    gap: 25px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  .navbar-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .navbar-menu-link {
+    height: 55px;
+
+    font-size: 14px;
+  }
 }
 
 /* =========================
