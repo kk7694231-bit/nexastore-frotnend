@@ -1085,301 +1085,190 @@ function Home({ cart, setCart }) {
 
 
       {/* =====================================================
-          NEWSLETTER
-      ===================================================== */}
+    NEWSLETTER + FOOTER
+===================================================== */}
 
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: 40,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{
-          once: false,
-          amount: 0.2,
-        }}
-        transition={{
-          delay: 0.2,
-          duration: 0.7,
-          ease: "easeOut",
-        }}
-        style={{
-          background:
-            "linear-gradient(135deg,#102a43,#173f5f)",
-          color: "#fff",
-          textAlign: "center",
-          padding: isMobile
-            ? "40px 20px"
-            : "60px 20px",
-        }}
-      >
+<section className="nexa-footer-section">
 
-        <h2
-          style={{
-            fontSize: isMobile
-              ? "26px"
-              : "36px",
-            margin: 0,
-          }}
-        >
-          Subscribe to our Newsletter
+  {/* Newsletter */}
+
+  <div className="nexa-newsletter">
+
+    <div className="newsletter-content">
+
+      <div className="newsletter-text">
+        <span className="newsletter-tag">
+          STAY UPDATED
+        </span>
+
+        <h2>
+          Get the latest from{" "}
+          <span>NexaStore</span>
         </h2>
 
-        <p
-          style={{
-            margin:
-              "15px 0 30px",
-            fontSize: isMobile
-              ? "15px"
-              : "16px",
-          }}
-        >
-          Get updates about new arrivals and offers.
+        <p>
+          Subscribe to get updates about new products,
+          exclusive offers and special deals.
         </p>
+      </div>
+
+      <div className="newsletter-form">
 
         <input
           type="email"
-          placeholder="Enter your email"
-          style={{
-            padding: "15px",
-            width: isMobile
-              ? "100%"
-              : "320px",
-            boxSizing: "border-box",
-            borderRadius: "8px",
-            border: "none",
-            outline: "none",
-            marginRight: isMobile
-              ? "0"
-              : "10px",
-            marginBottom: isMobile
-              ? "15px"
-              : "0",
-          }}
+          placeholder="Enter your email address"
         />
 
-        <button
-          style={{
-            padding: "15px 25px",
-            background: "#ff6b00",
-            color: "#fff",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "bold",
-            width: isMobile
-              ? "100%"
-              : "auto",
-          }}
-        >
+        <button>
           Subscribe
         </button>
-      </motion.div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 
-      {/* =====================================================
-          FOOTER
-      ===================================================== */}
+  {/* Footer */}
 
-      <motion.footer
-        initial={{
-          opacity: 0,
-          y: 40,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{
-          once: false,
-          amount: 0.2,
-        }}
-        transition={{
-          duration: 0.8,
-        }}
-        style={{
-          background: "#111",
-          color: "#fff",
-          padding: isMobile
-            ? "35px 20px"
-            : "50px 20px",
-        }}
-      >
+  <footer className="nexa-footer">
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile
-              ? "1fr"
-              : "repeat(auto-fit,minmax(250px,1fr))",
-            gap: "30px",
-            maxWidth: "1200px",
-            margin: "0 auto",
-          }}
+    <div className="footer-container">
+
+      {/* Brand */}
+
+      <div className="footer-column footer-brand">
+
+        <Link
+          to="/"
+          className="footer-logo"
         >
+          <span>NEXA</span>STORE
+        </Link>
 
-          <div>
-            <h2>NexaStore</h2>
+        <p>
+          Your trusted online shopping destination
+          for mobiles, electronics, fashion, gaming
+          and accessories.
+        </p>
 
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                lineHeight: "1.6",
-              }}
-            >
-              India's trusted online shopping
-              destination for Electronics,
-              Fashion, Mobiles and Gaming.
-            </p>
-          </div>
+        <div className="footer-social">
 
+          <a href="#" aria-label="Facebook">
+            f
+          </a>
 
-          <div>
-            <h3>Quick Links</h3>
+          <a href="#" aria-label="Instagram">
+            ◎
+          </a>
 
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              Home
-            </p>
+          <a href="#" aria-label="Twitter">
+            𝕏
+          </a>
 
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              Products
-            </p>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              Cart
-            </p>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              Orders
-            </p>
-          </div>
-
-
-          <div>
-            <h3>Contact</h3>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-              }}
-            >
-              📍 Coimbatore, Tamil Nadu
-            </p>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-              }}
-            >
-              📞 +91 9876543210
-            </p>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-              }}
-            >
-              ✉ support@nexastore.com
-            </p>
-          </div>
-
-
-          <div>
-            <h3>Follow Us</h3>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              📘 Facebook
-            </p>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              📸 Instagram
-            </p>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              🐦 Twitter
-            </p>
-
-            <p
-              style={{
-                color: "#bbb",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              ▶ YouTube
-            </p>
-          </div>
+          <a href="#" aria-label="YouTube">
+            ▶
+          </a>
 
         </div>
 
-        <hr
-          style={{
-            margin: "30px 0",
-            borderColor: "#333",
-          }}
-        />
+      </div>
 
-        <p
-          style={{
-            textAlign: "center",
-            fontSize: "14px",
-            color: "#bbb",
-            margin: 0,
-          }}
-        >
-          © 2026 NexaStore. All Rights Reserved.
+
+      {/* Quick Links */}
+
+      <div className="footer-column">
+
+        <h3>Quick Links</h3>
+
+        <Link to="/">Home</Link>
+
+        <Link to="/products">
+          Products
+        </Link>
+
+        <Link to="/cart">
+          Cart
+        </Link>
+
+        <Link to="/orders">
+          My Orders
+        </Link>
+
+      </div>
+
+
+      {/* Customer Service */}
+
+      <div className="footer-column">
+
+        <h3>Customer Service</h3>
+
+        <Link to="/products">
+          Shop
+        </Link>
+
+        <Link to="/login">
+          Login
+        </Link>
+
+        <Link to="/register">
+          Register
+        </Link>
+
+        <Link to="/cart">
+          Shopping Cart
+        </Link>
+
+      </div>
+
+
+      {/* Contact */}
+
+      <div className="footer-column footer-contact">
+
+        <h3>Contact Us</h3>
+
+        <p>
+          <span>📍</span>
+          Coimbatore, Tamil Nadu
         </p>
 
-      </motion.footer>
+        <p>
+          <span>📞</span>
+          +91 9876543210
+        </p>
+
+        <p>
+          <span>✉</span>
+          support@nexastore.com
+        </p>
+
+      </div>
+
+    </div>
+
+
+    {/* Bottom */}
+
+    <div className="footer-bottom">
+
+      <p>
+        © 2026 <strong>NexaStore</strong>.
+        All Rights Reserved.
+      </p>
+
+      <div className="footer-bottom-links">
+        <span>Privacy Policy</span>
+        <span>Terms & Conditions</span>
+      </div>
+
+    </div>
+
+  </footer>
+
+</section>
     </div>
   );
 }
