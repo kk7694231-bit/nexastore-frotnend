@@ -39,211 +39,148 @@ function Login() {
   };
 
   return (
-    <div className="auth-page">
+    <div className="simple-login-page">
 
-      <div className="auth-container">
+      <div className="simple-login-card">
 
-        {/* Left Branding */}
+        {/* Logo */}
 
-        <div className="auth-brand">
+        <div className="simple-login-logo">
+          <span>NEXA</span>STORE
+        </div>
 
-          <div className="auth-logo">
-            <span>NEXA</span>STORE
-          </div>
 
-          <h2>
-            Shop smarter.
-            <br />
-            Live better.
-          </h2>
+        {/* Heading */}
+
+        <div className="simple-login-heading">
+
+          <span>WELCOME BACK</span>
+
+          <h1>Login</h1>
 
           <p>
-            Discover quality products, great prices
-            and a simple shopping experience with
-            NexaStore.
+            Login to continue shopping with NexaStore.
           </p>
 
-          <div className="auth-benefits">
+        </div>
 
-            <div>
-              <span>🛍️</span>
-              <p>
-                Wide range of products
-              </p>
-            </div>
 
-            <div>
-              <span>🔒</span>
-              <p>
-                Secure shopping
-              </p>
-            </div>
+        {/* Email */}
 
-            <div>
-              <span>🚚</span>
-              <p>
-                Fast delivery
-              </p>
-            </div>
+        <div className="simple-login-field">
+
+          <label>Email Address</label>
+
+          <div className="simple-input">
+
+            <span>✉</span>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
+            />
 
           </div>
 
         </div>
 
 
-        {/* Login Card */}
+        {/* Password */}
 
-        <div className="login-card">
+        <div className="simple-login-field">
 
-          <div className="login-heading">
+          <label>Password</label>
 
-            <span className="login-tag">
-              WELCOME BACK
-            </span>
+          <div className="simple-input">
 
-            <h1>
-              Login
-            </h1>
+            <span>🔒</span>
 
-            <p>
-              Login to continue shopping with NexaStore.
-            </p>
-
-          </div>
-
-
-          {/* Email */}
-
-          <div className="login-field">
-
-            <label>
-              Email Address
-            </label>
-
-            <div className="login-input-wrapper">
-
-              <span>
-                ✉
-              </span>
-
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
-              />
-
-            </div>
-
-          </div>
-
-
-          {/* Password */}
-
-          <div className="login-field">
-
-            <label>
-              Password
-            </label>
-
-            <div className="login-input-wrapper">
-
-              <span>
-                🔒
-              </span>
-
-              <input
-                type={
-                  showPassword
-                    ? "text"
-                    : "password"
-                }
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
-              />
-
-              <button
-                type="button"
-                className="password-toggle"
-                onClick={() =>
-                  setShowPassword(!showPassword)
-                }
-              >
-                {showPassword
-                  ? "Hide"
-                  : "Show"}
-              </button>
-
-            </div>
-
-          </div>
-
-
-          {/* Login Button */}
-
-          <button
-            className="login-submit"
-            onClick={handleLogin}
-          >
-            Login
-            <span>→</span>
-          </button>
-
-
-          {/* Admin */}
-
-          <button
-            className="admin-login-link"
-            onClick={() =>
-              navigate("/admin-login")
-            }
-          >
-            Admin Login
-          </button>
-
-
-          {/* Register */}
-
-          <div className="login-register">
-
-            <span>
-              New to NexaStore?
-            </span>
+            <input
+              type={
+                showPassword
+                  ? "text"
+                  : "password"
+              }
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
+            />
 
             <button
+              type="button"
+              className="show-password"
               onClick={() =>
-                navigate("/register")
+                setShowPassword(!showPassword)
               }
             >
-              Create Account
+              {showPassword ? "Hide" : "Show"}
             </button>
 
           </div>
 
+        </div>
 
-          {/* Security */}
 
-          <div className="login-security">
+        {/* Login */}
 
-            <span>
-              🔒
-            </span>
+        <button
+          className="simple-login-button"
+          onClick={handleLogin}
+        >
+          Login
+          <span>→</span>
+        </button>
 
-            <div>
-              <strong>
-                Secure Login
-              </strong>
 
-              <p>
-                Your account information is protected.
-              </p>
-            </div>
+        {/* Admin */}
 
+        <button
+          className="simple-admin-button"
+          onClick={() =>
+            navigate("/admin-login")
+          }
+        >
+          Admin Login
+        </button>
+
+
+        {/* Register */}
+
+        <div className="simple-register">
+
+          <span>
+            New to NexaStore?
+          </span>
+
+          <button
+            onClick={() =>
+              navigate("/register")
+            }
+          >
+            Create Account
+          </button>
+
+        </div>
+
+
+        {/* Security */}
+
+        <div className="simple-security">
+
+          <span>🔒</span>
+
+          <div>
+            <strong>Secure Login</strong>
+
+            <p>
+              Your account information is protected.
+            </p>
           </div>
 
         </div>

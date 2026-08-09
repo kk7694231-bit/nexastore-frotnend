@@ -1420,116 +1420,385 @@ p{
   background:blue;
 }
 
-/* =========================
-   AUTH PAGES
-========================= */
+/* =========================================================
+   SIMPLE NEXASTORE LOGIN
+   ========================================================= */
 
-.auth-container{
-  min-height:100vh;
+.simple-login-page {
+  min-height: 75vh;
 
-  display:flex;
+  display: flex;
 
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
 
-  align-items:center;
+  padding: 60px 20px;
+
+  box-sizing: border-box;
 
   background:
-  linear-gradient(
-    135deg,
-    #050505,
-    #111111
-  );
+    radial-gradient(
+      circle at top left,
+      rgba(255, 107, 0, 0.06),
+      transparent 30%
+    ),
+    #f7f9fb;
 }
 
-.auth-card{
-  width:450px;
 
-  background:
-  linear-gradient(
-    145deg,
-    #111111,
-    #1a1a1a
-  );
+/* ================= CARD ================= */
 
-  border-radius:30px;
+.simple-login-card {
+  width: 100%;
 
-  padding:50px;
+  max-width: 440px;
 
-  border:1px solid rgba(
-    212,
-    175,
-    55,
-    .15
-  );
+  padding: 42px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e3e9ef;
+
+  border-radius: 18px;
 
   box-shadow:
-    0 0 30px rgba(
-      139,
-      92,
-      246,
-      .15
-    );
+    0 12px 40px rgba(16, 42, 67, 0.10);
 }
 
-.auth-card h1{
-  color:white;
 
-  text-align:center;
+/* ================= LOGO ================= */
 
-  margin-bottom:10px;
+.simple-login-logo {
+  text-align: center;
+
+  margin-bottom: 32px;
+
+  color: #102a43;
+
+  font-size: 28px;
+
+  font-weight: 900;
+
+  letter-spacing: -1px;
 }
 
-.auth-card p{
-  color:#D4AF37;
-
-  text-align:center;
-
-  margin-bottom:30px;
+.simple-login-logo span {
+  color: #ff6b00;
 }
 
-.auth-card form{
-  display:flex;
 
-  flex-direction:column;
+/* ================= HEADING ================= */
 
-  gap:20px;
+.simple-login-heading {
+  text-align: center;
+
+  margin-bottom: 30px;
 }
 
-.auth-card input{
-  padding:15px;
+.simple-login-heading > span {
+  color: #ff6b00;
 
-  border:none;
+  font-size: 12px;
 
-  border-radius:15px;
+  font-weight: 800;
 
-  background:#222;
-
-  color:white;
-
-  outline:none;
+  letter-spacing: 2px;
 }
 
-.auth-card input:focus{
-  border:1px solid #D4AF37;
+.simple-login-heading h1 {
+  margin: 7px 0;
+
+  color: #102a43;
+
+  font-size: 34px;
+
+  font-weight: 800;
 }
 
-.auth-card button{
-  padding:15px;
+.simple-login-heading p {
+  margin: 0;
 
-  border:none;
+  color: #7b8794;
 
-  border-radius:15px;
+  font-size: 13px;
 
-  color:white;
+  line-height: 1.6;
+}
 
-  font-weight:700;
 
-  background:
-  linear-gradient(
-    135deg,
-    #D4AF37,
-    #8B5CF6
-  );
+/* ================= FIELDS ================= */
+
+.simple-login-field {
+  margin-bottom: 20px;
+}
+
+.simple-login-field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #102a43;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.simple-input {
+  width: 100%;
+
+  min-height: 51px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dce3e9;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  transition: 0.2s ease;
+}
+
+.simple-input:focus-within {
+  border-color: #ff6b00;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 0, 0.09);
+}
+
+.simple-input > span {
+  color: #8a99a8;
+
+  font-size: 15px;
+}
+
+.simple-input input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #102a43;
+
+  font-family: inherit;
+
+  font-size: 14px;
+}
+
+.simple-input input::placeholder {
+  color: #9aa7b3;
+}
+
+
+/* ================= PASSWORD ================= */
+
+.show-password {
+  border: none;
+
+  background: transparent;
+
+  color: #ff6b00;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 5px;
+}
+
+
+/* ================= LOGIN BUTTON ================= */
+
+.simple-login-button {
+  width: 100%;
+
+  height: 52px;
+
+  margin-top: 5px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #ff6b00;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  transition: 0.2s ease;
+}
+
+.simple-login-button:hover {
+  background: #e85d00;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(255, 107, 0, 0.20);
+}
+
+.simple-login-button span {
+  font-size: 19px;
+}
+
+
+/* ================= ADMIN ================= */
+
+.simple-admin-button {
+  width: 100%;
+
+  margin-top: 15px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #52606d;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.simple-admin-button:hover {
+  color: #ff6b00;
+}
+
+
+/* ================= REGISTER ================= */
+
+.simple-register {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin-top: 22px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #edf0f3;
+
+  color: #7b8794;
+
+  font-size: 13px;
+}
+
+.simple-register button {
+  border: none;
+
+  background: transparent;
+
+  color: #ff6b00;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 0;
+}
+
+.simple-register button:hover {
+  text-decoration: underline;
+}
+
+
+/* ================= SECURITY ================= */
+
+.simple-security {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 20px;
+
+  padding: 12px;
+
+  background: #f7f9fb;
+
+  border-radius: 8px;
+}
+
+.simple-security > span {
+  font-size: 18px;
+}
+
+.simple-security strong {
+  display: block;
+
+  color: #102a43;
+
+  font-size: 11px;
+}
+
+.simple-security p {
+  margin: 2px 0 0;
+
+  color: #8a99a8;
+
+  font-size: 10px;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 500px) {
+
+  .simple-login-page {
+    padding: 40px 15px 60px;
+  }
+
+  .simple-login-card {
+    padding: 30px 22px;
+  }
+
+  .simple-login-logo {
+    font-size: 25px;
+
+    margin-bottom: 25px;
+  }
+
+  .simple-login-heading h1 {
+    font-size: 30px;
+  }
 }
 
 /* =========================
@@ -5140,493 +5409,3 @@ table td{
   }
 }
 
-/* =========================================================
-   NEXASTORE LOGIN PAGE
-   ========================================================= */
-
-.auth-page {
-  min-height: 78vh;
-
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(255, 107, 0, 0.08),
-      transparent 30%
-    ),
-    #f6f8fb;
-
-  padding: 70px 25px;
-
-  box-sizing: border-box;
-}
-
-.auth-container {
-  max-width: 1050px;
-
-  margin: 0 auto;
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 430px;
-
-  gap: 60px;
-
-  align-items: center;
-}
-
-
-/* ================= BRAND ================= */
-
-.auth-brand {
-  padding: 20px 0;
-}
-
-.auth-logo {
-  display: inline-block;
-
-  margin-bottom: 25px;
-
-  color: #102a43;
-
-  font-size: 30px;
-
-  font-weight: 900;
-
-  letter-spacing: -1px;
-}
-
-.auth-logo span {
-  color: #ff6b00;
-}
-
-.auth-brand h2 {
-  margin: 0 0 18px;
-
-  color: #102a43;
-
-  font-size: 46px;
-
-  line-height: 1.12;
-
-  font-weight: 800;
-}
-
-.auth-brand > p {
-  max-width: 500px;
-
-  margin: 0;
-
-  color: #697b8d;
-
-  font-size: 16px;
-
-  line-height: 1.7;
-}
-
-
-/* Benefits */
-
-.auth-benefits {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
-
-  margin-top: 30px;
-}
-
-.auth-benefits div {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-}
-
-.auth-benefits span {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  background: #fff2e8;
-
-  border-radius: 9px;
-
-  font-size: 18px;
-}
-
-.auth-benefits p {
-  margin: 0;
-
-  color: #52606d;
-
-  font-size: 14px;
-
-  font-weight: 600;
-}
-
-
-/* ================= LOGIN CARD ================= */
-
-.login-card {
-  background: #ffffff;
-
-  border: 1px solid #e2e8ee;
-
-  border-radius: 18px;
-
-  padding: 38px;
-
-  box-shadow:
-    0 15px 45px rgba(16, 42, 67, 0.10);
-
-  box-sizing: border-box;
-}
-
-.login-heading {
-  margin-bottom: 28px;
-}
-
-.login-tag {
-  color: #ff6b00;
-
-  font-size: 12px;
-
-  font-weight: 800;
-
-  letter-spacing: 2px;
-}
-
-.login-heading h1 {
-  margin: 7px 0 7px;
-
-  color: #102a43;
-
-  font-size: 34px;
-
-  font-weight: 800;
-}
-
-.login-heading p {
-  margin: 0;
-
-  color: #7b8794;
-
-  font-size: 13px;
-
-  line-height: 1.5;
-}
-
-
-/* ================= INPUTS ================= */
-
-.login-field {
-  margin-bottom: 20px;
-}
-
-.login-field label {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: #102a43;
-
-  font-size: 13px;
-
-  font-weight: 700;
-}
-
-.login-input-wrapper {
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  min-height: 50px;
-
-  padding: 0 13px;
-
-  box-sizing: border-box;
-
-  border: 1px solid #dce3e9;
-
-  border-radius: 9px;
-
-  background: #ffffff;
-
-  transition: 0.2s ease;
-}
-
-.login-input-wrapper:focus-within {
-  border-color: #ff6b00;
-
-  box-shadow:
-    0 0 0 3px rgba(255, 107, 0, 0.09);
-}
-
-.login-input-wrapper > span {
-  color: #8a99a8;
-
-  font-size: 16px;
-}
-
-.login-input-wrapper input {
-  flex: 1;
-
-  min-width: 0;
-
-  border: none;
-
-  outline: none;
-
-  background: transparent;
-
-  color: #102a43;
-
-  font-family: inherit;
-
-  font-size: 14px;
-}
-
-.login-input-wrapper input::placeholder {
-  color: #9aa7b3;
-}
-
-
-/* Password toggle */
-
-.password-toggle {
-  border: none;
-
-  background: transparent;
-
-  color: #ff6b00;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  padding: 5px;
-}
-
-
-/* ================= LOGIN BUTTON ================= */
-
-.login-submit {
-  width: 100%;
-
-  min-height: 51px;
-
-  margin-top: 5px;
-
-  border: none;
-
-  border-radius: 9px;
-
-  background: #ff6b00;
-
-  color: #ffffff;
-
-  font-size: 15px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 12px;
-
-  transition: 0.2s ease;
-}
-
-.login-submit:hover {
-  background: #e85d00;
-
-  transform: translateY(-1px);
-
-  box-shadow:
-    0 7px 18px rgba(255, 107, 0, 0.22);
-}
-
-.login-submit span {
-  font-size: 19px;
-}
-
-
-/* ================= ADMIN ================= */
-
-.admin-login-link {
-  width: 100%;
-
-  margin-top: 16px;
-
-  border: none;
-
-  background: transparent;
-
-  color: #52606d;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-.admin-login-link:hover {
-  color: #ff6b00;
-}
-
-
-/* ================= REGISTER ================= */
-
-.login-register {
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  gap: 5px;
-
-  margin-top: 22px;
-
-  padding-top: 20px;
-
-  border-top: 1px solid #edf0f3;
-
-  color: #7b8794;
-
-  font-size: 13px;
-}
-
-.login-register button {
-  border: none;
-
-  background: transparent;
-
-  color: #ff6b00;
-
-  font-size: 13px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  padding: 0;
-}
-
-.login-register button:hover {
-  text-decoration: underline;
-}
-
-
-/* ================= SECURITY ================= */
-
-.login-security {
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  margin-top: 20px;
-
-  padding: 12px;
-
-  background: #f7f9fb;
-
-  border-radius: 8px;
-}
-
-.login-security > span {
-  font-size: 18px;
-}
-
-.login-security strong {
-  display: block;
-
-  color: #102a43;
-
-  font-size: 11px;
-}
-
-.login-security p {
-  margin: 2px 0 0;
-
-  color: #8a99a8;
-
-  font-size: 10px;
-}
-
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 850px) {
-
-  .auth-container {
-    grid-template-columns: 1fr;
-
-    max-width: 500px;
-
-    gap: 30px;
-  }
-
-  .auth-brand {
-    text-align: center;
-  }
-
-  .auth-brand h2 {
-    font-size: 38px;
-  }
-
-  .auth-brand > p {
-    margin: 0 auto;
-  }
-
-  .auth-benefits {
-    align-items: center;
-  }
-
-  .auth-benefits div {
-    width: 230px;
-  }
-}
-
-
-@media (max-width: 500px) {
-
-  .auth-page {
-    padding: 40px 15px 60px;
-  }
-
-  .auth-brand h2 {
-    font-size: 32px;
-  }
-
-  .auth-logo {
-    font-size: 26px;
-  }
-
-  .login-card {
-    padding: 25px 20px;
-  }
-
-  .login-heading h1 {
-    font-size: 30px;
-  }
-}
