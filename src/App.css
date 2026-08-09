@@ -2188,92 +2188,563 @@ p{
   padding:40px;
 }
 
-/* =========================
-   MY ORDERS
-========================= */
+/* =========================================================
+   NEXASTORE MY ORDERS PAGE
+   ========================================================= */
 
-.orders-page{
-  min-height:100vh;
-  background:#050505;
-  padding:60px;
+.orders-page {
+  min-height: 75vh;
+
+  background: #f6f8fb;
+
+  padding: 55px 25px 80px;
+
+  box-sizing: border-box;
 }
 
-.orders-page h1{
-  color:white;
-  font-size:3rem;
-  margin-bottom:40px;
+
+/* ================= HEADER ================= */
+
+.orders-header {
+  max-width: 1200px;
+
+  margin: 0 auto 35px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 30px;
 }
 
-.order-card{
-  color: white;
-  background:linear-gradient(
-    145deg,
-    #111111,
-    #1a1a1a
-  );
+.orders-tag {
+  color: #ff6b00;
 
-  border:1px solid rgba(
-    212,
-    175,
-    55,
-    .15
-  );
+  font-size: 13px;
 
-  border-radius:25px;
+  font-weight: 800;
 
-  padding:30px;
-
-  margin-bottom:25px;
-
-  transition:.4s;
+  letter-spacing: 2px;
 }
 
-.order-card:hover{
-  transform:translateY(-5px);
+.orders-header h1 {
+  margin: 8px 0 5px;
+
+  color: #102a43;
+
+  font-size: 42px;
+
+  font-weight: 800;
+}
+
+.orders-header p {
+  margin: 0;
+
+  color: #697b8d;
+
+  font-size: 15px;
+}
+
+
+/* Order count */
+
+.orders-count {
+  min-width: 90px;
+
+  padding: 14px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5eaf0;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  box-shadow: 0 4px 15px rgba(16, 42, 67, 0.06);
+}
+
+.orders-count strong {
+  display: block;
+
+  color: #ff6b00;
+
+  font-size: 25px;
+}
+
+.orders-count span {
+  color: #697b8d;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* ================= ORDER LIST ================= */
+
+.orders-list {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 25px;
+}
+
+
+/* ================= ORDER CARD ================= */
+
+.order-card {
+  background: #ffffff;
+
+  border: 1px solid #e4e9ef;
+
+  border-radius: 16px;
+
+  overflow: hidden;
 
   box-shadow:
-    0 0 20px rgba(212,175,55,.2),
-    0 0 40px rgba(139,92,246,.15);
+    0 6px 20px rgba(16, 42, 67, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.order-id{
-  color:white;
-  font-size:1.3rem;
-  font-weight:700;
+.order-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(16, 42, 67, 0.11);
 }
 
-.order-status{
-  display:inline-block;
 
-  margin-top:15px;
+/* ================= ORDER TOP ================= */
 
-  padding:8px 16px;
+.order-top {
+  padding: 22px 25px;
 
-  border-radius:20px;
+  display: flex;
 
-  background:#8B5CF6;
+  align-items: center;
 
-  color:white;
+  justify-content: space-between;
 
-  font-weight:600;
+  gap: 20px;
+
+  border-bottom: 1px solid #edf0f3;
 }
 
-.order-amount{
-  color:#D4AF37;
+.order-number span {
+  display: block;
 
-  font-size:1.8rem;
+  margin-bottom: 5px;
 
-  font-weight:700;
+  color: #8a99a8;
 
-  margin-top:15px;
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
 }
 
-.order-products{
-  color:#ccc;
+.order-number strong {
+  display: block;
 
-  margin-top:10px;
+  color: #102a43;
+
+  font-size: 15px;
+
+  word-break: break-all;
 }
 
+
+/* ================= STATUS ================= */
+
+.order-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 14px;
+
+  border-radius: 30px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-transform: capitalize;
+
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  display: inline-block;
+}
+
+
+/* Pending */
+
+.status-pending {
+  background: #fff4e8;
+
+  color: #d95f00;
+}
+
+.status-pending .status-dot {
+  background: #ff6b00;
+}
+
+
+/* Shipped */
+
+.status-shipped {
+  background: #eaf4ff;
+
+  color: #1971c2;
+}
+
+.status-shipped .status-dot {
+  background: #1971c2;
+}
+
+
+/* Delivered */
+
+.status-delivered {
+  background: #eaf8f0;
+
+  color: #16804a;
+}
+
+.status-delivered .status-dot {
+  background: #16804a;
+}
+
+
+/* Cancelled */
+
+.status-cancelled {
+  background: #fff0f0;
+
+  color: #d64545;
+}
+
+.status-cancelled .status-dot {
+  background: #d64545;
+}
+
+
+/* ================= DETAILS ================= */
+
+.order-details {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  padding: 22px 25px;
+
+  background: #fbfcfd;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+.order-detail-item {
+  padding: 0 20px;
+
+  border-right: 1px solid #e5e9ee;
+}
+
+.order-detail-item:first-child {
+  padding-left: 0;
+}
+
+.order-detail-item:last-child {
+  border-right: none;
+}
+
+.detail-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #8a99a8;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.order-detail-item strong {
+  color: #102a43;
+
+  font-size: 15px;
+}
+
+.order-detail-item .order-price {
+  color: #ff6b00;
+
+  font-size: 20px;
+}
+
+
+/* ================= PRODUCTS ================= */
+
+.order-products {
+  padding: 25px;
+}
+
+.products-heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 15px;
+}
+
+.products-heading span {
+  font-size: 20px;
+}
+
+.products-heading h3 {
+  margin: 0;
+
+  color: #102a43;
+
+  font-size: 17px;
+}
+
+
+/* Product */
+
+.ordered-product {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 13px;
+
+  margin-top: 10px;
+
+  background: #f7f9fb;
+
+  border: 1px solid #e9edf2;
+
+  border-radius: 10px;
+}
+
+.product-placeholder {
+  width: 55px;
+  height: 55px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border-radius: 9px;
+
+  font-size: 25px;
+}
+
+.ordered-product-info h4 {
+  margin: 0 0 6px;
+
+  color: #102a43;
+
+  font-size: 15px;
+}
+
+.ordered-product-info p {
+  margin: 0;
+
+  color: #7b8794;
+
+  font-size: 13px;
+}
+
+.ordered-product-info p strong {
+  color: #102a43;
+}
+
+
+/* ================= BOTTOM ================= */
+
+.order-bottom {
+  padding: 14px 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  border-top: 1px solid #edf0f3;
+
+  color: #8a99a8;
+
+  font-size: 12px;
+}
+
+.secure-order {
+  color: #16804a;
+
+  font-weight: 600;
+}
+
+
+/* ================= NO ORDERS ================= */
+
+.no-orders {
+  max-width: 600px;
+
+  margin: 70px auto;
+
+  padding: 55px 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5eaf0;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow:
+    0 8px 25px rgba(16, 42, 67, 0.07);
+}
+
+.no-orders-icon {
+  width: 80px;
+  height: 80px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #fff2e8;
+
+  font-size: 38px;
+}
+
+.no-orders h2 {
+  margin: 0 0 8px;
+
+  color: #102a43;
+
+  font-size: 24px;
+}
+
+.no-orders p {
+  margin: 0;
+
+  color: #7b8794;
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .orders-page {
+    padding: 35px 15px 60px;
+  }
+
+  .orders-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .orders-header h1 {
+    font-size: 34px;
+  }
+
+  .orders-count {
+    align-self: flex-start;
+  }
+
+  .order-top {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .order-details {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .order-detail-item {
+    padding: 0 0 15px;
+
+    border-right: none;
+
+    border-bottom: 1px solid #e5e9ee;
+  }
+
+  .order-detail-item:last-child {
+    padding-bottom: 0;
+
+    border-bottom: none;
+  }
+
+  .order-bottom {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding: 15px 20px;
+  }
+
+  .order-products {
+    padding: 20px;
+  }
+
+  .order-top {
+    padding: 20px;
+  }
+
+  .order-number strong {
+    max-width: 100%;
+  }
+}
 /* =========================
    ADMIN DASHBOARD
 ========================= */
