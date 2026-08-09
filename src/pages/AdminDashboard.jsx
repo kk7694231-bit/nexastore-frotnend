@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AdminSidebar from "../components/AdminSidebar";
 
 function AdminDashboard() {
   const [data, setData] = useState({
@@ -33,81 +32,289 @@ function AdminDashboard() {
     }
   };
 
-return (
-  <div className="admin-container">
-    <AdminSidebar />
-
+  return (
     <main className="admin-main">
 
-      <h1
-  className="dashboard-title"
-  style={{ color: "white" }}
->
-  Admin Dashboard
-</h1>
+      {/* ================= HEADER ================= */}
 
-      <div className="dashboard-cards">
+      <div className="admin-dashboard-header">
 
-        <div className="dashboard-card">
-          <h3>👥 Total Users</h3>
-          <p>{data.totalUsers}</p>
-        </div>
+        <div>
+          <span className="admin-dashboard-tag">
+            NEXASTORE ADMIN
+          </span>
 
-        <div className="dashboard-card">
-          <h3>📦 Total Products</h3>
-          <p>{data.totalProducts}</p>
-        </div>
+          <h1 className="dashboard-title">
+            Dashboard
+          </h1>
 
-        <div className="dashboard-card">
-          <h3>🛒 Total Orders</h3>
-          <p>{data.totalOrders}</p>
-        </div>
-
-        <div className="dashboard-card">
-          <h3>💰 Revenue</h3>
-          <p>
-            ₹{data.totalRevenue.toLocaleString()}
+          <p className="dashboard-subtitle">
+            Monitor your store performance and activity.
           </p>
+        </div>
+
+        <div className="admin-status">
+          <span className="status-dot"></span>
+          Store Active
         </div>
 
       </div>
 
+
+      {/* ================= STAT CARDS ================= */}
+
+      <div className="dashboard-cards">
+
+        {/* Users */}
+
+        <div className="dashboard-card users-card">
+
+          <div className="dashboard-card-top">
+
+            <div className="dashboard-icon">
+              👥
+            </div>
+
+            <span className="dashboard-label">
+              CUSTOMERS
+            </span>
+
+          </div>
+
+          <h3>
+            Total Users
+          </h3>
+
+          <p>
+            {data.totalUsers.toLocaleString("en-IN")}
+          </p>
+
+          <span className="dashboard-card-footer">
+            Registered users
+          </span>
+
+        </div>
+
+
+        {/* Products */}
+
+        <div className="dashboard-card products-card">
+
+          <div className="dashboard-card-top">
+
+            <div className="dashboard-icon">
+              📦
+            </div>
+
+            <span className="dashboard-label">
+              INVENTORY
+            </span>
+
+          </div>
+
+          <h3>
+            Total Products
+          </h3>
+
+          <p>
+            {data.totalProducts.toLocaleString("en-IN")}
+          </p>
+
+          <span className="dashboard-card-footer">
+            Products listed
+          </span>
+
+        </div>
+
+
+        {/* Orders */}
+
+        <div className="dashboard-card orders-card">
+
+          <div className="dashboard-card-top">
+
+            <div className="dashboard-icon">
+              🛒
+            </div>
+
+            <span className="dashboard-label">
+              SALES
+            </span>
+
+          </div>
+
+          <h3>
+            Total Orders
+          </h3>
+
+          <p>
+            {data.totalOrders.toLocaleString("en-IN")}
+          </p>
+
+          <span className="dashboard-card-footer">
+            Orders received
+          </span>
+
+        </div>
+
+
+        {/* Revenue */}
+
+        <div className="dashboard-card revenue-card">
+
+          <div className="dashboard-card-top">
+
+            <div className="dashboard-icon">
+              ₹
+            </div>
+
+            <span className="dashboard-label">
+              REVENUE
+            </span>
+
+          </div>
+
+          <h3>
+            Total Revenue
+          </h3>
+
+          <p>
+            ₹
+            {data.totalRevenue.toLocaleString("en-IN")}
+          </p>
+
+          <span className="dashboard-card-footer">
+            Store earnings
+          </span>
+
+        </div>
+
+      </div>
+
+
+      {/* ================= STORE SUMMARY ================= */}
+
       <div className="dashboard-summary">
 
         <div className="summary-card">
-          <h2>Store Summary</h2>
 
-          <p>
-            Users Registered:
-            <strong>
-              {" "}
-              {data.totalUsers}
-            </strong>
-          </p>
+          <div className="summary-header">
 
-          <p>
-            Products Listed:
-            <strong>
-              {" "}
-              {data.totalProducts}
-            </strong>
-          </p>
+            <div>
+              <span className="summary-tag">
+                STORE OVERVIEW
+              </span>
 
-          <p>
-            Orders Received:
-            <strong>
-              {" "}
-              {data.totalOrders}
-            </strong>
-          </p>
+              <h2>
+                Store Summary
+              </h2>
+
+              <p>
+                A quick overview of your NexaStore.
+              </p>
+            </div>
+
+            <div className="summary-icon">
+              📊
+            </div>
+
+          </div>
+
+
+          <div className="summary-stats">
+
+            <div className="summary-stat">
+
+              <span className="summary-stat-icon">
+                👥
+              </span>
+
+              <div>
+                <span>
+                  Users Registered
+                </span>
+
+                <strong>
+                  {data.totalUsers.toLocaleString(
+                    "en-IN"
+                  )}
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div className="summary-stat">
+
+              <span className="summary-stat-icon">
+                📦
+              </span>
+
+              <div>
+                <span>
+                  Products Listed
+                </span>
+
+                <strong>
+                  {data.totalProducts.toLocaleString(
+                    "en-IN"
+                  )}
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div className="summary-stat">
+
+              <span className="summary-stat-icon">
+                🛒
+              </span>
+
+              <div>
+                <span>
+                  Orders Received
+                </span>
+
+                <strong>
+                  {data.totalOrders.toLocaleString(
+                    "en-IN"
+                  )}
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div className="summary-stat">
+
+              <span className="summary-stat-icon revenue-summary-icon">
+                ₹
+              </span>
+
+              <div>
+                <span>
+                  Total Revenue
+                </span>
+
+                <strong>
+                  ₹
+                  {data.totalRevenue.toLocaleString(
+                    "en-IN"
+                  )}
+                </strong>
+              </div>
+
+            </div>
+
+          </div>
 
         </div>
 
       </div>
 
     </main>
-  </div>
-);
+  );
 }
 
 export default AdminDashboard;
