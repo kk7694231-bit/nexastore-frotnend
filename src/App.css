@@ -1325,99 +1325,368 @@ p{
   }
 }
 
-/* =========================
-   LOGIN & REGISTER
-========================= */
+/* =========================================================
+   SIMPLE NEXASTORE REGISTER
+   ========================================================= */
 
-.login-container,
-.register-container{
-  min-height:100vh;
+.simple-register-page {
+  min-height: 75vh;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
 
-  padding:40px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px 20px;
+
+  box-sizing: border-box;
 
   background:
-  radial-gradient(
-    circle at top,
-    rgba(139,92,246,.18),
-    transparent 40%
-  ),
-  #050505;
+    radial-gradient(
+      circle at top right,
+      rgba(255, 107, 0, 0.06),
+      transparent 30%
+    ),
+    #f7f9fb;
 }
 
-.login-box,
-.register-box{
-  width:450px;
-  color: white;
 
-  padding:40px;
+/* ================= CARD ================= */
 
-  border-radius:30px;
+.simple-register-card {
+  width: 100%;
 
-  background:
-  rgba(255,255,255,.05);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+  max-width: 440px;
 
-  border:1px solid rgba(
-    212,
-    175,
-    55,
-    .15
-  );
+  padding: 42px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e3e9ef;
+
+  border-radius: 18px;
 
   box-shadow:
-  0 0 30px rgba(
-    139,
-    92,
-    246,
-    .15
-  );
+    0 12px 40px rgba(16, 42, 67, 0.10);
 }
 
-.login-box h1,
-.register-box h1{
-  text-align:center;
-  margin-bottom:25px;
-  color:var(--gold);
+
+/* ================= LOGO ================= */
+
+.simple-register-logo {
+  text-align: center;
+
+  margin-bottom: 32px;
+
+  color: #102a43;
+
+  font-size: 28px;
+
+  font-weight: 900;
+
+  letter-spacing: -1px;
 }
 
-.login-box input,
-.register-box input{
-  width:100%;
-
-  padding:15px;
-
-  margin-bottom:15px;
-
-  border:none;
-  outline:none;
-
-  color:white;
-
-  background:#181818;
-
-  border-radius:15px;
+.simple-register-logo span {
+  color: #ff6b00;
 }
 
-.login-box button,
-.register-box button{
-  width:100%;
 
-  padding:15px;
+/* ================= HEADING ================= */
 
-  border:none;
+.simple-register-heading {
+  text-align: center;
 
-  border-radius:15px;
+  margin-bottom: 28px;
+}
 
-  color:white;
+.simple-register-heading > span {
+  color: #ff6b00;
 
-  font-weight:700;
+  font-size: 12px;
 
-  background:blue;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.simple-register-heading h1 {
+  margin: 7px 0;
+
+  color: #102a43;
+
+  font-size: 32px;
+
+  font-weight: 800;
+}
+
+.simple-register-heading p {
+  margin: 0;
+
+  color: #7b8794;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* ================= FORM ================= */
+
+.simple-register-card form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+
+/* ================= FIELD ================= */
+
+.simple-register-field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #102a43;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.simple-register-input {
+  width: 100%;
+
+  min-height: 51px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dce3e9;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  transition: 0.2s ease;
+}
+
+.simple-register-input:focus-within {
+  border-color: #ff6b00;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 0, 0.09);
+}
+
+.simple-register-input > span {
+  color: #8a99a8;
+
+  font-size: 15px;
+}
+
+.simple-register-input input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #102a43;
+
+  font-family: inherit;
+
+  font-size: 14px;
+}
+
+.simple-register-input input::placeholder {
+  color: #9aa7b3;
+}
+
+
+/* ================= PASSWORD ================= */
+
+.register-show-password {
+  border: none;
+
+  background: transparent;
+
+  color: #ff6b00;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 5px;
+}
+
+
+/* ================= CREATE BUTTON ================= */
+
+.create-account-button {
+  width: 100%;
+
+  height: 52px;
+
+  margin-top: 5px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #ff6b00;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  transition: 0.2s ease;
+}
+
+.create-account-button:hover {
+  background: #e85d00;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(255, 107, 0, 0.20);
+}
+
+.create-account-button span {
+  font-size: 19px;
+}
+
+
+/* ================= LOGIN ================= */
+
+.already-account {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin-top: 22px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #edf0f3;
+
+  color: #7b8794;
+
+  font-size: 13px;
+}
+
+.already-account button {
+  border: none;
+
+  background: transparent;
+
+  color: #ff6b00;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 0;
+}
+
+.already-account button:hover {
+  text-decoration: underline;
+}
+
+
+/* ================= SECURITY ================= */
+
+.register-security {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 20px;
+
+  padding: 12px;
+
+  background: #f7f9fb;
+
+  border-radius: 8px;
+}
+
+.register-security > span {
+  font-size: 18px;
+}
+
+.register-security strong {
+  display: block;
+
+  color: #102a43;
+
+  font-size: 11px;
+}
+
+.register-security p {
+  margin: 2px 0 0;
+
+  color: #8a99a8;
+
+  font-size: 10px;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 500px) {
+
+  .simple-register-page {
+    padding: 40px 15px 60px;
+  }
+
+  .simple-register-card {
+    padding: 30px 22px;
+  }
+
+  .simple-register-logo {
+    font-size: 25px;
+
+    margin-bottom: 25px;
+  }
+
+  .simple-register-heading h1 {
+    font-size: 29px;
+  }
 }
 
 /* =========================================================

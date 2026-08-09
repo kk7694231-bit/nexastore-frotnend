@@ -8,6 +8,7 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -18,73 +19,193 @@ function Register() {
         {
           name,
           email,
-          password
+          password,
         }
       );
 
       alert(res.data.message);
 
       navigate("/login");
-
     } catch (error) {
       alert(
         error.response?.data?.message ||
-        "Registration Failed"
+          "Registration Failed"
       );
     }
   };
 
   return (
-  <div className="auth-container">
+    <div className="simple-register-page">
 
-    <div className="auth-card">
+      <div className="simple-register-card">
 
-      <h1>Create Account</h1>
+        {/* Logo */}
 
-      <p>
-        Join NEXASTORE Today
-      </p>
+        <div className="simple-register-logo">
+          <span>NEXA</span>STORE
+        </div>
 
-      <form onSubmit={handleRegister}>
 
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={name}
-          onChange={(e) =>
-            setName(e.target.value)
-          }
-        />
+        {/* Heading */}
 
-        <input
-          type="email"
-          placeholder="Email Address"
-          value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
-        />
+        <div className="simple-register-heading">
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
-        />
+          <span>JOIN NEXASTORE</span>
 
-        <button type="submit">
-          Create Account
-        </button>
+          <h1>Create Account</h1>
 
-      </form>
+          <p>
+            Create your account and start shopping
+            with NexaStore.
+          </p>
+
+        </div>
+
+
+        <form onSubmit={handleRegister}>
+
+          {/* Full Name */}
+
+          <div className="simple-register-field">
+
+            <label>Full Name</label>
+
+            <div className="simple-register-input">
+
+              <span>👤</span>
+
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                value={name}
+                onChange={(e) =>
+                  setName(e.target.value)
+                }
+              />
+
+            </div>
+
+          </div>
+
+
+          {/* Email */}
+
+          <div className="simple-register-field">
+
+            <label>Email Address</label>
+
+            <div className="simple-register-input">
+
+              <span>✉</span>
+
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+              />
+
+            </div>
+
+          </div>
+
+
+          {/* Password */}
+
+          <div className="simple-register-field">
+
+            <label>Password</label>
+
+            <div className="simple-register-input">
+
+              <span>🔒</span>
+
+              <input
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
+                placeholder="Create a password"
+                value={password}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
+              />
+
+              <button
+                type="button"
+                className="register-show-password"
+                onClick={() =>
+                  setShowPassword(!showPassword)
+                }
+              >
+                {showPassword
+                  ? "Hide"
+                  : "Show"}
+              </button>
+
+            </div>
+
+          </div>
+
+
+          {/* Create Account */}
+
+          <button
+            type="submit"
+            className="create-account-button"
+          >
+            Create Account
+            <span>→</span>
+          </button>
+
+        </form>
+
+
+        {/* Login */}
+
+        <div className="already-account">
+
+          <span>
+            Already have an account?
+          </span>
+
+          <button
+            onClick={() =>
+              navigate("/login")
+            }
+          >
+            Login
+          </button>
+
+        </div>
+
+
+        {/* Security */}
+
+        <div className="register-security">
+
+          <span>🔒</span>
+
+          <div>
+            <strong>
+              Secure Account
+            </strong>
+
+            <p>
+              Your personal information is protected.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
-
-  </div>
   );
-
 }
 
 export default Register;
