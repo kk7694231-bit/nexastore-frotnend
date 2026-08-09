@@ -7,6 +7,7 @@ function AdminLogin() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleAdminLogin = async (e) => {
     e.preventDefault();
@@ -30,43 +31,162 @@ function AdminLogin() {
       localStorage.setItem("userId", data.userId);
 
       alert("Admin Login Successful");
+
       navigate("/admin");
     } catch (error) {
-      alert(error.response?.data?.message || "Login Failed");
+      alert(
+        error.response?.data?.message ||
+          "Login Failed"
+      );
     }
   };
 
   return (
-    <div className="admin-login-container">
-      <div className="admin-login-box">
-        <h1>Admin Login</h1>
+    <div className="simple-admin-page">
+
+      <div className="simple-admin-card">
+
+        {/* Logo */}
+
+        <div className="simple-admin-logo">
+          <span>NEXA</span>STORE
+        </div>
+
+
+        {/* Heading */}
+
+        <div className="simple-admin-heading">
+
+          <span>ADMIN PORTAL</span>
+
+          <h1>Admin Login</h1>
+
+          <p>
+            Sign in to manage your NexaStore store.
+          </p>
+
+        </div>
+
+
+        {/* Form */}
 
         <form onSubmit={handleAdminLogin}>
-          <div className="admin-input-box">
-            <input
-              type="email"
-              placeholder="Enter Admin Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+
+          {/* Email */}
+
+          <div className="simple-admin-field">
+
+            <label>
+              Admin Email
+            </label>
+
+            <div className="simple-admin-input">
+
+              <span>✉</span>
+
+              <input
+                type="email"
+                placeholder="Enter admin email"
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+                required
+              />
+
+            </div>
+
           </div>
 
-          <div className="admin-input-box">
-            <input
-              type="password"
-              placeholder="Enter Admin Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+
+          {/* Password */}
+
+          <div className="simple-admin-field">
+
+            <label>
+              Admin Password
+            </label>
+
+            <div className="simple-admin-input">
+
+              <span>🔒</span>
+
+              <input
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
+                placeholder="Enter admin password"
+                value={password}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
+                required
+              />
+
+              <button
+                type="button"
+                className="admin-show-password"
+                onClick={() =>
+                  setShowPassword(!showPassword)
+                }
+              >
+                {showPassword
+                  ? "Hide"
+                  : "Show"}
+              </button>
+
+            </div>
+
           </div>
 
-          <button type="submit" className="admin-login-btn">
+
+          {/* Login */}
+
+          <button
+            type="submit"
+            className="simple-admin-login-btn"
+          >
             Login
+            <span>→</span>
           </button>
+
         </form>
+
+
+        {/* Back to customer login */}
+
+        <button
+          className="back-to-login"
+          onClick={() =>
+            navigate("/login")
+          }
+        >
+          ← Back to Customer Login
+        </button>
+
+
+        {/* Security */}
+
+        <div className="admin-security">
+
+          <span>🛡️</span>
+
+          <div>
+            <strong>
+              Secure Admin Access
+            </strong>
+
+            <p>
+              Authorized administrators only.
+            </p>
+          </div>
+
+        </div>
+
       </div>
+
     </div>
   );
 }
