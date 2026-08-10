@@ -6,12 +6,10 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-
 import "./App.css";
 
 import Navbar from "./components/Navbar";
+import AdminSidebar from "./components/AdminSidebar";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -20,6 +18,10 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import Orders from "./pages/Orders";
+
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -28,156 +30,203 @@ import AdminOrders from "./pages/AdminOrders";
 import AdminUsers from "./pages/AdminUsers";
 import AdminAnalytics from "./pages/AdminAnalytics";
 
-import Orders from "./pages/Orders";
 
 function AppContent({ cart, setCart }) {
+
   const location = useLocation();
 
   const isAdminRoute =
-    location.pathname.startsWith("/admin");
+    location.pathname === "/admin" ||
+    location.pathname.startsWith("/admin/");
+
+  const isAdminLogin =
+    location.pathname === "/admin-login";
+
 
   return (
     <>
-      {!isAdminRoute && (
+
+      {/* Customer Navbar */}
+
+      {!isAdminRoute && !isAdminLogin && (
         <Navbar cart={cart} />
       )}
 
-      <Routes>
 
-        <Route
-          path="/"
-          element={
-            <Home
-              cart={cart}
-              setCart={setCart}
-            />
-          }
-        />
+      {/* ADMIN AREA */}
 
-        <Route
-          path="/about"
-          element={<About />}
-        />
+      {isAdminRoute ? (
 
-        <Route
-          path="/contact"
-          element={<Contact />}
-        />
+        <div className="admin-layout">
 
-        <Route
-          path="/products"
-          element={
-            <Products
-              cart={cart}
-              setCart={setCart}
-            />
-          }
-        />
+          <AdminSidebar />
 
-        <Route
-          path="/products/:id"
-          element={
-            <ProductDetails
-              cart={cart}
-              setCart={setCart}
-            />
-          }
-        />
+          <div className="admin-content">
 
-        <Route
-          path="/cart"
-          element={
-            <Cart
-              cart={cart}
-              setCart={setCart}
-            />
-          }
-        />
+            <Routes>
 
-        <Route
-          path="/checkout"
-          element={
-            <Checkout
-              cart={cart}
-            />
-          }
-        />
+              <Route
+                path="/admin"
+                element={<AdminDashboard />}
+              />
 
-        <Route
-          path="/orders"
-          element={<Orders />}
-        />
+              <Route
+                path="/admin/products"
+                element={<AdminProducts />}
+              />
 
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+              <Route
+                path="/admin/orders"
+                element={<AdminOrders />}
+              />
 
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+              <Route
+                path="/admin/users"
+                element={<AdminUsers />}
+              />
 
-        <Route
-          path="/admin-login"
-          element={<AdminLogin />}
-        />
+              <Route
+                path="/admin/analytics"
+                element={<AdminAnalytics />}
+              />
 
-        <Route
-          path="/admin"
-          element={<AdminDashboard />}
-        />
+            </Routes>
 
-        <Route
-          path="/admin/products"
-          element={<AdminProducts />}
-        />
+          </div>
 
-        <Route
-          path="/admin/orders"
-          element={<AdminOrders />}
-        />
+        </div>
 
-        <Route
-          path="/admin/users"
-          element={<AdminUsers />}
-        />
+      ) : (
 
-        <Route
-          path="/admin/analytics"
-          element={<AdminAnalytics />}
-        />
+        /* CUSTOMER AREA */
 
-      </Routes>
+        <Routes>
+
+          <Route
+            path="/"
+            element={
+              <Home
+                cart={cart}
+                setCart={setCart}
+              />
+            }
+          />
+
+          <Route
+            path="/about"
+            element={<About />}
+          />
+
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
+
+          <Route
+            path="/products"
+            element={
+              <Products
+                cart={cart}
+                setCart={setCart}
+              />
+            }
+          />
+
+          <Route
+            path="/products/:id"
+            element={
+              <ProductDetails
+                cart={cart}
+                setCart={setCart}
+              />
+            }
+          />
+
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cart={cart}
+                setCart={setCart}
+              />
+            }
+          />
+
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                cart={cart}
+              />
+            }
+          />
+
+          <Route
+            path="/orders"
+            element={<Orders />}
+          />
+
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+
+          <Route
+            path="/register"
+            element={<Register />}
+          />
+
+          <Route
+            path="/admin-login"
+            element={<AdminLogin />}
+          />
+
+        </Routes>
+
+      )}
+
     </>
   );
 }
 
+
 function App() {
+
   const [cart, setCart] = useState(() => {
+
     const savedCart =
       localStorage.getItem("cart");
 
     return savedCart
       ? JSON.parse(savedCart)
       : [];
+
   });
 
+
   useEffect(() => {
+
     localStorage.setItem(
       "cart",
       JSON.stringify(cart)
     );
+
   }, [cart]);
 
+
   return (
+
     <BrowserRouter>
+
       <AppContent
         cart={cart}
         setCart={setCart}
       />
+
     </BrowserRouter>
+
   );
 }
+
 
 export default App;

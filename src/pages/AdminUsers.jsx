@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AdminSidebar from "../components/AdminSidebar";
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
