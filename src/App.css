@@ -6483,3 +6483,41 @@ table td{
   }
 }
 
+/* =========================
+   MOBILE AUTH INPUT FIX
+========================= */
+
+@media (max-width: 700px) {
+
+  .auth-card {
+    width: calc(100% - 32px);
+    max-width: 450px;
+    box-sizing: border-box;
+    padding: 30px 22px;
+  }
+
+  .auth-card input {
+    width: 100%;
+    box-sizing: border-box;
+
+    position: relative;
+    z-index: 10;
+
+    pointer-events: auto;
+
+    -webkit-user-select: text;
+    user-select: text;
+
+    touch-action: manipulation;
+  }
+
+  .auth-card input:focus {
+    outline: none;
+  }
+
+  .auth-card button {
+    position: relative;
+    z-index: 10;
+  }
+}
+
