@@ -6521,3 +6521,108 @@ table td{
   }
 }
 
+/* =========================
+   PASSWORD INPUT FIX
+========================= */
+
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.password-icon {
+  flex: 0 0 24px;
+  width: 24px;
+  text-align: center;
+  z-index: 2;
+}
+
+.password-field {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+
+  color: #14213d !important;
+
+  font-size: 16px !important;
+
+  padding: 0 10px !important;
+  margin: 0 !important;
+
+  box-sizing: border-box !important;
+}
+
+.password-field::placeholder {
+  color: #8b96a8 !important;
+  opacity: 1 !important;
+}
+
+.password-field:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.show-password {
+  flex: 0 0 auto !important;
+
+  border: none !important;
+  outline: none !important;
+
+  background: transparent !important;
+
+  color: #ff6600 !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+
+  padding: 8px !important;
+  margin: 0 !important;
+
+  cursor: pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+  .simple-input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .password-input {
+    min-height: 56px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .password-field {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+
+    font-size: 16px !important;
+    padding: 0 8px !important;
+  }
+
+  .show-password {
+    flex-shrink: 0 !important;
+    font-size: 14px !important;
+    padding: 8px 6px !important;
+  }
+
+  .password-icon {
+    flex-shrink: 0 !important;
+  }
+}
+

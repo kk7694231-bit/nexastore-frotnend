@@ -91,40 +91,35 @@ function Login() {
 
         {/* Password */}
 
-        <div className="simple-login-field">
+<div className="simple-login-field">
 
-          <label>Password</label>
+  <label>Password</label>
 
-          <div className="simple-input">
+  <div className="simple-input password-input">
 
-            <span>🔒</span>
+    <span className="password-icon">🔒</span>
 
-            <input
-              type={
-                showPassword
-                  ? "text"
-                  : "password"
-              }
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
-            />
+    <input
+      className="password-field"
+      type={showPassword ? "text" : "password"}
+      placeholder="Enter your password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
 
-            <button
-              type="button"
-              className="show-password"
-              onClick={() =>
-                setShowPassword(!showPassword)
-              }
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
+    <button
+      type="button"
+      className="show-password"
+      onClick={() =>
+        setShowPassword(!showPassword)
+      }
+    >
+      {showPassword ? "Hide" : "Show"}
+    </button>
 
-          </div>
+  </div>
 
-        </div>
+</div>
 
 
         {/* Login */}
