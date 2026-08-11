@@ -6626,3 +6626,37 @@ table td{
   }
 }
 
+/* =========================================================
+   MOBILE LOGIN INPUT FIX
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .simple-input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+
+  .simple-input input {
+    flex: 1 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    box-sizing: border-box;
+  }
+
+  .simple-input .show-password {
+    width: auto !important;
+    min-width: 45px;
+    flex-shrink: 0;
+    padding: 6px 4px;
+    margin: 0;
+  }
+}
