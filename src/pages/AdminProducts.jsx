@@ -12,7 +12,8 @@ function AdminProducts() {
   const [image, setImage] = useState("");
   const [stock, setStock] = useState("");
 
-  const API_URL = "https://nexastore-backend-rzao.vercel.app";
+  const API_URL =
+    "https://nexastore-backend-rzao.vercel.app";
 
   useEffect(() => {
     fetchProducts();
@@ -20,7 +21,10 @@ function AdminProducts() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get(`${API_URL}/api/products`);
+      const res = await axios.get(
+        `${API_URL}/api/products`
+      );
+
       setProducts(res.data);
     } catch (error) {
       console.log(error);
@@ -63,7 +67,11 @@ function AdminProducts() {
       fetchProducts();
     } catch (error) {
       console.log(error);
-      alert(error.response?.data?.message || "Failed To Add Product");
+
+      alert(
+        error.response?.data?.message ||
+          "Failed To Add Product"
+      );
     }
   };
 
@@ -71,118 +79,215 @@ function AdminProducts() {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.delete(`${API_URL}/api/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `${API_URL}/api/products/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       alert("Product Deleted Successfully");
-      fetchProducts();
 
+      fetchProducts();
     } catch (error) {
       console.log(error);
-      alert(error.response?.data?.message || "Delete Failed");
+
+      alert(
+        error.response?.data?.message ||
+          "Delete Failed"
+      );
     }
   };
 
   return (
-    <div className="admin-main">
+    <main className="admin-products-page">
+
+      {/* PAGE TITLE */}
+
       <h1>Manage Products</h1>
 
+
+      {/* ADD PRODUCT FORM */}
+
       <div className="product-form">
+
         <input
           type="text"
           placeholder="Product Name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) =>
+            setName(e.target.value)
+          }
         />
 
         <input
           type="text"
           placeholder="Description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) =>
+            setDescription(e.target.value)
+          }
         />
 
         <input
           type="number"
           placeholder="Price"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) =>
+            setPrice(e.target.value)
+          }
         />
 
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) =>
+            setCategory(e.target.value)
+          }
         >
-          <option value="">Select Category</option>
-          <option value="Mobiles">Mobiles</option>
-          <option value="Laptops">Laptops</option>
-          <option value="Gaming">Gaming</option>
-          <option value="Fashion">Fashion</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Accessories">Accessories</option>
+          <option value="">
+            Select Category
+          </option>
+
+          <option value="Mobiles">
+            Mobiles
+          </option>
+
+          <option value="Laptops">
+            Laptops
+          </option>
+
+          <option value="Gaming">
+            Gaming
+          </option>
+
+          <option value="Fashion">
+            Fashion
+          </option>
+
+          <option value="Electronics">
+            Electronics
+          </option>
+
+          <option value="Accessories">
+            Accessories
+          </option>
         </select>
+
+
         <select
           value={brand}
-          onChange={(e) => setBrand(e.target.value)}
+          onChange={(e) =>
+            setBrand(e.target.value)
+          }
         >
-          <option value="">Select Brand</option>
-          <option value="Apple">Apple</option>
-          <option value="Samsung">Samsung</option>
-          <option value="HP">HP</option>
-          <option value="Dell">Dell</option>
-          <option value="Sony">Sony</option>
-          <option value="Nike">Nike</option>
+          <option value="">
+            Select Brand
+          </option>
+
+          <option value="Apple">
+            Apple
+          </option>
+
+          <option value="Samsung">
+            Samsung
+          </option>
+
+          <option value="HP">
+            HP
+          </option>
+
+          <option value="Dell">
+            Dell
+          </option>
+
+          <option value="Sony">
+            Sony
+          </option>
+
+          <option value="Nike">
+            Nike
+          </option>
         </select>
+
 
         <input
           type="text"
           placeholder="Image URL"
           value={image}
-          onChange={(e) => setImage(e.target.value)}
+          onChange={(e) =>
+            setImage(e.target.value)
+          }
         />
 
         <input
           type="number"
           placeholder="Stock"
           value={stock}
-          onChange={(e) => setStock(e.target.value)}
+          onChange={(e) =>
+            setStock(e.target.value)
+          }
         />
 
-        <button onClick={handleAddProduct}>
+
+        <button
+          onClick={handleAddProduct}
+        >
           Add Product
         </button>
+
       </div>
 
+
+      {/* PRODUCTS */}
+
       <div className="admin-products-grid">
+
         {products.map((product) => (
+
           <div
             key={product._id}
             className="admin-product-card"
           >
+
             <img
               src={product.image}
               alt={product.name}
             />
 
-            <h3>{product.name}</h3>
 
-            <p>₹{product.price}</p>
+            <h3>
+              {product.name}
+            </h3>
 
-            <span>{product.category}</span>
+
+            <p>
+              ₹{product.price.toLocaleString()}
+            </p>
+
+
+            <span>
+              {product.category}
+            </span>
+
 
             <button
               className="delete-btn"
-              onClick={() => handleDelete(product._id)}
+              onClick={() =>
+                handleDelete(product._id)
+              }
             >
               Delete
             </button>
+
           </div>
+
         ))}
+
       </div>
-    </div>
+
+    </main>
   );
 }
 
