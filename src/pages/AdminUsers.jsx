@@ -32,49 +32,100 @@ function AdminUsers() {
       } else {
         setUsers([]);
       }
-
     } catch (error) {
-      console.log(error);
+      console.log("Users Error:", error);
+
       setUsers([]);
     }
   };
 
   return (
-    <div className="admin-container">
-      <AdminSidebar />
+    <main className="users-page">
 
-      <main className="users-page">
-        <h1>Manage Users</h1>
+      <div className="admin-page-header">
+        <div>
+          <p className="admin-page-label">
+            USER MANAGEMENT
+          </p>
 
-        <div className="users-grid">
-          {Array.isArray(users) && users.length > 0 ? (
-            users.map((user) => (
-              <div
-                key={user._id}
-                className="user-card"
-              >
-                <h3>{user.name}</h3>
+          <h1>Manage Users</h1>
 
-                <p>{user.email}</p>
+          <p className="admin-page-subtitle">
+            View registered customers and account details
+          </p>
+        </div>
+
+        <div className="user-count">
+          {users.length} Users
+        </div>
+      </div>
+
+      <div className="users-grid">
+
+        {users.length > 0 ? (
+          users.map((user) => (
+            <div
+              key={user._id}
+              className="user-card"
+            >
+
+              <div className="user-card-top">
+
+                <div className="user-avatar">
+                  {user.name
+                    ? user.name
+                        .charAt(0)
+                        .toUpperCase()
+                    : "U"}
+                </div>
 
                 <span className="role-badge">
-                  {user.role}
+                  {user.role || "user"}
                 </span>
 
-                <div className="user-history">
-                  Joined{" "}
-                  {user.createdAt
-                    ? new Date(user.createdAt).toLocaleDateString()
-                    : "-"}
-                </div>
               </div>
-            ))
-          ) : (
-            <h3>No Users Found</h3>
-          )}
-        </div>
-      </main>
-    </div>
+
+              <h3>
+                {user.name || "Unknown User"}
+              </h3>
+
+              <p className="user-email">
+                {user.email}
+              </p>
+
+              <div className="user-history">
+                <span>📅</span>
+
+                Joined{" "}
+
+                {user.createdAt
+                  ? new Date(
+                      user.createdAt
+                    ).toLocaleDateString()
+                  : "-"}
+              </div>
+
+            </div>
+          ))
+        ) : (
+          <div className="empty-users">
+
+            <div className="empty-users-icon">
+              👥
+            </div>
+
+            <h2>No Users Found</h2>
+
+            <p>
+              Registered users will appear here.
+            </p>
+
+          </div>
+        )}
+
+      </div>
+
+    </main>
   );
 }
 

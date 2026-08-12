@@ -23,11 +23,24 @@ function AdminOrders() {
         }
       );
 
-      setOrders(res.data.orders || res.data);
+      console.log("Orders API Response:", res.data);
 
+      if (Array.isArray(res.data)) {
+        setOrders(res.data);
+      } else if (Array.isArray(res.data.orders)) {
+        setOrders(res.data.orders);
+      } else {
+        setOrders([]);
+      }
     } catch (error) {
-      console.log(error);
-      alert(error.response?.data?.message || "Failed to fetch orders");
+      console.log("Orders Error:", error);
+
+      alert(
+        error.response?.data?.message ||
+          "Failed to fetch orders"
+      );
+
+      setOrders([]);
     }
   };
 
@@ -47,26 +60,60 @@ function AdminOrders() {
         }
       );
 
-      alert("Order status updated");
-      fetchOrders();
+      alert("Order status updated successfully");
 
+      fetchOrders();
     } catch (error) {
-      console.log(error);
-      alert(error.response?.data?.message || "Update failed");
+      console.log("Update Error:", error);
+
+      alert(
+        error.response?.data?.message ||
+          "Failed to update order"
+      );
     }
   };
 
   return (
-    <div className="admin-container">
-      <AdminSidebar />
+    <main className="admin-main">
 
-      <main className="admin-main">
-        <h1 className="orders-title" style={{ color: "white" }}>
-          Manage Orders
-        </h1>
+      <div className="admin-page-header">
+        <div>
+          <p className="admin-page-label">
+            ORDER MANAGEMENT
+          </p>
 
-        <div className="orders-table-wrapper">
+          <h1 className="orders-title">
+            Manage Orders
+          </h1>
+
+          <p className="admin-page-subtitle">
+            View and manage customer orders
+          </p>
+        </div>
+
+        <div className="order-count">
+          {orders.length} Orders
+        </div>
+      </div>
+
+      <div className="orders-table-wrapper">
+
+        {orders.length === 0 ? (
+          <div className="empty-orders">
+            <div className="empty-orders-icon">
+              🛒
+            </div>
+
+            <h2>No Orders Found</h2>
+
+            <p>
+              Customer orders will appear here once
+              they place an order.
+            </p>
+          </div>
+        ) : (
           <table className="orders-table">
+
             <thead>
               <tr>
                 <th>User</th>
@@ -80,41 +127,92 @@ function AdminOrders() {
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id}>
-                  <td>{order.userId?.name || "Unknown User"}</td>
 
-                  <td>₹{order.totalAmount}</td>
+                  <td>
+                    <div className="order-user">
+                      <div className="order-user-icon">
+                        👤
+                      </div>
 
-                  <td>{order.paymentMethod}</td>
+                      <div>
+                        <strong>
+                          {order.userId?.name ||
+                            "Unknown User"}
+                        </strong>
+
+                        {order.userId?.email && (
+                          <small>
+                            {order.userId.email}
+                          </small>
+                        )}
+                      </div>
+                    </div>
+                  </td>
+
+                  <td className="order-total">
+                    ₹
+                    {Number(
+                      order.totalAmount || 0
+                    ).toLocaleString()}
+                  </td>
+
+                  <td>
+                    <span className="payment-badge">
+                      {order.paymentMethod || "COD"}
+                    </span>
+                  </td>
 
                   <td>
                     <span
-                      className={`status-badge ${order.orderStatus}`}
+                      className={`status-badge ${
+                        order.orderStatus || "Pending"
+                      }`}
                     >
-                      {order.orderStatus}
+                      {order.orderStatus || "Pending"}
                     </span>
                   </td>
 
                   <td>
                     <select
-                      value={order.orderStatus}
+                      value={
+                        order.orderStatus ||
+                        "Pending"
+                      }
                       onChange={(e) =>
-                        updateStatus(order._id, e.target.value)
+                        updateStatus(
+                          order._id,
+                          e.target.value
+                        )
                       }
                     >
-                      <option value="Pending">Pending</option>
-                      <option value="Processing">Processing</option>
-                      <option value="Shipped">Shipped</option>
-                      <option value="Delivered">Delivered</option>
+                      <option value="Pending">
+                        Pending
+                      </option>
+
+                      <option value="Processing">
+                        Processing
+                      </option>
+
+                      <option value="Shipped">
+                        Shipped
+                      </option>
+
+                      <option value="Delivered">
+                        Delivered
+                      </option>
                     </select>
                   </td>
+
                 </tr>
               ))}
             </tbody>
 
           </table>
-        </div>
-      </main>
-    </div>
+        )}
+
+      </div>
+
+    </main>
   );
 }
 
