@@ -6660,3 +6660,56 @@ table td{
     margin: 0;
   }
 }
+
+/* =========================================
+   FINAL ADMIN PASSWORD MOBILE FIX
+========================================= */
+
+.simple-admin-input {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 10px !important;
+}
+
+.simple-admin-input input {
+  flex: 1 1 0 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+.simple-admin-input .admin-show-password {
+  width: auto !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+  flex: 0 0 50px !important;
+  margin: 0 !important;
+  padding: 5px !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .simple-admin-input {
+    width: 100% !important;
+  }
+
+  .simple-admin-input input {
+    width: auto !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+  }
+
+  .simple-admin-input .admin-show-password {
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    flex: 0 0 50px !important;
+  }
+
+}
