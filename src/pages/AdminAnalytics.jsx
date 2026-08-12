@@ -12,7 +12,6 @@ import {
 } from "recharts";
 
 function AdminAnalytics() {
-
   const [data, setData] = useState({
     totalUsers: 0,
     totalProducts: 0,
@@ -22,18 +21,19 @@ function AdminAnalytics() {
 
   const [salesHistory, setSalesHistory] = useState([]);
 
+  const API_URL =
+    "https://nexastore-backend-rzao.vercel.app";
+
   useEffect(() => {
     fetchAnalytics();
   }, []);
 
   const fetchAnalytics = async () => {
     try {
-
-      const token =
-        localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "https://nexastore-backend-rzao.vercel.app/api/admin/analytics",
+        `${API_URL}/api/admin/analytics`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -42,90 +42,269 @@ function AdminAnalytics() {
       );
 
       setData({
-        totalUsers: res.data.totalUsers,
-        totalProducts: res.data.totalProducts,
-        totalOrders: res.data.totalOrders,
-        totalRevenue: res.data.totalRevenue,
+        totalUsers: res.data.totalUsers || 0,
+        totalProducts: res.data.totalProducts || 0,
+        totalOrders: res.data.totalOrders || 0,
+        totalRevenue: res.data.totalRevenue || 0,
       });
 
       setSalesHistory(
-        res.data.salesHistory || []
+        Array.isArray(res.data.salesHistory)
+          ? res.data.salesHistory
+          : []
       );
-
     } catch (error) {
-      console.log(error);
+      console.log("Analytics Error:", error);
+
+      setData({
+        totalUsers: 0,
+        totalProducts: 0,
+        totalOrders: 0,
+        totalRevenue: 0,
+      });
+
+      setSalesHistory([]);
     }
   };
 
   return (
-    <div className="analytics-page">
+    <main className="analytics-page">
 
-      <h1>
-        📊 Sales Analytics
-      </h1>
+      {/* PAGE HEADER */}
+      <div className="analytics-header">
+        <span className="analytics-label">
+          STORE INSIGHTS
+        </span>
 
+        <h1>
+          📊 Sales Analytics
+        </h1>
+
+        <p>
+          Track your store performance, orders and revenue.
+        </p>
+      </div>
+
+
+      {/* ANALYTICS CARDS */}
       <div className="analytics-cards">
 
+        {/* USERS */}
         <div className="dashboard-card">
+          <div className="analytics-card-top">
+            <span className="analytics-icon">
+              👥
+            </span>
+
+            <span className="analytics-card-label">
+              CUSTOMERS
+            </span>
+          </div>
+
           <h3>Total Users</h3>
-          <p>{data.totalUsers}</p>
-        </div>
 
-        <div className="dashboard-card">
-          <h3>Total Products</h3>
-          <p>{data.totalProducts}</p>
-        </div>
-
-        <div className="dashboard-card">
-          <h3>Total Orders</h3>
-          <p>{data.totalOrders}</p>
-        </div>
-
-        <div className="dashboard-card">
-          <h3>Revenue</h3>
           <p>
-            ₹
-            {data.totalRevenue.toLocaleString()}
+            {data.totalUsers.toLocaleString()}
+          </p>
+        </div>
+
+
+        {/* PRODUCTS */}
+        <div className="dashboard-card">
+          <div className="analytics-card-top">
+            <span className="analytics-icon">
+              📦
+            </span>
+
+            <span className="analytics-card-label">
+              INVENTORY
+            </span>
+          </div>
+
+          <h3>Total Products</h3>
+
+          <p>
+            {data.totalProducts.toLocaleString()}
+          </p>
+        </div>
+
+
+        {/* ORDERS */}
+        <div className="dashboard-card">
+          <div className="analytics-card-top">
+            <span className="analytics-icon">
+              🛒
+            </span>
+
+            <span className="analytics-card-label">
+              SALES
+            </span>
+          </div>
+
+          <h3>Total Orders</h3>
+
+          <p>
+            {data.totalOrders.toLocaleString()}
+          </p>
+        </div>
+
+
+        {/* REVENUE */}
+        <div className="dashboard-card">
+          <div className="analytics-card-top">
+            <span className="analytics-icon">
+              💰
+            </span>
+
+            <span className="analytics-card-label">
+              EARNINGS
+            </span>
+          </div>
+
+          <h3>Total Revenue</h3>
+
+          <p>
+            ₹{data.totalRevenue.toLocaleString("en-IN")}
           </p>
         </div>
 
       </div>
 
+
+      {/* REVENUE CHART */}
       <div className="chart-container">
 
-        <h2>
-          Revenue History
-        </h2>
+        <div className="chart-header">
+          <div>
+            <span className="chart-label">
+              PERFORMANCE
+            </span>
 
-        <ResponsiveContainer
-          width="100%"
-          height={400}
-        >
-          <LineChart
-            data={salesHistory}
-          >
-            <CartesianGrid
-              strokeDasharray="3 3"
-            />
+            <h2>
+              Revenue History
+            </h2>
 
-            <XAxis dataKey="_id" />
+            <p>
+              Your store revenue over time
+            </p>
+          </div>
 
-            <YAxis />
+          <div className="chart-total">
+            <span>Total Revenue</span>
 
-            <Tooltip />
+            <strong>
+              ₹{data.totalRevenue.toLocaleString("en-IN")}
+            </strong>
+          </div>
+        </div>
 
-            <Line
-              type="monotone"
-              dataKey="revenue"
-              stroke="#D4AF37"
-              strokeWidth={4}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+
+        {/* CHART */}
+        <div className="analytics-chart">
+
+          {salesHistory.length > 0 ? (
+            <ResponsiveContainer
+              width="100%"
+              height={400}
+            >
+              <LineChart
+                data={salesHistory}
+                margin={{
+                  top: 20,
+                  right: 20,
+                  left: 10,
+                  bottom: 20,
+                }}
+              >
+
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="rgba(255,255,255,0.08)"
+                />
+
+                <XAxis
+                  dataKey="_id"
+                  stroke="#8b98a7"
+                  tick={{
+                    fill: "#8b98a7",
+                    fontSize: 12,
+                  }}
+                  tickLine={false}
+                  axisLine={false}
+                />
+
+                <YAxis
+                  stroke="#8b98a7"
+                  tick={{
+                    fill: "#8b98a7",
+                    fontSize: 12,
+                  }}
+                  tickLine={false}
+                  axisLine={false}
+                  tickFormatter={(value) =>
+                    `₹${value}`
+                  }
+                />
+
+                <Tooltip
+                  contentStyle={{
+                    background: "#151515",
+                    border:
+                      "1px solid rgba(212,175,55,0.35)",
+                    borderRadius: "12px",
+                    color: "#ffffff",
+                  }}
+                  labelStyle={{
+                    color: "#d4af37",
+                  }}
+                  formatter={(value) => [
+                    `₹${Number(value).toLocaleString(
+                      "en-IN"
+                    )}`,
+                    "Revenue",
+                  ]}
+                />
+
+                <Line
+                  type="monotone"
+                  dataKey="revenue"
+                  stroke="#D4AF37"
+                  strokeWidth={4}
+                  dot={{
+                    r: 4,
+                    fill: "#D4AF37",
+                  }}
+                  activeDot={{
+                    r: 7,
+                  }}
+                />
+
+              </LineChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="no-sales-data">
+
+              <div className="no-sales-icon">
+                📈
+              </div>
+
+              <h3>
+                No Sales Data Yet
+              </h3>
+
+              <p>
+                Revenue history will appear here
+                once customers place orders.
+              </p>
+
+            </div>
+          )}
+
+        </div>
 
       </div>
 
-    </div>
+    </main>
   );
 }
 
