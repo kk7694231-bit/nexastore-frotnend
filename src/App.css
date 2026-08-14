@@ -7609,3 +7609,349 @@ table td{
     padding: 18px;
   }
 }
+
+/* =====================================================
+   ADMIN ANALYTICS
+===================================================== */
+
+.analytics-header {
+  margin-bottom: 28px;
+}
+
+.analytics-label {
+  display: block;
+  color: #ff6b00;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.analytics-header h1 {
+  margin: 0;
+  color: #122d47;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.analytics-header p {
+  margin: 10px 0 0;
+  color: #5f7185;
+  font-size: 17px;
+}
+
+
+/* =====================================================
+   ANALYTICS CARDS
+===================================================== */
+
+.analytics-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.analytics-cards .dashboard-card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 190px;
+  padding: 28px;
+
+  background: linear-gradient(
+    145deg,
+    #171717,
+    #111111
+  );
+
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 22px;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.20);
+
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.analytics-cards .dashboard-card::after {
+  content: "";
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -55px;
+  bottom: -65px;
+
+  border-radius: 50%;
+
+  background: rgba(212, 175, 55, 0.08);
+}
+
+.analytics-cards .dashboard-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.30);
+}
+
+
+/* CARD TOP */
+
+.analytics-card-top {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 12px;
+}
+
+.analytics-icon {
+  font-size: 21px;
+}
+
+.analytics-card-label {
+  color: #d4af37;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+
+/* CARD TEXT */
+
+.analytics-cards .dashboard-card h3 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: #ffffff !important;
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.analytics-cards .dashboard-card p {
+  position: relative;
+  z-index: 2;
+
+  margin: 18px 0 0;
+
+  color: #d4af37 !important;
+
+  font-size: 38px;
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   CHART CONTAINER
+===================================================== */
+
+.chart-container {
+  padding: 34px 38px 30px;
+
+  background: linear-gradient(
+    145deg,
+    #171717,
+    #111111
+  );
+
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 24px;
+
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.22);
+}
+
+
+/* CHART HEADER */
+
+.chart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.chart-label {
+  display: block;
+
+  color: #d4af37;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  margin-bottom: 8px;
+}
+
+.chart-header h2 {
+  margin: 0;
+
+  color: #ffffff !important;
+
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.chart-header p {
+  margin: 8px 0 0;
+
+  color: #aeb8c4 !important;
+
+  font-size: 15px;
+}
+
+
+/* TOTAL REVENUE */
+
+.chart-total {
+  min-width: 170px;
+
+  padding: 15px 20px;
+
+  text-align: right;
+
+  background: rgba(212, 175, 55, 0.08);
+
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 14px;
+}
+
+.chart-total span {
+  display: block;
+
+  color: #aeb8c4 !important;
+
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.chart-total strong {
+  color: #d4af37 !important;
+
+  font-size: 23px;
+}
+
+
+/* =====================================================
+   GRAPH
+===================================================== */
+
+.analytics-chart {
+  width: 100%;
+  min-height: 400px;
+
+  padding-top: 10px;
+}
+
+
+/* =====================================================
+   NO SALES DATA
+===================================================== */
+
+.no-sales-data {
+  min-height: 330px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  border: 1px dashed rgba(212, 175, 55, 0.3);
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.no-sales-icon {
+  font-size: 46px;
+
+  margin-bottom: 12px;
+}
+
+.no-sales-data h3 {
+  margin: 0 0 8px;
+
+  color: #ffffff !important;
+
+  font-size: 22px;
+}
+
+.no-sales-data p {
+  margin: 0;
+
+  color: #aeb8c4 !important;
+
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.analytics-loading {
+  min-height: 400px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #d4af37;
+
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+  .analytics-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .analytics-header h1 {
+    font-size: 32px;
+  }
+
+  .analytics-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    padding: 24px 18px;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .chart-total {
+    width: 100%;
+    text-align: left;
+  }
+
+}
