@@ -19,32 +19,60 @@ function AdminProducts() {
     fetchProducts();
   }, []);
 
+  // ==============================
+  // FETCH PRODUCTS
+  // ==============================
+
   const fetchProducts = async () => {
     try {
       const res = await axios.get(
         `${API_URL}/api/products`
       );
 
-      setProducts(res.data);
+      setProducts(
+        Array.isArray(res.data)
+          ? res.data
+          : []
+      );
+
     } catch (error) {
-      console.log(error);
+      console.log("Fetch Products Error:", error);
       alert("Failed to fetch products");
     }
   };
 
+
+  // ==============================
+  // ADD PRODUCT
+  // ==============================
+
   const handleAddProduct = async () => {
+    if (
+      !name.trim() ||
+      !description.trim() ||
+      !price ||
+      !category ||
+      !brand ||
+      !image.trim() ||
+      !stock
+    ) {
+      alert("Please fill all product details");
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("token");
+      const token =
+        localStorage.getItem("token");
 
       await axios.post(
         `${API_URL}/api/products`,
         {
-          name,
-          description,
+          name: name.trim(),
+          description: description.trim(),
           price: Number(price),
           category,
           brand,
-          image,
+          image: image.trim(),
           stock: Number(stock),
         },
         {
@@ -54,8 +82,11 @@ function AdminProducts() {
         }
       );
 
-      alert("Product Added Successfully");
+      alert(
+        "Product Added Successfully"
+      );
 
+      // Clear form
       setName("");
       setDescription("");
       setPrice("");
@@ -64,9 +95,14 @@ function AdminProducts() {
       setImage("");
       setStock("");
 
+      // Refresh products
       fetchProducts();
+
     } catch (error) {
-      console.log(error);
+      console.log(
+        "Add Product Error:",
+        error
+      );
 
       alert(
         error.response?.data?.message ||
@@ -75,9 +111,15 @@ function AdminProducts() {
     }
   };
 
+
+  // ==============================
+  // DELETE PRODUCT
+  // ==============================
+
   const handleDelete = async (id) => {
     try {
-      const token = localStorage.getItem("token");
+      const token =
+        localStorage.getItem("token");
 
       await axios.delete(
         `${API_URL}/api/products/${id}`,
@@ -88,11 +130,17 @@ function AdminProducts() {
         }
       );
 
-      alert("Product Deleted Successfully");
+      alert(
+        "Product Deleted Successfully"
+      );
 
       fetchProducts();
+
     } catch (error) {
-      console.log(error);
+      console.log(
+        "Delete Product Error:",
+        error
+      );
 
       alert(
         error.response?.data?.message ||
@@ -101,17 +149,28 @@ function AdminProducts() {
     }
   };
 
+
+  // ==============================
+  // RETURN
+  // ==============================
+
   return (
-    <main className="admin-products-page">
+    <main>
 
       {/* PAGE TITLE */}
 
-      <h1>Manage Products</h1>
+      <h1>
+        Manage Products
+      </h1>
 
 
-      {/* ADD PRODUCT FORM */}
+      {/* ==========================
+          ADD PRODUCT FORM
+      =========================== */}
 
       <div className="product-form">
+
+        {/* Product Name */}
 
         <input
           type="text"
@@ -122,23 +181,37 @@ function AdminProducts() {
           }
         />
 
+
+        {/* Description */}
+
         <input
           type="text"
           placeholder="Description"
           value={description}
           onChange={(e) =>
-            setDescription(e.target.value)
+            setDescription(
+              e.target.value
+            )
           }
         />
+
+
+        {/* Price */}
 
         <input
           type="number"
           placeholder="Price"
+          min="0"
           value={price}
           onChange={(e) =>
             setPrice(e.target.value)
           }
         />
+
+
+        {/* ==========================
+            CATEGORY
+        =========================== */}
 
         <select
           value={category}
@@ -146,6 +219,7 @@ function AdminProducts() {
             setCategory(e.target.value)
           }
         >
+
           <option value="">
             Select Category
           </option>
@@ -173,8 +247,19 @@ function AdminProducts() {
           <option value="Accessories">
             Accessories
           </option>
+
+          {/* HOME & LIVING */}
+
+          <option value="Home & Living">
+            Home & Living
+          </option>
+
         </select>
 
+
+        {/* ==========================
+            BRAND
+        =========================== */}
 
         <select
           value={brand}
@@ -182,6 +267,7 @@ function AdminProducts() {
             setBrand(e.target.value)
           }
         >
+
           <option value="">
             Select Brand
           </option>
@@ -209,8 +295,19 @@ function AdminProducts() {
           <option value="Nike">
             Nike
           </option>
+
+          <option value="IKEA">
+            IKEA
+          </option>
+
+          <option value="Home Centre">
+            Home Centre
+          </option>
+
         </select>
 
+
+        {/* Image URL */}
 
         <input
           type="text"
@@ -221,15 +318,21 @@ function AdminProducts() {
           }
         />
 
+
+        {/* Stock */}
+
         <input
           type="number"
           placeholder="Stock"
+          min="0"
           value={stock}
           onChange={(e) =>
             setStock(e.target.value)
           }
         />
 
+
+        {/* Add Product */}
 
         <button
           onClick={handleAddProduct}
@@ -240,50 +343,91 @@ function AdminProducts() {
       </div>
 
 
-      {/* PRODUCTS */}
+      {/* ==========================
+          PRODUCTS LIST
+      =========================== */}
 
       <div className="admin-products-grid">
 
-        {products.map((product) => (
+        {products.length > 0 ? (
 
-          <div
-            key={product._id}
-            className="admin-product-card"
-          >
+          products.map((product) => (
 
-            <img
-              src={product.image}
-              alt={product.name}
-            />
-
-
-            <h3>
-              {product.name}
-            </h3>
-
-
-            <p>
-              ₹{product.price.toLocaleString()}
-            </p>
-
-
-            <span>
-              {product.category}
-            </span>
-
-
-            <button
-              className="delete-btn"
-              onClick={() =>
-                handleDelete(product._id)
-              }
+            <div
+              key={product._id}
+              className="admin-product-card"
             >
-              Delete
-            </button>
 
-          </div>
+              {/* Image */}
 
-        ))}
+              <img
+                src={product.image}
+                alt={product.name}
+              />
+
+
+              {/* Name */}
+
+              <h3>
+                {product.name}
+              </h3>
+
+
+              {/* Price */}
+
+              <p>
+                ₹
+                {Number(
+                  product.price || 0
+                ).toLocaleString("en-IN")}
+              </p>
+
+
+              {/* Category */}
+
+              <span>
+                {product.category}
+              </span>
+
+
+              {/* Brand */}
+
+              <small>
+                {product.brand}
+              </small>
+
+
+              {/* Stock */}
+
+              <small>
+                Stock: {product.stock}
+              </small>
+
+
+              {/* Delete */}
+
+              <button
+                className="delete-btn"
+                onClick={() =>
+                  handleDelete(
+                    product._id
+                  )
+                }
+              >
+                Delete
+              </button>
+
+            </div>
+
+          ))
+
+        ) : (
+
+          <h3>
+            No Products Found
+          </h3>
+
+        )}
 
       </div>
 

@@ -7,22 +7,28 @@ function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);
   const location = useLocation();
 
-  // மொபைல் திரையைக் கண்டறியும் State
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  // Mobile screen detection
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth <= 768
+  );
 
-  const API_URL = "https://nexastore-backend-rzao.vercel.app";
+  const API_URL =
+    "https://nexastore-backend-rzao.vercel.app";
 
+  // Fetch products whenever URL changes
   useEffect(() => {
     const params = new URLSearchParams(location.search);
+
     const keyword = params.get("keyword") || "";
     const category = params.get("category") || "";
 
     fetchProducts(keyword, category);
 
-    // விண்டோ அளவை கண்காணிக்கும் Event Listener
+    // Window resize
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
+
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -30,25 +36,51 @@ function Products({ cart, setCart }) {
     };
   }, [location.search]);
 
+
+  // =====================================================
+  // FETCH PRODUCTS
+  // =====================================================
+
   const fetchProducts = async (keyword, category) => {
     try {
+      const params = new URLSearchParams();
+
+      if (keyword) {
+        params.append("keyword", keyword);
+      }
+
+      if (category) {
+        params.append("category", category);
+      }
+
       const { data } = await axios.get(
-        `${API_URL}/api/products?keyword=${keyword}&category=${category}`
+        `${API_URL}/api/products?${params.toString()}`
       );
+
+      console.log("Products API Response:", data);
+      console.log("Selected Category:", category);
 
       if (Array.isArray(data)) {
         setProducts(data);
       } else {
         setProducts([]);
       }
+
     } catch (error) {
-      console.log(error);
+      console.log("Products Error:", error);
       setProducts([]);
     }
   };
 
+
+  // =====================================================
+  // ADD TO CART
+  // =====================================================
+
   const addToCart = (product) => {
-    const existingItem = cart.find((item) => item._id === product._id);
+    const existingItem = cart.find(
+      (item) => item._id === product._id
+    );
 
     if (existingItem) {
       setCart(
@@ -74,20 +106,32 @@ function Products({ cart, setCart }) {
     alert("Product Added Successfully");
   };
 
+
   return (
     <div
       style={{
         maxWidth: "1400px",
-        margin: isMobile ? "20px auto" : "40px auto",
-        padding: isMobile ? "0 15px" : "0 20px",
+        margin: isMobile
+          ? "20px auto"
+          : "40px auto",
+        padding: isMobile
+          ? "0 15px"
+          : "0 20px",
         boxSizing: "border-box",
-        overflowX: "hidden", // கிடைமட்ட ஸ்க்ரோலைத் தடுக்கிறது
+        overflowX: "hidden",
       }}
     >
+
+      {/* =================================================
+          PAGE TITLE
+      ================================================= */}
+
       <h1
         style={{
           textAlign: "center",
-          fontSize: isMobile ? "30px" : "42px",
+          fontSize: isMobile
+            ? "30px"
+            : "42px",
           color: "#222",
           marginBottom: "10px",
         }}
@@ -95,58 +139,87 @@ function Products({ cart, setCart }) {
         Our Products
       </h1>
 
+
       <p
         style={{
           textAlign: "center",
           color: "#666",
-          fontSize: isMobile ? "15px" : "18px",
-          marginBottom: isMobile ? "30px" : "40px",
+          fontSize: isMobile
+            ? "15px"
+            : "18px",
+          marginBottom: isMobile
+            ? "30px"
+            : "40px",
           lineHeight: "1.5",
         }}
       >
-        Discover the latest mobiles, electronics, fashion and gaming products.
+        Discover the latest mobiles, electronics,
+        fashion and gaming products.
       </p>
 
-      {/* Responsive Grid */}
+
+      {/* =================================================
+          PRODUCT GRID
+      ================================================= */}
+
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: isMobile 
-            ? "1fr" 
+          gridTemplateColumns: isMobile
+            ? "1fr"
             : "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: isMobile ? "20px" : "30px",
+          gap: isMobile
+            ? "20px"
+            : "30px",
           width: "100%",
         }}
       >
-        {Array.isArray(products) && products.length > 0 ? (
+
+        {Array.isArray(products) &&
+        products.length > 0 ? (
+
           products.map((product, index) => (
+
             <motion.div
               key={product._id}
-              // மொபைலில் பக்கவாட்டு அசைவுகள் இல்லாமல் நேராக மென்மையாக மேலே உயரும்
+
               initial={{
                 opacity: 0,
-                x: isMobile ? 0 : (index % 2 === 0 ? -100 : 100),
-                y: isMobile ? 40 : 0,
+                x: isMobile
+                  ? 0
+                  : index % 2 === 0
+                  ? -100
+                  : 100,
+                y: isMobile
+                  ? 40
+                  : 0,
               }}
+
               whileInView={{
                 opacity: 1,
                 x: 0,
                 y: 0,
               }}
+
               viewport={{
                 once: false,
                 amount: 0.1,
               }}
+
               transition={{
                 duration: 0.6,
-                delay: isMobile ? 0 : index * 0.05,
+                delay: isMobile
+                  ? 0
+                  : index * 0.05,
                 ease: "easeOut",
               }}
+
               style={{
                 background: "#ffffff",
                 borderRadius: "18px",
                 overflow: "hidden",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.12)",
+                boxShadow:
+                  "0 4px 15px rgba(0,0,0,0.12)",
                 border: "1px solid #eee",
                 display: "flex",
                 flexDirection: "column",
@@ -154,7 +227,11 @@ function Products({ cart, setCart }) {
                 boxSizing: "border-box",
               }}
             >
-              {/* Product Image Box */}
+
+              {/* =================================================
+                  PRODUCT IMAGE
+              ================================================= */}
+
               <div
                 style={{
                   position: "relative",
@@ -167,6 +244,7 @@ function Products({ cart, setCart }) {
                   justifyContent: "center",
                 }}
               >
+
                 <span
                   style={{
                     position: "absolute",
@@ -183,6 +261,7 @@ function Products({ cart, setCart }) {
                   🔥 Trending
                 </span>
 
+
                 <span
                   style={{
                     position: "absolute",
@@ -195,6 +274,7 @@ function Products({ cart, setCart }) {
                   ❤️
                 </span>
 
+
                 <img
                   src={product.image}
                   alt={product.name}
@@ -204,9 +284,14 @@ function Products({ cart, setCart }) {
                     objectFit: "contain",
                   }}
                 />
+
               </div>
 
-              {/* Product Details Box */}
+
+              {/* =================================================
+                  PRODUCT DETAILS
+              ================================================= */}
+
               <div
                 style={{
                   padding: "20px",
@@ -215,6 +300,7 @@ function Products({ cart, setCart }) {
                   flexGrow: 1,
                 }}
               >
+
                 <Link
                   to={`/products/${product._id}`}
                   style={{
@@ -233,6 +319,7 @@ function Products({ cart, setCart }) {
                   </h2>
                 </Link>
 
+
                 <p
                   style={{
                     color: "#666",
@@ -242,10 +329,17 @@ function Products({ cart, setCart }) {
                     lineHeight: "1.5",
                   }}
                 >
-                  {product.description.length > 70
-                    ? product.description.substring(0, 70) + "..."
+                  {product.description &&
+                  product.description.length > 70
+                    ? product.description.substring(
+                        0,
+                        70
+                      ) + "..."
                     : product.description}
                 </p>
+
+
+                {/* Rating */}
 
                 <div
                   style={{
@@ -254,10 +348,16 @@ function Products({ cart, setCart }) {
                     margin: "12px 0",
                   }}
                 >
-                  ⭐⭐⭐⭐⭐ ({product.rating || 4.5})
+                  ⭐⭐⭐⭐⭐ (
+                  {product.rating || 4.5}
+                  )
                 </div>
 
-                {/* Price tag responsive section */}
+
+                {/* =================================================
+                    PRICE
+                ================================================= */}
+
                 <div
                   style={{
                     display: "flex",
@@ -267,6 +367,7 @@ function Products({ cart, setCart }) {
                     marginBottom: "12px",
                   }}
                 >
+
                   <span
                     style={{
                       color: "#e53935",
@@ -274,19 +375,29 @@ function Products({ cart, setCart }) {
                       fontWeight: "bold",
                     }}
                   >
-                    ₹{product.price.toLocaleString()}
+                    ₹
+                    {Number(
+                      product.price || 0
+                    ).toLocaleString()}
                   </span>
+
 
                   <span
                     style={{
-                      textDecoration: "line-through",
+                      textDecoration:
+                        "line-through",
                       color: "#888",
                       fontSize: "14px",
                     }}
                   >
                     ₹
-                    {Math.floor(product.price * 1.2).toLocaleString()}
+                    {Math.floor(
+                      Number(
+                        product.price || 0
+                      ) * 1.2
+                    ).toLocaleString()}
                   </span>
+
 
                   <span
                     style={{
@@ -300,13 +411,21 @@ function Products({ cart, setCart }) {
                   >
                     20% OFF
                   </span>
+
                 </div>
+
+
+                {/* Stock */}
 
                 <p
                   style={{
-                    color: product.stock > 0 ? "green" : "red",
+                    color:
+                      product.stock > 0
+                        ? "green"
+                        : "red",
                     fontWeight: "bold",
-                    margin: "0 0 15px 0",
+                    margin:
+                      "0 0 15px 0",
                     fontSize: "14px",
                   }}
                 >
@@ -315,7 +434,11 @@ function Products({ cart, setCart }) {
                     : "Out of Stock"}
                 </p>
 
-                {/* Buy Buttons */}
+
+                {/* =================================================
+                    BUTTONS
+                ================================================= */}
+
                 <div
                   style={{
                     display: "flex",
@@ -323,8 +446,11 @@ function Products({ cart, setCart }) {
                     marginTop: "auto",
                   }}
                 >
+
                   <button
-                    onClick={() => addToCart(product)}
+                    onClick={() =>
+                      addToCart(product)
+                    }
                     style={{
                       flex: 1,
                       padding: "12px 10px",
@@ -339,6 +465,7 @@ function Products({ cart, setCart }) {
                   >
                     🛒 Add To Cart
                   </button>
+
 
                   <Link
                     to={`/products/${product._id}`}
@@ -363,48 +490,74 @@ function Products({ cart, setCart }) {
                       View Details
                     </button>
                   </Link>
+
                 </div>
+
               </div>
+
             </motion.div>
+
           ))
+
         ) : (
+
+          /* =================================================
+             NO PRODUCTS
+          ================================================= */
+
           <div
             style={{
               gridColumn: "1 / -1",
               textAlign: "center",
-              padding: isMobile ? "50px 10px" : "80px 20px",
+              padding: isMobile
+                ? "50px 10px"
+                : "80px 20px",
             }}
           >
+
             <img
               src="https://cdn-icons-png.flaticon.com/512/6134/6134065.png"
               alt="No Products"
               style={{
-                width: isMobile ? "120px" : "180px",
+                width: isMobile
+                  ? "120px"
+                  : "180px",
                 marginBottom: "20px",
               }}
             />
+
 
             <h2
               style={{
                 color: "#555",
                 marginBottom: "10px",
-                fontSize: isMobile ? "20px" : "24px",
+                fontSize: isMobile
+                  ? "20px"
+                  : "24px",
               }}
             >
               No Products Found
             </h2>
 
+
             <p
               style={{
                 color: "#888",
-                fontSize: isMobile ? "14px" : "17px",
+                fontSize: isMobile
+                  ? "14px"
+                  : "17px",
               }}
             >
-              Try searching with another keyword or category.
+              Try searching with another
+              keyword or category.
             </p>
+
           </div>
+
         )}
+
       </div>
+
     </div>
   );
 }

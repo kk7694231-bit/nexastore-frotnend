@@ -24,7 +24,7 @@ function Navbar({ cart }) {
 
   const handleSearch = () => {
     if (search.trim()) {
-      navigate(`/products?keyword=${search}`);
+      navigate(`/products?keyword=${encodeURIComponent(search)}`);
     } else {
       navigate("/products");
     }
@@ -37,7 +37,7 @@ function Navbar({ cart }) {
   };
 
   return (
-    <header className="navbar-wrapper">
+    <header>
 
       {/* Top Navbar */}
       <div className="navbar-main">
@@ -122,6 +122,7 @@ function Navbar({ cart }) {
         </div>
       </div>
 
+
       {/* Second Navigation */}
       <nav className="navbar-menu">
 
@@ -153,8 +154,9 @@ function Navbar({ cart }) {
           Fashion
         </Link>
 
+        {/* Home & Living */}
         <Link
-          to="/products"
+          to="/products?category=Home%20%26%20Living"
           className="navbar-menu-link"
         >
           Home & Living
