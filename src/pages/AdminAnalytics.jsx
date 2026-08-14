@@ -20,6 +20,7 @@ function AdminAnalytics() {
   });
 
   const [salesHistory, setSalesHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const API_URL =
     "https://nexastore-backend-rzao.vercel.app";
@@ -41,6 +42,11 @@ function AdminAnalytics() {
         }
       );
 
+      console.log(
+        "REAL ANALYTICS DATA:",
+        res.data
+      );
+
       setData({
         totalUsers: res.data.totalUsers || 0,
         totalProducts: res.data.totalProducts || 0,
@@ -53,44 +59,54 @@ function AdminAnalytics() {
           ? res.data.salesHistory
           : []
       );
+
     } catch (error) {
-      console.log("Analytics Error:", error);
-
-      setData({
-        totalUsers: 0,
-        totalProducts: 0,
-        totalOrders: 0,
-        totalRevenue: 0,
-      });
-
-      setSalesHistory([]);
+      console.log(
+        "Analytics Error:",
+        error.response?.data || error.message
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
-  return (
-    <main className="analytics-page">
+  if (loading) {
+    return (
+      <main className="admin-main">
+        <div className="analytics-loading">
+          Loading Analytics...
+        </div>
+      </main>
+    );
+  }
 
-      {/* PAGE HEADER */}
+  return (
+    <main className="admin-main">
+
+      {/* HEADER */}
+
       <div className="analytics-header">
+
         <span className="analytics-label">
           STORE INSIGHTS
         </span>
 
-        <h1>
-          📊 Sales Analytics
-        </h1>
+        <h1>📊 Sales Analytics</h1>
 
         <p>
-          Track your store performance, orders and revenue.
+          Track your store performance,
+          orders and revenue.
         </p>
+
       </div>
 
 
-      {/* ANALYTICS CARDS */}
+      {/* STAT CARDS */}
+
       <div className="analytics-cards">
 
-        {/* USERS */}
         <div className="dashboard-card">
+
           <div className="analytics-card-top">
             <span className="analytics-icon">
               👥
@@ -106,18 +122,19 @@ function AdminAnalytics() {
           <p>
             {data.totalUsers.toLocaleString()}
           </p>
+
         </div>
 
 
-        {/* PRODUCTS */}
         <div className="dashboard-card">
+
           <div className="analytics-card-top">
             <span className="analytics-icon">
               📦
             </span>
 
             <span className="analytics-card-label">
-              INVENTORY
+              PRODUCTS
             </span>
           </div>
 
@@ -126,18 +143,19 @@ function AdminAnalytics() {
           <p>
             {data.totalProducts.toLocaleString()}
           </p>
+
         </div>
 
 
-        {/* ORDERS */}
         <div className="dashboard-card">
+
           <div className="analytics-card-top">
             <span className="analytics-icon">
               🛒
             </span>
 
             <span className="analytics-card-label">
-              SALES
+              ORDERS
             </span>
           </div>
 
@@ -146,18 +164,19 @@ function AdminAnalytics() {
           <p>
             {data.totalOrders.toLocaleString()}
           </p>
+
         </div>
 
 
-        {/* REVENUE */}
         <div className="dashboard-card">
+
           <div className="analytics-card-top">
             <span className="analytics-icon">
               💰
             </span>
 
             <span className="analytics-card-label">
-              EARNINGS
+              REVENUE
             </span>
           </div>
 
@@ -166,18 +185,21 @@ function AdminAnalytics() {
           <p>
             ₹{data.totalRevenue.toLocaleString("en-IN")}
           </p>
+
         </div>
 
       </div>
 
 
-      {/* REVENUE CHART */}
+      {/* GRAPH */}
+
       <div className="chart-container">
 
         <div className="chart-header">
+
           <div>
             <span className="chart-label">
-              PERFORMANCE
+              SALES PERFORMANCE
             </span>
 
             <h2>
@@ -185,33 +207,40 @@ function AdminAnalytics() {
             </h2>
 
             <p>
-              Your store revenue over time
+              Revenue generated from your
+              actual orders
             </p>
           </div>
 
           <div className="chart-total">
-            <span>Total Revenue</span>
+
+            <span>
+              Total Revenue
+            </span>
 
             <strong>
               ₹{data.totalRevenue.toLocaleString("en-IN")}
             </strong>
+
           </div>
+
         </div>
 
 
-        {/* CHART */}
-        <div className="analytics-chart">
+        {salesHistory.length > 0 ? (
 
-          {salesHistory.length > 0 ? (
+          <div className="analytics-chart">
+
             <ResponsiveContainer
               width="100%"
               height={400}
             >
+
               <LineChart
                 data={salesHistory}
                 margin={{
                   top: 20,
-                  right: 20,
+                  right: 30,
                   left: 10,
                   bottom: 20,
                 }}
@@ -224,23 +253,19 @@ function AdminAnalytics() {
 
                 <XAxis
                   dataKey="_id"
-                  stroke="#8b98a7"
+                  stroke="#999"
                   tick={{
-                    fill: "#8b98a7",
+                    fill: "#999",
                     fontSize: 12,
                   }}
-                  tickLine={false}
-                  axisLine={false}
                 />
 
                 <YAxis
-                  stroke="#8b98a7"
+                  stroke="#999"
                   tick={{
-                    fill: "#8b98a7",
+                    fill: "#999",
                     fontSize: 12,
                   }}
-                  tickLine={false}
-                  axisLine={false}
                   tickFormatter={(value) =>
                     `₹${value}`
                   }
@@ -250,19 +275,28 @@ function AdminAnalytics() {
                   contentStyle={{
                     background: "#151515",
                     border:
-                      "1px solid rgba(212,175,55,0.35)",
-                    borderRadius: "12px",
-                    color: "#ffffff",
+                      "1px solid #D4AF37",
+                    borderRadius: "10px",
                   }}
                   labelStyle={{
-                    color: "#d4af37",
+                    color: "#D4AF37",
                   }}
-                  formatter={(value) => [
-                    `₹${Number(value).toLocaleString(
-                      "en-IN"
-                    )}`,
-                    "Revenue",
-                  ]}
+                  formatter={(value, name) => {
+
+                    if (name === "revenue") {
+                      return [
+                        `₹${Number(value).toLocaleString(
+                          "en-IN"
+                        )}`,
+                        "Revenue",
+                      ];
+                    }
+
+                    return [
+                      value,
+                      "Orders",
+                    ];
+                  }}
                 />
 
                 <Line
@@ -271,36 +305,40 @@ function AdminAnalytics() {
                   stroke="#D4AF37"
                   strokeWidth={4}
                   dot={{
-                    r: 4,
+                    r: 5,
                     fill: "#D4AF37",
                   }}
                   activeDot={{
-                    r: 7,
+                    r: 8,
                   }}
                 />
 
               </LineChart>
+
             </ResponsiveContainer>
-          ) : (
-            <div className="no-sales-data">
 
-              <div className="no-sales-icon">
-                📈
-              </div>
+          </div>
 
-              <h3>
-                No Sales Data Yet
-              </h3>
+        ) : (
 
-              <p>
-                Revenue history will appear here
-                once customers place orders.
-              </p>
+          <div className="no-sales-data">
 
+            <div className="no-sales-icon">
+              📈
             </div>
-          )}
 
-        </div>
+            <h3>
+              No Sales Data Yet
+            </h3>
+
+            <p>
+              Once customers place orders,
+              your revenue graph will appear here.
+            </p>
+
+          </div>
+
+        )}
 
       </div>
 
