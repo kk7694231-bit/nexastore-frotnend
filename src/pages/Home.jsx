@@ -610,8 +610,8 @@ function Home({ cart, setCart }) {
           style={{
             display: "grid",
             gridTemplateColumns: isMobile
-              ? "1fr"
-              : "repeat(auto-fill, minmax(280px, 1fr))",
+  ? "1fr"
+  : "repeat(4, 1fr)",
             gap: "25px",
             width: "100%",
           }}
