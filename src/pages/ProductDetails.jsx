@@ -87,237 +87,436 @@ function ProductDetails({ cart, setCart }) {
     <>
       <style>
         {`
+
+        /* ==============================
+           MAIN PRODUCT DETAILS
+        ============================== */
+
+        .product-details-container {
+          width: calc(100% - 40px);
+          max-width: 1200px;
+          margin: 40px auto;
+          padding: 30px;
+          background: #ffffff;
+          border-radius: 16px;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 45px;
+
+          box-sizing: border-box;
+        }
+
+
+        /* ==============================
+           IMAGE BOX
+        ============================== */
+
+        .product-image-section {
+          width: 100%;
+          min-height: 500px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background: #f7f8fa;
+
+          border: 1px solid #e5e5e5;
+          border-radius: 14px;
+
+          padding: 25px;
+          box-sizing: border-box;
+        }
+
+
+        .product-details-image {
+          width: 100%;
+          height: 450px;
+
+          object-fit: contain;
+
+          display: block;
+        }
+
+
+        /* ==============================
+           PRODUCT INFORMATION
+        ============================== */
+
+        .product-info-section {
+          width: 100%;
+          min-width: 0;
+        }
+
+
+        .product-title {
+          font-size: 38px;
+          color: #102a43;
+          margin: 0 0 10px;
+          line-height: 1.2;
+        }
+
+
+        .product-rating {
+          color: #ff9800;
+          font-size: 20px;
+          margin: 8px 0;
+        }
+
+
+        .product-price {
+          color: #e53935;
+          font-size: 36px;
+          margin: 10px 0 15px;
+        }
+
+
+        .product-info-section hr {
+          border: none;
+          border-top: 1px solid #ddd;
+          margin: 15px 0 20px;
+        }
+
+
+        .product-info-text {
+          font-size: 17px;
+          color: #333;
+          margin: 8px 0;
+        }
+
+
+        .product-description {
+          margin-top: 25px;
+          line-height: 1.8;
+          color: #555;
+          font-size: 16px;
+        }
+
+
+        /* ==============================
+           BUTTONS
+        ============================== */
+
+        .product-buttons {
+          display: flex;
+          gap: 15px;
+          margin-top: 30px;
+        }
+
+
+        .product-button {
+          flex: 1;
+
+          color: #ffffff;
+          border: none;
+
+          padding: 15px 20px;
+
+          font-size: 17px;
+          font-weight: 600;
+
+          border-radius: 8px;
+
+          cursor: pointer;
+
+          min-height: 55px;
+        }
+
+
+        .cart-button {
+          background: #ff9f00;
+        }
+
+
+        .buy-button {
+          background: #fb641b;
+        }
+
+
+        .product-button:hover {
+          opacity: 0.9;
+        }
+
+
+        /* ==============================
+           BENEFITS
+        ============================== */
+
+        .product-benefits {
+          margin-top: 30px;
+
+          padding: 18px;
+
+          background: #f5f5f5;
+
+          border-radius: 10px;
+
+          color: #333;
+        }
+
+
+        .product-benefits p {
+          margin: 10px 0;
+          font-size: 15px;
+        }
+
+
+        /* ==============================
+           TABLET
+        ============================== */
+
+        @media (max-width: 900px) {
+
           .product-details-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 15px;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 25px;
+          }
+
+
+          .product-image-section {
+            min-height: 400px;
+          }
+
+
+          .product-details-image {
+            height: 350px;
+          }
+
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 768px) {
+
+          .product-details-container {
+            width: calc(100% - 20px);
+
+            margin: 20px auto;
+
+            padding: 12px;
+
+            border-radius: 14px;
+
             display: flex;
-            gap: 40px;
-            box-shadow: 0 5px 20px rgba(0,0,0,.15);
+            flex-direction: column;
+
+            gap: 20px;
+
+            box-shadow:
+              0 4px 15px rgba(0, 0, 0, 0.10);
+          }
+
+
+          /* IMAGE HAS ITS OWN BORDERED BOX */
+
+          .product-image-section {
+            width: 100%;
+
+            height: 280px;
+            min-height: 280px;
+
+            padding: 15px;
+
+            background: #f8f9fa;
+
+            border: 2px solid #e6e6e6;
+
+            border-radius: 12px;
+
             box-sizing: border-box;
           }
 
-          .product-image-section {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-          }
 
           .product-details-image {
             width: 100%;
-            max-width: 450px;
-            height: 450px;
+            height: 245px;
+
             object-fit: contain;
           }
 
+
+          /* DETAILS FULL WIDTH */
+
           .product-info-section {
-            flex: 1;
-            min-width: 0;
+            width: 100%;
           }
+
 
           .product-title {
-            font-size: 38px;
-            color: #222;
-            margin-top: 0;
+            font-size: 28px;
+
+            margin: 0 0 5px;
+
+            line-height: 1.2;
           }
+
 
           .product-rating {
-            color: #ff9800;
-            font-size: 20px;
+            font-size: 16px;
+
+            margin: 5px 0;
           }
+
 
           .product-price {
-            color: #e53935;
-            font-size: 36px;
+            font-size: 27px;
+
+            margin: 7px 0 12px;
           }
+
+
+          .product-info-section hr {
+            margin: 12px 0 16px;
+          }
+
 
           .product-info-text {
-            font-size: 18px;
+            font-size: 14px;
+
+            margin: 7px 0;
           }
 
+
           .product-description {
-            margin-top: 20px;
-            line-height: 1.8;
-            color: #555;
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-top: 18px;
           }
+
+
+          /* BUTTONS */
 
           .product-buttons {
             display: flex;
-            gap: 20px;
-            margin-top: 30px;
+
+            gap: 10px;
+
+            margin-top: 22px;
           }
+
 
           .product-button {
-            color: #fff;
-            border: none;
-            padding: 15px 20px;
-            font-size: 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            flex: 1;
-            font-weight: 600;
+            padding: 13px 8px;
+
+            font-size: 15px;
+
+            min-height: 55px;
           }
 
-          .cart-button {
-            background: #ff9f00;
-          }
 
-          .buy-button {
-            background: #fb641b;
-          }
+          /* BENEFITS */
 
           .product-benefits {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 10px;
+            margin-top: 20px;
+
+            padding: 13px;
+
+            border-radius: 9px;
           }
 
-          @media (max-width: 768px) {
 
-            .product-details-container {
-              width: calc(100% - 20px);
-              margin: 20px auto;
-              padding: 18px;
-              border-radius: 12px;
-              display: flex;
-              flex-direction: row;
-              align-items: flex-start;
-              gap: 18px;
-              box-shadow: 0 4px 15px rgba(0,0,0,.12);
-            }
+          .product-benefits p {
+            font-size: 13px;
 
-            .product-image-section {
-              flex: 0 0 90px;
-              width: 90px;
-              display: flex;
-              justify-content: center;
-              align-items: flex-start;
-            }
-
-            .product-details-image {
-              width: 90px;
-              height: 90px;
-              max-width: 90px;
-              object-fit: contain;
-              background: #f7f7f7;
-              border-radius: 8px;
-              padding: 5px;
-              box-sizing: border-box;
-            }
-
-            .product-info-section {
-              flex: 1;
-              width: auto;
-              min-width: 0;
-            }
-
-            .product-title {
-              font-size: 27px;
-              line-height: 1.2;
-              margin: 0 0 5px;
-            }
-
-            .product-rating {
-              font-size: 15px;
-              margin: 4px 0;
-            }
-
-            .product-price {
-              font-size: 25px;
-              margin: 5px 0 10px;
-            }
-
-            .product-info-text {
-              font-size: 14px;
-              margin: 6px 0;
-            }
-
-            .product-description {
-              font-size: 14px;
-              line-height: 1.6;
-              margin-top: 18px;
-            }
-
-            .product-buttons {
-              display: flex;
-              gap: 10px;
-              margin-top: 20px;
-            }
-
-            .product-button {
-              padding: 12px 8px;
-              font-size: 15px;
-              min-height: 70px;
-            }
-
-            .product-benefits {
-              margin-top: 20px;
-              padding: 12px;
-              font-size: 13px;
-            }
-
-            .product-benefits p {
-              margin: 7px 0;
-            }
+            margin: 7px 0;
           }
 
-          @media (max-width: 400px) {
+        }
 
-            .product-details-container {
-              width: calc(100% - 14px);
-              padding: 14px;
-              gap: 12px;
-            }
 
-            .product-image-section {
-              flex: 0 0 75px;
-              width: 75px;
-            }
+        /* ==============================
+           SMALL MOBILE
+        ============================== */
 
-            .product-details-image {
-              width: 75px;
-              height: 75px;
-              max-width: 75px;
-            }
+        @media (max-width: 400px) {
 
-            .product-title {
-              font-size: 24px;
-            }
+          .product-details-container {
+            width: calc(100% - 14px);
 
-            .product-price {
-              font-size: 23px;
-            }
+            padding: 10px;
 
-            .product-description {
-              font-size: 13px;
-            }
-
-            .product-button {
-              font-size: 14px;
-              padding: 10px 5px;
-            }
+            gap: 16px;
           }
+
+
+          .product-image-section {
+            height: 240px;
+            min-height: 240px;
+
+            padding: 12px;
+          }
+
+
+          .product-details-image {
+            height: 210px;
+          }
+
+
+          .product-title {
+            font-size: 25px;
+          }
+
+
+          .product-rating {
+            font-size: 15px;
+          }
+
+
+          .product-price {
+            font-size: 25px;
+          }
+
+
+          .product-description {
+            font-size: 13px;
+          }
+
+
+          .product-button {
+            font-size: 14px;
+
+            padding: 11px 5px;
+          }
+
+        }
+
         `}
       </style>
 
+
+      {/* ==========================================
+          PRODUCT DETAILS CONTAINER
+      =========================================== */}
+
       <div className="product-details-container">
 
-        {/* PRODUCT IMAGE */}
+
+        {/* ==========================================
+            PRODUCT IMAGE
+        =========================================== */}
 
         <div className="product-image-section">
+
           <img
             src={product.image}
             alt={product.name}
             className="product-details-image"
           />
+
         </div>
 
-        {/* PRODUCT DETAILS */}
+
+        {/* ==========================================
+            PRODUCT INFORMATION
+        =========================================== */}
 
         <div className="product-info-section">
 
@@ -325,31 +524,40 @@ function ProductDetails({ cart, setCart }) {
             {product.name}
           </h1>
 
+
           <p className="product-rating">
             ⭐⭐⭐⭐☆ ({product.rating || 0})
           </p>
+
 
           <h2 className="product-price">
             ₹{product.price.toLocaleString()}
           </h2>
 
+
           <hr />
+
 
           <p className="product-info-text">
             <b>Category :</b>{" "}
             {product.category}
           </p>
 
+
           <p className="product-info-text">
             <b>Available Stock :</b>{" "}
             {product.stock}
           </p>
 
+
           <p className="product-description">
             {product.description}
           </p>
 
-          {/* BUTTONS */}
+
+          {/* ==========================================
+              BUTTONS
+          =========================================== */}
 
           <div className="product-buttons">
 
@@ -360,6 +568,7 @@ function ProductDetails({ cart, setCart }) {
               🛒 Add To Cart
             </button>
 
+
             <button
               className="product-button buy-button"
             >
@@ -368,17 +577,28 @@ function ProductDetails({ cart, setCart }) {
 
           </div>
 
-          {/* BENEFITS */}
+
+          {/* ==========================================
+              BENEFITS
+          =========================================== */}
 
           <div className="product-benefits">
 
-            <p>🚚 Free Delivery</p>
+            <p>
+              🚚 Free Delivery
+            </p>
 
-            <p>🔄 7 Days Replacement</p>
+            <p>
+              🔄 7 Days Replacement
+            </p>
 
-            <p>🛡 1 Year Warranty</p>
+            <p>
+              🛡 1 Year Warranty
+            </p>
 
-            <p>💳 Secure Payment</p>
+            <p>
+              💳 Secure Payment
+            </p>
 
           </div>
 
