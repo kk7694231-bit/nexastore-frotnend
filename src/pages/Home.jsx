@@ -10,14 +10,13 @@ function Home({ cart, setCart }) {
   const [selectedBrand, setSelectedBrand] = useState("All");
   const productsRef = useRef(null);
 
-  const API_URL = "https://nexastore-backend-rzao.vercel.app";
+  const API_URL =
+    "https://nexastore-backend-rzao.vercel.app";
 
-  // Mobile screen detection
   const [isMobile, setIsMobile] = useState(
     () => window.innerWidth <= 768
   );
 
-  // Fetch products + handle screen resize
   useEffect(() => {
     fetchProducts();
 
@@ -32,17 +31,18 @@ function Home({ cart, setCart }) {
     };
   }, []);
 
-  // Fetch products
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get(`${API_URL}/api/products`);
+      const { data } = await axios.get(
+        `${API_URL}/api/products`
+      );
+
       setProducts(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Filter products
   const filteredProducts = products.filter((product) => {
     const categoryMatch =
       selectedCategory === "All" ||
@@ -55,26 +55,35 @@ function Home({ cart, setCart }) {
     return categoryMatch && brandMatch;
   });
 
-  // Add product to cart
   const addToCart = (product) => {
-    const exist = cart.find((item) => item._id === product._id);
+    const exist = cart.find(
+      (item) => item._id === product._id
+    );
 
     if (exist) {
       setCart(
         cart.map((item) =>
           item._id === product._id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+              }
             : item
         )
       );
     } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+      setCart([
+        ...cart,
+        {
+          ...product,
+          quantity: 1,
+        },
+      ]);
     }
 
     alert("Product Added Successfully");
   };
 
-  // Scroll to products
   const scrollToProducts = () => {
     productsRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -92,12 +101,18 @@ function Home({ cart, setCart }) {
     >
 
       {/* =====================================================
-          MODERN HERO SECTION
+          HERO SECTION
       ===================================================== */}
 
       <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{
+          opacity: 0,
+          y: 30,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
         transition={{
           duration: 0.8,
           ease: "easeOut",
@@ -114,41 +129,50 @@ function Home({ cart, setCart }) {
           style={{
             width: "100%",
             maxWidth: "1450px",
-            minHeight: isMobile ? "700px" : "570px",
+            minHeight: isMobile
+              ? "700px"
+              : "570px",
             margin: "0 auto",
             padding: isMobile
               ? "45px 20px"
               : "45px 50px",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            gap: isMobile ? "30px" : "20px",
-            flexDirection: isMobile ? "column" : "row",
+            justifyContent:
+              "space-between",
+            gap: isMobile
+              ? "30px"
+              : "20px",
+            flexDirection: isMobile
+              ? "column"
+              : "row",
             boxSizing: "border-box",
           }}
         >
 
-          {/* ================= LEFT SIDE ================= */}
+          {/* LEFT SIDE */}
 
           <div
             style={{
               flex: "0 0 42%",
               maxWidth: "570px",
-              textAlign: isMobile ? "center" : "left",
+              textAlign: isMobile
+                ? "center"
+                : "left",
               zIndex: 3,
-              paddingTop: isMobile ? "10px" : "0",
+              paddingTop: isMobile
+                ? "10px"
+                : "0",
             }}
           >
-
-            {/* Welcome text */}
-
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: isMobile
-                  ? "center"
-                  : "flex-start",
+                justifyContent:
+                  isMobile
+                    ? "center"
+                    : "flex-start",
                 gap: "12px",
                 marginBottom: "22px",
               }}
@@ -164,25 +188,32 @@ function Home({ cart, setCart }) {
 
               <span
                 style={{
-                  fontSize: isMobile ? "15px" : "18px",
+                  fontSize: isMobile
+                    ? "15px"
+                    : "18px",
                   fontWeight: "600",
                   color: "#172b4d",
-                  letterSpacing: "0.3px",
+                  letterSpacing:
+                    "0.3px",
                 }}
               >
                 WELCOME TO{" "}
-                <span style={{ color: "#ff6b00" }}>
+                <span
+                  style={{
+                    color: "#ff6b00",
+                  }}
+                >
                   NEXASTORE
                 </span>
               </span>
             </div>
 
-            {/* Main heading */}
-
             <h1
               style={{
                 margin: 0,
-                fontSize: isMobile ? "48px" : "72px",
+                fontSize: isMobile
+                  ? "48px"
+                  : "72px",
                 lineHeight: "1.03",
                 fontWeight: "800",
                 color: "#102a43",
@@ -194,46 +225,53 @@ function Home({ cart, setCart }) {
               SHOP MORE.
               <br />
 
-              <span style={{ color: "#ff6b00" }}>
+              <span
+                style={{
+                  color: "#ff6b00",
+                }}
+              >
                 SAVE MORE.
               </span>
             </h1>
-
-            {/* Description */}
 
             <p
               style={{
                 marginTop: "28px",
                 marginBottom: "6px",
-                fontSize: isMobile ? "16px" : "19px",
+                fontSize: isMobile
+                  ? "16px"
+                  : "19px",
                 lineHeight: "1.6",
                 color: "#52606d",
               }}
             >
-              Discover top quality products at best prices.
+              Discover top quality products at best
+              prices.
             </p>
 
             <p
               style={{
-                marginTop: "0",
-                fontSize: isMobile ? "16px" : "19px",
+                marginTop: 0,
+                fontSize: isMobile
+                  ? "16px"
+                  : "19px",
                 lineHeight: "1.6",
                 color: "#52606d",
               }}
             >
-              Your one-stop destination for everything you need.
+              Your one-stop destination for everything
+              you need.
             </p>
-
-            {/* Buttons */}
 
             <div
               style={{
                 display: "flex",
                 gap: "14px",
                 marginTop: "30px",
-                justifyContent: isMobile
-                  ? "center"
-                  : "flex-start",
+                justifyContent:
+                  isMobile
+                    ? "center"
+                    : "flex-start",
                 flexWrap: "wrap",
               }}
             >
@@ -260,7 +298,8 @@ function Home({ cart, setCart }) {
                   padding: "13px 27px",
                   background: "#ffffff",
                   color: "#ff6b00",
-                  border: "2px solid #ff6b00",
+                  border:
+                    "2px solid #ff6b00",
                   borderRadius: "8px",
                   fontSize: "16px",
                   fontWeight: "700",
@@ -273,43 +312,54 @@ function Home({ cart, setCart }) {
             </div>
           </div>
 
-          {/* ================= RIGHT SIDE ================= */}
+          {/* RIGHT SIDE */}
 
           <div
             style={{
               flex: "0 0 55%",
-              width: isMobile ? "100%" : "55%",
-              minHeight: isMobile ? "320px" : "500px",
+              width: isMobile
+                ? "100%"
+                : "55%",
+              minHeight: isMobile
+                ? "320px"
+                : "500px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               position: "relative",
             }}
           >
-
-            {/* Orange decorative circle */}
-
             <div
               style={{
                 position: "absolute",
-                width: isMobile ? "230px" : "400px",
-                height: isMobile ? "230px" : "400px",
+                width: isMobile
+                  ? "230px"
+                  : "400px",
+                height: isMobile
+                  ? "230px"
+                  : "400px",
                 borderRadius: "50%",
                 background: "#ff6b00",
                 opacity: 0.9,
-                right: isMobile ? "5%" : "12%",
-                top: isMobile ? "10%" : "5%",
+                right: isMobile
+                  ? "5%"
+                  : "12%",
+                top: isMobile
+                  ? "10%"
+                  : "5%",
                 zIndex: 0,
               }}
             />
 
-            {/* Soft background circle */}
-
             <div
               style={{
                 position: "absolute",
-                width: isMobile ? "280px" : "570px",
-                height: isMobile ? "280px" : "570px",
+                width: isMobile
+                  ? "280px"
+                  : "570px",
+                height: isMobile
+                  ? "280px"
+                  : "570px",
                 borderRadius: "50%",
                 background:
                   "radial-gradient(circle, #f2f4f7 0%, #ffffff 70%)",
@@ -317,15 +367,19 @@ function Home({ cart, setCart }) {
               }}
             />
 
-            {/* Product image */}
-
             <img
               src={banner}
               alt="NexaStore Products"
               style={{
-                width: isMobile ? "100%" : "110%",
-                maxWidth: isMobile ? "430px" : "720px",
-                height: isMobile ? "330px" : "520px",
+                width: isMobile
+                  ? "100%"
+                  : "110%",
+                maxWidth: isMobile
+                  ? "430px"
+                  : "720px",
+                height: isMobile
+                  ? "330px"
+                  : "520px",
                 objectFit: "contain",
                 position: "relative",
                 zIndex: 2,
@@ -335,7 +389,6 @@ function Home({ cart, setCart }) {
           </div>
         </div>
       </motion.section>
-
 
       {/* =====================================================
           CATEGORIES
@@ -360,18 +413,18 @@ function Home({ cart, setCart }) {
           ease: "easeOut",
         }}
         style={{
-  display: "grid",
-  gridTemplateColumns: isMobile
-    ? "repeat(3, 1fr)"
-    : "repeat(6, 1fr)",
-  gap: isMobile ? "12px" : "20px",
-  marginBottom: "55px",
-  padding: isMobile
-    ? "0 15px"
-    : "0 30px",
-}}
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          marginBottom: "55px",
+          gap: isMobile
+            ? "15px"
+            : "20px",
+          padding: isMobile
+            ? "0 15px"
+            : "0 30px",
+        }}
       >
-
         {[
           {
             icon: "📱",
@@ -401,11 +454,17 @@ function Home({ cart, setCart }) {
           <div
             key={item.name}
             onClick={() => {
-              setSelectedCategory(item.name);
+              setSelectedCategory(
+                item.name
+              );
               setSelectedBrand("All");
               scrollToProducts();
             }}
             style={{
+              width: isMobile
+                ? "42%"
+                : "160px",
+              maxWidth: "170px",
               background: "#ffffff",
               borderRadius: "14px",
               padding: isMobile
@@ -417,8 +476,6 @@ function Home({ cart, setCart }) {
               border:
                 "1px solid #f0f0f0",
               cursor: "pointer",
-              transition:
-                "transform 0.2s ease",
             }}
           >
             <div
@@ -447,7 +504,6 @@ function Home({ cart, setCart }) {
         ))}
       </motion.div>
 
-
       {/* =====================================================
           FEATURED BRANDS
       ===================================================== */}
@@ -475,7 +531,6 @@ function Home({ cart, setCart }) {
           marginBottom: "50px",
         }}
       >
-
         <h2
           style={{
             textAlign: "center",
@@ -492,9 +547,10 @@ function Home({ cart, setCart }) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile
-            ? "repeat(3, 1fr)"
-            : "repeat(6, 1fr)",
+            gridTemplateColumns:
+              isMobile
+                ? "repeat(2, 1fr)"
+                : "repeat(6, 1fr)",
             gap: isMobile
               ? "15px"
               : "20px",
@@ -564,9 +620,9 @@ function Home({ cart, setCart }) {
         </div>
       </motion.div>
 
-
       {/* =====================================================
           FEATURED PRODUCTS
+          MOBILE = 3 PRODUCTS PER ROW
       ===================================================== */}
 
       <motion.div
@@ -587,16 +643,17 @@ function Home({ cart, setCart }) {
         style={{
           maxWidth: "1300px",
           margin: "40px auto",
-          padding: "0 20px",
+          padding: isMobile
+            ? "0 8px"
+            : "0 20px",
         }}
       >
-
         <h2
           style={{
             fontSize: isMobile
-              ? "28px"
+              ? "24px"
               : "34px",
-            marginBottom: "30px",
+            marginBottom: "25px",
             textAlign: isMobile
               ? "center"
               : "left",
@@ -609,10 +666,16 @@ function Home({ cart, setCart }) {
         <div
           style={{
             display: "grid",
+
+            // ⭐ MOBILE: 3 PRODUCTS PER ROW
             gridTemplateColumns: isMobile
-  ? "1fr"
-  : "repeat(4, 1fr)",
-            gap: "25px",
+              ? "repeat(3, minmax(0, 1fr))"
+              : "repeat(4, minmax(0, 1fr))",
+
+            gap: isMobile
+              ? "8px"
+              : "25px",
+
             width: "100%",
           }}
         >
@@ -628,7 +691,7 @@ function Home({ cart, setCart }) {
                     ? -40
                     : 40,
                   y: isMobile
-                    ? 30
+                    ? 20
                     : 0,
                 }}
                 whileInView={{
@@ -649,16 +712,21 @@ function Home({ cart, setCart }) {
                 }}
                 style={{
                   background: "#ffffff",
-                  borderRadius: "15px",
+                  borderRadius: isMobile
+                    ? "8px"
+                    : "15px",
                   overflow: "hidden",
                   boxShadow:
-                    "0 8px 20px rgba(16,42,67,0.10)",
+                    "0 5px 15px rgba(16,42,67,0.10)",
                   display: "flex",
                   flexDirection: "column",
                   border:
                     "1px solid #f0f0f0",
+                  minWidth: 0,
                 }}
               >
+
+                {/* PRODUCT IMAGE */}
 
                 <img
                   src={product.image}
@@ -666,39 +734,54 @@ function Home({ cart, setCart }) {
                   style={{
                     width: "100%",
                     height: isMobile
-                      ? "180px"
+                      ? "105px"
                       : "250px",
                     objectFit: "contain",
                     background: "#f7f8fa",
                     padding: isMobile
-                      ? "10px"
+                      ? "5px"
                       : "20px",
                   }}
                 />
 
+                {/* PRODUCT DETAILS */}
+
                 <div
                   style={{
                     padding: isMobile
-                      ? "15px"
+                      ? "8px"
                       : "20px",
                     flex: 1,
                     display: "flex",
-                    flexDirection: "column",
+                    flexDirection:
+                      "column",
                     justifyContent:
                       "space-between",
+                    minWidth: 0,
                   }}
                 >
-
                   <div>
 
                     <h3
                       style={{
                         fontSize: isMobile
-                          ? "15px"
+                          ? "11px"
                           : "16px",
+                        lineHeight: isMobile
+                          ? "1.3"
+                          : "1.4",
                         margin:
-                          "0 0 10px",
+                          "0 0 6px",
                         color: "#102a43",
+                        display:
+                          "-webkit-box",
+                        WebkitLineClamp:
+                          isMobile
+                            ? 2
+                            : 2,
+                        WebkitBoxOrient:
+                          "vertical",
+                        overflow: "hidden",
                       }}
                     >
                       {product.name}
@@ -707,29 +790,54 @@ function Home({ cart, setCart }) {
                     <p
                       style={{
                         color: "#666",
-                        minHeight: isMobile
-                          ? "auto"
-                          : "45px",
+                        minHeight:
+                          isMobile
+                            ? "0"
+                            : "45px",
                         fontSize: isMobile
-                          ? "14px"
+                          ? "9px"
                           : "16px",
+                        lineHeight: "1.4",
                         margin:
-                          "0 0 10px",
+                          "0 0 6px",
+                        display:
+                          "-webkit-box",
+                        WebkitLineClamp:
+                          isMobile
+                            ? 2
+                            : 3,
+                        WebkitBoxOrient:
+                          "vertical",
+                        overflow: "hidden",
                       }}
                     >
                       {product.description
                         ? product.description.substring(
                             0,
-                            60
-                          ) + "..."
+                            isMobile
+                              ? 35
+                              : 60
+                          ) +
+                          (product.description
+                            .length >
+                          (isMobile
+                            ? 35
+                            : 60)
+                            ? "..."
+                            : "")
                         : "Quality product available at NexaStore."}
                     </p>
 
                     <h2
                       style={{
-                        color: "#ff6b00",
+                        color:
+                          "#ff6b00",
                         margin:
-                          "0 0 10px",
+                          "0 0 5px",
+                        fontSize:
+                          isMobile
+                            ? "13px"
+                            : "24px",
                       }}
                     >
                       ₹
@@ -738,9 +846,14 @@ function Home({ cart, setCart }) {
 
                     <p
                       style={{
-                        color: "#ff9800",
+                        color:
+                          "#ff9800",
                         margin:
-                          "0 0 5px",
+                          "0 0 4px",
+                        fontSize:
+                          isMobile
+                            ? "9px"
+                            : "16px",
                       }}
                     >
                       ⭐{" "}
@@ -751,17 +864,21 @@ function Home({ cart, setCart }) {
                     <p
                       style={{
                         margin:
-                          "0 0 15px",
-                        fontSize: isMobile
-                          ? "15px"
-                          : "16px",
-                        color: "#333",
+                          "0 0 8px",
+                        fontSize:
+                          isMobile
+                            ? "9px"
+                            : "16px",
+                        color:
+                          "#333",
                       }}
                     >
-                      Stock :{" "}
+                      Stock:{" "}
                       {product.stock}
                     </p>
                   </div>
+
+                  {/* BUTTONS */}
 
                   <div
                     style={{
@@ -770,31 +887,43 @@ function Home({ cart, setCart }) {
                         isMobile
                           ? "column"
                           : "row",
-                      gap: "10px",
-                      marginTop: "auto",
+                      gap: isMobile
+                        ? "5px"
+                        : "10px",
+                      marginTop:
+                        "auto",
                     }}
                   >
-
                     <button
                       onClick={() =>
-                        addToCart(product)
+                        addToCart(
+                          product
+                        )
                       }
                       style={{
                         flex: 1,
-                        padding: "12px",
-                        width: isMobile
-                          ? "100%"
-                          : "auto",
+                        padding:
+                          isMobile
+                            ? "7px 3px"
+                            : "12px",
+                        width: "100%",
                         border: "none",
                         background:
                           "#ff6b00",
-                        color: "#fff",
+                        color:
+                          "#fff",
                         borderRadius:
-                          "8px",
+                          isMobile
+                            ? "5px"
+                            : "8px",
                         cursor:
                           "pointer",
                         fontWeight:
                           "bold",
+                        fontSize:
+                          isMobile
+                            ? "9px"
+                            : "14px",
                       }}
                     >
                       Add To Cart
@@ -810,32 +939,63 @@ function Home({ cart, setCart }) {
                     >
                       <button
                         style={{
-                          width: "100%",
-                          padding: "12px",
-                          border: "none",
+                          width:
+                            "100%",
+                          padding:
+                            isMobile
+                              ? "7px 3px"
+                              : "12px",
+                          border:
+                            "none",
                           background:
                             "#102a43",
-                          color: "#fff",
+                          color:
+                            "#fff",
                           borderRadius:
-                            "8px",
+                            isMobile
+                              ? "5px"
+                              : "8px",
                           cursor:
                             "pointer",
                           fontWeight:
                             "bold",
+                          fontSize:
+                            isMobile
+                              ? "9px"
+                              : "14px",
                         }}
                       >
                         View Details
                       </button>
                     </Link>
-
                   </div>
                 </div>
               </motion.div>
             )
           )}
         </div>
-      </motion.div>
 
+        {/* NO PRODUCTS */}
+
+        {filteredProducts.length === 0 && (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "50px 20px",
+              color: "#666",
+            }}
+          >
+            <h3>
+              No Products Found
+            </h3>
+
+            <p>
+              Try selecting another
+              category or brand.
+            </p>
+          </div>
+        )}
+      </motion.div>
 
       {/* =====================================================
           WHY CHOOSE US
@@ -865,7 +1025,6 @@ function Home({ cart, setCart }) {
           padding: "0 20px",
         }}
       >
-
         <h2
           style={{
             textAlign: "center",
@@ -882,9 +1041,10 @@ function Home({ cart, setCart }) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile
-              ? "1fr"
-              : "repeat(auto-fit,minmax(250px,1fr))",
+            gridTemplateColumns:
+              isMobile
+                ? "1fr"
+                : "repeat(auto-fit,minmax(250px,1fr))",
             gap: "25px",
           }}
         >
@@ -959,13 +1119,14 @@ function Home({ cart, setCart }) {
                   {item.title}
                 </h3>
 
-                <p>{item.desc}</p>
+                <p>
+                  {item.desc}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
       </motion.div>
-
 
       {/* =====================================================
           CUSTOMER REVIEWS
@@ -994,7 +1155,6 @@ function Home({ cart, setCart }) {
           padding: "60px 20px",
         }}
       >
-
         <h2
           style={{
             textAlign: "center",
@@ -1011,9 +1171,10 @@ function Home({ cart, setCart }) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile
-              ? "1fr"
-              : "repeat(auto-fit,minmax(300px,1fr))",
+            gridTemplateColumns:
+              isMobile
+                ? "1fr"
+                : "repeat(auto-fit,minmax(300px,1fr))",
             gap: "25px",
             maxWidth: "1200px",
             margin: "auto",
@@ -1064,7 +1225,9 @@ function Home({ cart, setCart }) {
                   "0 5px 15px rgba(16,42,67,0.10)",
               }}
             >
-              <h3>{item.name}</h3>
+              <h3>
+                {item.name}
+              </h3>
 
               <p
                 style={{
@@ -1074,198 +1237,225 @@ function Home({ cart, setCart }) {
                 ⭐⭐⭐⭐⭐
               </p>
 
-              <p>{item.review}</p>
+              <p>
+                {item.review}
+              </p>
             </motion.div>
           ))}
         </div>
       </motion.div>
 
-
       {/* =====================================================
-    NEWSLETTER + FOOTER
-===================================================== */}
+          NEWSLETTER + FOOTER
+      ===================================================== */}
 
-<section className="nexa-footer-section">
+      <section
+        className="nexa-footer-section"
+        id="footer"
+      >
 
-  {/* Newsletter */}
+        {/* Newsletter */}
 
-  <div className="nexa-newsletter">
+        <div className="nexa-newsletter">
+          <div className="newsletter-content">
 
-    <div className="newsletter-content">
+            <div className="newsletter-text">
+              <span className="newsletter-tag">
+                STAY UPDATED
+              </span>
 
-      <div className="newsletter-text">
-        <span className="newsletter-tag">
-          STAY UPDATED
-        </span>
+              <h2>
+                Get the latest from{" "}
+                <span>
+                  NexaStore
+                </span>
+              </h2>
 
-        <h2>
-          Get the latest from{" "}
-          <span>NexaStore</span>
-        </h2>
+              <p>
+                Subscribe to get updates about
+                new products, exclusive offers
+                and special deals.
+              </p>
+            </div>
 
-        <p>
-          Subscribe to get updates about new products,
-          exclusive offers and special deals.
-        </p>
-      </div>
+            <div className="newsletter-form">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+              />
 
-      <div className="newsletter-form">
+              <button>
+                Subscribe
+              </button>
+            </div>
 
-        <input
-          type="email"
-          placeholder="Enter your email address"
-        />
-
-        <button>
-          Subscribe
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  {/* Footer */}
-
-  <footer id="footer" className="nexa-footer">
-
-    <div className="footer-container">
-
-      {/* Brand */}
-
-      <div className="footer-column footer-brand">
-
-        <Link
-          to="/"
-          className="footer-logo"
-        >
-          <span>NEXA</span>STORE
-        </Link>
-
-        <p>
-          Your trusted online shopping destination
-          for mobiles, electronics, fashion, gaming
-          and accessories.
-        </p>
-
-        <div className="footer-social">
-
-          <a href="#" aria-label="Facebook">
-            f
-          </a>
-
-          <a href="#" aria-label="Instagram">
-            ◎
-          </a>
-
-          <a href="#" aria-label="Twitter">
-            𝕏
-          </a>
-
-          <a href="#" aria-label="YouTube">
-            ▶
-          </a>
-
+          </div>
         </div>
 
-      </div>
+        {/* Footer */}
 
+        <footer className="nexa-footer">
+          <div className="footer-container">
 
-      {/* Quick Links */}
+            {/* Brand */}
 
-      <div className="footer-column">
+            <div className="footer-column footer-brand">
 
-        <h3>Quick Links</h3>
+              <Link
+                to="/"
+                className="footer-logo"
+              >
+                <span>
+                  NEXA
+                </span>
+                STORE
+              </Link>
 
-        <Link to="/">Home</Link>
+              <p>
+                Your trusted online shopping
+                destination for mobiles,
+                electronics, fashion, gaming
+                and accessories.
+              </p>
 
-        <Link to="/products">
-          Products
-        </Link>
+              <div className="footer-social">
 
-        <Link to="/cart">
-          Cart
-        </Link>
+                <a
+                  href="#"
+                  aria-label="Facebook"
+                >
+                  f
+                </a>
 
-        <Link to="/orders">
-          My Orders
-        </Link>
+                <a
+                  href="#"
+                  aria-label="Instagram"
+                >
+                  ◎
+                </a>
 
-      </div>
+                <a
+                  href="#"
+                  aria-label="Twitter"
+                >
+                  𝕏
+                </a>
 
+                <a
+                  href="#"
+                  aria-label="YouTube"
+                >
+                  ▶
+                </a>
 
-      {/* Customer Service */}
+              </div>
+            </div>
 
-      <div className="footer-column">
+            {/* Quick Links */}
 
-        <h3>Customer Service</h3>
+            <div className="footer-column">
 
-        <Link to="/products">
-          Shop
-        </Link>
+              <h3>
+                Quick Links
+              </h3>
 
-        <Link to="/login">
-          Login
-        </Link>
+              <Link to="/">
+                Home
+              </Link>
 
-        <Link to="/register">
-          Register
-        </Link>
+              <Link to="/products">
+                Products
+              </Link>
 
-        <Link to="/cart">
-          Shopping Cart
-        </Link>
+              <Link to="/cart">
+                Cart
+              </Link>
 
-      </div>
+              <Link to="/orders">
+                My Orders
+              </Link>
 
+            </div>
 
-      {/* Contact */}
+            {/* Customer Service */}
 
-      <div className="footer-column footer-contact">
+            <div className="footer-column">
 
-        <h3>Contact Us</h3>
+              <h3>
+                Customer Service
+              </h3>
 
-        <p>
-          <span>📍</span>
-          Coimbatore, Tamil Nadu
-        </p>
+              <Link to="/products">
+                Shop
+              </Link>
 
-        <p>
-          <span>📞</span>
-          +91 9876543210
-        </p>
+              <Link to="/login">
+                Login
+              </Link>
 
-        <p>
-          <span>✉</span>
-          support@nexastore.com
-        </p>
+              <Link to="/register">
+                Register
+              </Link>
 
-      </div>
+              <Link to="/cart">
+                Shopping Cart
+              </Link>
 
-    </div>
+            </div>
 
+            {/* Contact */}
 
-    {/* Bottom */}
+            <div className="footer-column footer-contact">
 
-    <div className="footer-bottom">
+              <h3>
+                Contact Us
+              </h3>
 
-      <p>
-        © 2026 <strong>NexaStore</strong>.
-        All Rights Reserved.
-      </p>
+              <p>
+                <span>📍</span>
+                Coimbatore, Tamil Nadu
+              </p>
 
-      <div className="footer-bottom-links">
-        <span>Privacy Policy</span>
-        <span>Terms & Conditions</span>
-      </div>
+              <p>
+                <span>📞</span>
+                +91 9876543210
+              </p>
 
-    </div>
+              <p>
+                <span>✉</span>
+                support@nexastore.com
+              </p>
 
-  </footer>
+            </div>
 
-</section>
+          </div>
+
+          {/* Footer Bottom */}
+
+          <div className="footer-bottom">
+
+            <p>
+              © 2026{" "}
+              <strong>
+                NexaStore
+              </strong>
+              . All Rights Reserved.
+            </p>
+
+            <div className="footer-bottom-links">
+              <span>
+                Privacy Policy
+              </span>
+
+              <span>
+                Terms & Conditions
+              </span>
+            </div>
+
+          </div>
+        </footer>
+
+      </section>
     </div>
   );
 }
