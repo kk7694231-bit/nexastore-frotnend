@@ -261,11 +261,11 @@ function Navbar({ cart }) {
 
         {/* About Us */}
         <Link
-          to="/"
-          className="navbar-menu-link"
-        >
-          About Us
-        </Link>
+  to="/about"
+  className="navbar-menu-link"
+>
+  About Us
+</Link>
 
 
         {/* Contact Us → Footer */}
