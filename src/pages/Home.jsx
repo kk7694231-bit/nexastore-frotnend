@@ -496,8 +496,8 @@ function Home({ cart, setCart }) {
           style={{
             display: "grid",
             gridTemplateColumns: isMobile
-              ? "repeat(2, 1fr)"
-              : "repeat(6, 1fr)",
+            ? "repeat(3, 1fr)"
+            : "repeat(6, 1fr)",
             gap: isMobile
               ? "15px"
               : "20px",
