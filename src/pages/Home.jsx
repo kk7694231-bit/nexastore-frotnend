@@ -360,15 +360,16 @@ function Home({ cart, setCart }) {
           ease: "easeOut",
         }}
         style={{
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          marginBottom: "55px",
-          gap: isMobile ? "15px" : "20px",
-          padding: isMobile
-            ? "0 15px"
-            : "0 30px",
-        }}
+  display: "grid",
+  gridTemplateColumns: isMobile
+    ? "repeat(3, 1fr)"
+    : "repeat(6, 1fr)",
+  gap: isMobile ? "12px" : "20px",
+  marginBottom: "55px",
+  padding: isMobile
+    ? "0 15px"
+    : "0 30px",
+}}
       >
 
         {[
@@ -405,10 +406,6 @@ function Home({ cart, setCart }) {
               scrollToProducts();
             }}
             style={{
-              width: isMobile
-                ? "42%"
-                : "160px",
-              maxWidth: "170px",
               background: "#ffffff",
               borderRadius: "14px",
               padding: isMobile
