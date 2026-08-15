@@ -12,6 +12,7 @@ function Navbar({ cart }) {
 
   const token = localStorage.getItem("token");
 
+  // Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
@@ -22,6 +23,7 @@ function Navbar({ cart }) {
     navigate("/login");
   };
 
+  // Search
   const handleSearch = () => {
     if (search.trim()) {
       navigate(
@@ -42,7 +44,7 @@ function Navbar({ cart }) {
   const handleContactClick = (e) => {
     e.preventDefault();
 
-    // If already on home page, scroll directly
+    // Already on Home page
     if (window.location.pathname === "/") {
       const footer = document.getElementById("footer");
 
@@ -53,12 +55,12 @@ function Navbar({ cart }) {
         });
       }
     } else {
-      // Go home first, then scroll to footer
+      // Go to Home first
       navigate("/");
 
+      // Wait for Home component to render
       setTimeout(() => {
-        const footer =
-          document.getElementById("footer");
+        const footer = document.getElementById("footer");
 
         if (footer) {
           footer.scrollIntoView({
@@ -66,7 +68,7 @@ function Navbar({ cart }) {
             block: "start",
           });
         }
-      }, 300);
+      }, 500);
     }
   };
 
@@ -79,7 +81,6 @@ function Navbar({ cart }) {
       <div className="navbar-main">
 
         {/* Logo */}
-
         <Link
           to="/"
           className="navbar-logo"
@@ -95,20 +96,15 @@ function Navbar({ cart }) {
 
 
         {/* Search */}
-
         <div className="navbar-search">
 
           <button
             className="category-select"
-            onClick={() =>
-              navigate("/products")
-            }
+            onClick={() => navigate("/products")}
           >
             All Categories
-
             <span>⌄</span>
           </button>
-
 
           <input
             type="text"
@@ -117,11 +113,8 @@ function Navbar({ cart }) {
             onChange={(e) =>
               setSearch(e.target.value)
             }
-            onKeyDown={
-              handleSearchKeyDown
-            }
+            onKeyDown={handleSearchKeyDown}
           />
-
 
           <button
             className="search-button"
@@ -134,11 +127,10 @@ function Navbar({ cart }) {
 
 
         {/* Right Actions */}
-
         <div className="navbar-actions">
 
+          {/* Login / Logout */}
           {!token ? (
-
             <Link
               to="/login"
               className="nav-action login-action"
@@ -151,9 +143,7 @@ function Navbar({ cart }) {
                 Login / Register
               </span>
             </Link>
-
           ) : (
-
             <button
               onClick={handleLogout}
               className="nav-action logout-action"
@@ -166,12 +156,11 @@ function Navbar({ cart }) {
                 Logout
               </span>
             </button>
-
           )}
 
 
+          {/* My Orders */}
           {token && (
-
             <Link
               to="/orders"
               className="nav-action"
@@ -184,10 +173,10 @@ function Navbar({ cart }) {
                 My Orders
               </span>
             </Link>
-
           )}
 
 
+          {/* Cart */}
           <Link
             to="/cart"
             className="nav-action cart-action"
@@ -217,17 +206,15 @@ function Navbar({ cart }) {
       <nav className="navbar-menu">
 
         {/* Home */}
-
         <Link
           to="/"
-          className="navbar-menu-link active"
+          className="navbar-menu-link"
         >
           Home
         </Link>
 
 
         {/* Shop */}
-
         <Link
           to="/products"
           className="navbar-menu-link"
@@ -237,7 +224,6 @@ function Navbar({ cart }) {
 
 
         {/* Electronics */}
-
         <Link
           to="/products?category=Electronics"
           className="navbar-menu-link"
@@ -247,7 +233,6 @@ function Navbar({ cart }) {
 
 
         {/* Fashion */}
-
         <Link
           to="/products?category=Fashion"
           className="navbar-menu-link"
@@ -257,7 +242,6 @@ function Navbar({ cart }) {
 
 
         {/* Home & Living */}
-
         <Link
           to="/products?category=Home%20%26%20Living"
           className="navbar-menu-link"
@@ -267,7 +251,6 @@ function Navbar({ cart }) {
 
 
         {/* Offers */}
-
         <Link
           to="/products"
           className="navbar-menu-link"
@@ -277,7 +260,6 @@ function Navbar({ cart }) {
 
 
         {/* About Us */}
-
         <Link
           to="/"
           className="navbar-menu-link"
@@ -287,7 +269,6 @@ function Navbar({ cart }) {
 
 
         {/* Contact Us → Footer */}
-
         <a
           href="#footer"
           className="navbar-menu-link"

@@ -1132,7 +1132,7 @@ function Home({ cart, setCart }) {
 
   {/* Footer */}
 
-  <footer className="nexa-footer">
+  <footer id="footer" className="nexa-footer">
 
     <div className="footer-container">
 
